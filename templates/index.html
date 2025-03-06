@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week Builder</title>
+    <style>
+        table, td, th, tr {
+            border: 1px solid black;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Week Builder</h1>
+
+    <button onclick="fetchWeekProgram()">Build Week Program</button>    
+
+    <div id="weekProgramContainer"></div>
+    <script>
+        async function fetchWeekProgram() {
+            try {
+                let response = await fetch("/build_week_program");
+                let weekProgram = await response.json();
+
+                renderWeekProgram(weekProgram);
+            } catch (error) {
+                console.error("Error fetching week program:", error);
+            }
+        }
+
+        function renderWeekProgram(weekProgram) {
+            let container = document.getElementById("weekProgramContainer");
+            container.innerHTML = "<h2>Week Program</h2>";
+
+            let table = document.createElement("table");
+            for (const day in weekProgram) {
+                let row = document.createElement("tr");
+
+                // Day column
+                let dayCell = document.createElement("td");
+                dayCell.textContent = day;
+                dayCell.rowSpan = Object.keys(weekProgram[day]).length + 1;
+                table.appendChild(dayCell);
+
+                let rows = []
+                for (const hour in weekProgram[day]) {
+                    let hourRow = document.createElement("tr");
+
+                    let hourCell = document.createElement("td");
+                    hourCell.textContent = hour;
+                    hourRow.appendChild(hourCell);
+
+                    rows.push(hourRow);
+                }
+
+                cols_list = [] // lec_code: start, span
+
+                for (const hour in weekProgram[day]) {
+
+                    var added_to = []
+                    for (let j = 0; j < cols_list.length; j++) {
+                        added_to.push(false)
+                    }
+
+                    // for (let i = weekProgram[day][hour].length - 1; i >= 0; i--) {
+                    //     let old_cols_list_len = cols_list.length;
+                    //     lec = weekProgram[day][hour][i]
+
+                    //     for (let j = 0; j < old_cols_list_len; j++) {
+
+                    //         if ((cols_list[j].length > 0) && cols_list[j][cols_list[j].length-1] && cols_list[j][cols_list[j].length-1]["code"] == lec["code"]) {
+                    //             added_to[j] = true;
+                    //             cols_list[j].push(lec);
+                    //             weekProgram[day][hour].splice(i, 1);
+                    //             break;
+                    //         }
+                    //     }
+                    // }
+
+                    for (let i = weekProgram[day][hour].length - 1; i >= 0; i--) {
+                        // console.log(weekProgram[day][hour][i])
+                        lec = weekProgram[day][hour][i];
+
+                        let old_cols_list_len = cols_list.length;
+                        for (let j = 0; j < old_cols_list_len; j++) {
+                            if (!added_to[j]) {
+                                added_to[j] = true;
+                                cols_list[j].push(lec);
+                                weekProgram[day][hour].splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+
+                    for (let j = 0; j < cols_list.length; j++) {
+                        if (!added_to[j]) {
+                            added_to[j] = true;
+                            cols_list[j].push(null);
+                        }
+                    }
+
+                    for (let i = weekProgram[day][hour].length - 1; i >= 0; i--) {
+                        lec = weekProgram[day][hour][i]
+                        cols_list.push([lec]);
+                        weekProgram[day][hour].splice(i, 1);
+                    }
+                }
+
+                // console.log(rows);
+                
+                // for (let i = 0; i < rows.length; i++) {
+                //     for (const col in cols_list) {
+                //         let cell = document.createElement("td");
+                //         cell.textContent = cols_list[col][i] ? cols_list[col][i]["code"] : "";
+
+                //         let z = ""
+                //         if (cols_list[col][i-1] === undefined) {
+                //             z = "undefined"
+                //         } else if (cols_list[col][i-1] === null) {
+                //             z = "null"
+                //         } else {
+                //             z = cols_list[col][i-1]["code"]
+                //         }
+
+                //         if (z == cell.textContent) {
+                //             continue;
+                //         }
+
+                //         let j = 0;
+                //         while (true) {
+                //             let z = ""
+                //             if (cols_list[col][i+j] === undefined) {
+                //                 z = "undefined"
+                //             } else if (cols_list[col][i+j] === null) {
+                //                 z = "null"
+                //             } else {
+                //                 z = cols_list[col][i+j]["code"]
+                //             }
+                //             if (z != cell.textContent) {
+                //                 if (j != 0) {
+                //                     // cell.rowSpan = j;
+                //                     cell.rowSpan = cols_list[col][i]["count"];
+                //                     rows[i].appendChild(cell);
+                //                 }
+                //                 break;
+                //             }
+                //             j++;
+                //         }
+                //     }
+                // }
+
+                for (let i = 0; i < rows.length; i++) {
+                    for (const col in cols_list) {
+                        if (cols_list[col][i] !== null) {
+                            let cell = document.createElement("td");
+                            cell.rowSpan = cols_list[col][i]["count"];
+                            cell.textContent = cols_list[col][i]["code"];
+                            rows[i].appendChild(cell);
+                        }
+                    }
+                }
+
+                for (const row in rows) {
+                    table.appendChild(rows[row]);
+                }
+
+                table.appendChild(row);
+            }
+
+            container.appendChild(table);
+        }
+    </script>
+</body>
+</html>
