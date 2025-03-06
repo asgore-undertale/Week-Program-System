@@ -65,21 +65,6 @@
                         added_to.push(false)
                     }
 
-                    // for (let i = weekProgram[day][hour].length - 1; i >= 0; i--) {
-                    //     let old_cols_list_len = cols_list.length;
-                    //     lec = weekProgram[day][hour][i]
-
-                    //     for (let j = 0; j < old_cols_list_len; j++) {
-
-                    //         if ((cols_list[j].length > 0) && cols_list[j][cols_list[j].length-1] && cols_list[j][cols_list[j].length-1]["code"] == lec["code"]) {
-                    //             added_to[j] = true;
-                    //             cols_list[j].push(lec);
-                    //             weekProgram[day][hour].splice(i, 1);
-                    //             break;
-                    //         }
-                    //     }
-                    // }
-
                     for (let i = weekProgram[day][hour].length - 1; i >= 0; i--) {
                         // console.log(weekProgram[day][hour][i])
                         lec = weekProgram[day][hour][i];
@@ -108,49 +93,6 @@
                         weekProgram[day][hour].splice(i, 1);
                     }
                 }
-
-                // console.log(rows);
-                
-                // for (let i = 0; i < rows.length; i++) {
-                //     for (const col in cols_list) {
-                //         let cell = document.createElement("td");
-                //         cell.textContent = cols_list[col][i] ? cols_list[col][i]["code"] : "";
-
-                //         let z = ""
-                //         if (cols_list[col][i-1] === undefined) {
-                //             z = "undefined"
-                //         } else if (cols_list[col][i-1] === null) {
-                //             z = "null"
-                //         } else {
-                //             z = cols_list[col][i-1]["code"]
-                //         }
-
-                //         if (z == cell.textContent) {
-                //             continue;
-                //         }
-
-                //         let j = 0;
-                //         while (true) {
-                //             let z = ""
-                //             if (cols_list[col][i+j] === undefined) {
-                //                 z = "undefined"
-                //             } else if (cols_list[col][i+j] === null) {
-                //                 z = "null"
-                //             } else {
-                //                 z = cols_list[col][i+j]["code"]
-                //             }
-                //             if (z != cell.textContent) {
-                //                 if (j != 0) {
-                //                     // cell.rowSpan = j;
-                //                     cell.rowSpan = cols_list[col][i]["count"];
-                //                     rows[i].appendChild(cell);
-                //                 }
-                //                 break;
-                //             }
-                //             j++;
-                //         }
-                //     }
-                // }
 
                 for (let i = 0; i < rows.length; i++) {
                     for (const col in cols_list) {
