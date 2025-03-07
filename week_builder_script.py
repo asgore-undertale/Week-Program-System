@@ -1,6 +1,8 @@
 import sqlite3
 import random
 from rich import print
+import openpyxl
+from openpyxl.styles import PatternFill, Alignment, Border, Side
 
 
 def get_lecture_id_by_code(code):
@@ -249,7 +251,18 @@ def get_fully_detailed_lecture(lecture):
     for row in professors:
         if lecture["professorId"] == row[0]:
             lecture["professorName"] = row[2]
+            # del lecture["professorId"] # it is safer to remove any database info
+            lecture["professorNumber"] = row[1]
             break
+    
+    lecture["studentNumbers"] = []
+    for student_id in lecture["studentIds"]:
+        for row in students:
+            if student_id == row[0]:
+                lecture["studentNumbers"].append(row[1])
+                break
+    
+    # del lecture["studentIds"]
     
     return lecture
 
@@ -261,16 +274,18 @@ def combine_sequenced_lectures(week):
 
     for day in week:
         reversed_hours = list(week[day].keys())[::-1]
+        print(reversed_hours)
         for h, hour in enumerate(reversed_hours[:-1]):
             to_delete = []
             for l, lec in enumerate(week[day][hour]):
                 # deleted_num = 0
                 for l2, lec2 in enumerate(week[day][reversed_hours[h+1]]):
                     if lec["code"] == lec2["code"] and lec["professorId"] == lec2["professorId"]:
-                        week[day][reversed_hours[h+1]][l2]["count"] += 1
+                        week[day][reversed_hours[h+1]][l2]["count"] += week[day][hour][l]["count"]
                         # week[day][hour].pop(l)
                         to_delete.append(l)
                         # deleted_num += 1
+
                         break
             
             for d in to_delete[::-1]:
@@ -337,19 +352,44 @@ def tableize_combined_week_by_year(combined_week, remove_unnecessary_nones = Fal
     return table
 
 def build_week_html_content(tableized_week):
-    table_content = "<table>"
+    style = """<style>
+    table, th, tr {
+        border: 1px solid black;
+    }
+    td, th {
+        padding: 5px;
+    }
+    .bordered {
+        border: 1px solid black;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .vertical_writing {
+        transform: rotate(-90deg);
+    }
+    table {
+        border-collapse: collapse;
+    }
+    .header_row {
+        /* background-color: rgb(255, 89, 89); */
+        background-color: aqua;
+    }
+    .lec_cell {
+        background-color: rgb(224, 224, 224);
+    }
+    </style>"""
 
-    header_content = """
-    <tr>
-        <td class="bordered header_row">Day</td>
-        <td class="bordered header_row">Time</td>""" + "".join(
-            f"""
-            <td class="bordered header_row" colspan="{len(tableized_week["cols"][year])}">Year {year}</td>
-            """
-            for year in tableized_week["cols"]
-        ) + """
-    </tr>
-    """
+    table_content = style + "<table>"
+
+    header_content = """<tr>
+    <td class="bordered header_row">Day</td>
+    <td class="bordered header_row">Time</td>""" + "".join(
+        f"""
+        <td class="bordered header_row" colspan="{len(tableized_week["cols"][year])}">Year {year}</td>
+        """
+        for year in tableized_week["cols"]
+    ) + """
+</tr>"""
     
 
     global_table_row_pointer = 0
@@ -357,15 +397,11 @@ def build_week_html_content(tableized_week):
     for day in tableized_week["rows"]:
         table_content += header_content
         
-        days_content = f"""
-            <td class="bordered vertical_writing" rowspan="{len(tableized_week["rows"][day])+1}">{day}</td>
-        """
+        days_content = f"""<td class="bordered vertical_writing" rowspan="{len(tableized_week["rows"][day])+1}">{day}</td>"""
         
         rows_content = []
         for hour in tableized_week["rows"][day]:
-            rows_content.append(f"""
-                <tr><td class="bordered">{hour}:00 ~ {hour}:50</td>
-            """)
+            rows_content.append(f"""<tr><td class="bordered">{hour}:00 ~ {hour}:50</td>""")
         
         for year in tableized_week["cols"]:
             for col in tableized_week["cols"][year]:
@@ -379,7 +415,7 @@ def build_week_html_content(tableized_week):
 
                     span = lec["count"]
 
-                    # rows_content[l] += f"""<td rowspan="{span}" class="bordered" style="background-color: rgb(224, 224, 224);">{lec["name"]}<br>{lec["professorName"]}</td>"""
+                    rows_content[l] += f"""<td rowspan="{span}" class="bordered lec_cell">{lec["name"]}<br>{lec["professorName"]}</td>"""
         
         global_table_row_pointer += len(rows_content)
 
@@ -390,111 +426,176 @@ def build_week_html_content(tableized_week):
 
         table_content += days_content
 
-#             <tr>
-#     <td class="bordered">8:00 ~ 8:50</td>
-#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Fizik II<br>Dr. Öğr. Üyesi Dilan ALP</td>
-#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Dfferansyel Denklemler<br>Dr. Öğr. Üyesi Mustafa MIZRAK</td>
-#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Yazılım Mühendislği<br>Dr. Öğr. Üyesi Kenan DONUK</td>
-#     <td rowspan="3" class="bordered" style="background-color: rgb(224, 224, 224);">Gömülü Sistemi Programlama<br>Dr. Öğr. Üyesi Mehmet GÜL</td>
-# </tr>
-                
-
     table_content += "</table>"
 
-    print(table_content)
     return table_content
 
-
-# def build_week_excel_file(tableized_week):
-#     wb = openpyxl.Workbook()
-#     ws = wb.active
-
-#     def add_header(ws, row, col):
-#         ws.cell(row=1+row, column=1+col, value=f"Day")
-#         ws.cell(row=1+row, column=1+col+1, value=f"Time")
-
-#         col += 2
-
-#         for year in tableized_week["cols"]:
-#             years_columns_num = len(tableized_week["cols"][year])
-            
-#             ws.cell(row=1+row, column=1+col, value=f"Year {year}")
-#             ws.merge_cells(
-#                 start_row=1+row,
-#                 start_column=1+col,
-#                 end_row=1+row,
-#                 end_column=1+col+years_columns_num -1
-#             )
-
-#             col += years_columns_num
-
-#     global_row_pointer = 0
-#     global_table_row_pointer = 0
-#     global_col_pointer = 0
-
-
-#     for day in tableized_week["rows"]:
-#         add_header(ws, global_row_pointer, global_col_pointer)
-#         global_row_pointer += 1
-
-#         ws.cell(row=1+global_row_pointer, column=1+global_col_pointer, value=day)
-
-#         ws.merge_cells(
-#             start_row=1+global_row_pointer,
-#             start_column=1+global_col_pointer,
-#             end_row=1+global_row_pointer+len(tableized_week["rows"][day]) -1,
-#             end_column=1+global_col_pointer
-#         )
-
-#         local_row_pointer = global_row_pointer
-#         for hour in tableized_week["rows"][day]:
-#             ws.cell(row=1+local_row_pointer, column=1+global_col_pointer+1, value=f"{hour}:00 ~ {hour}:50")
-#             local_row_pointer += 1
+def auto_adjust_column_width(ws):
+    for col in ws.columns:
+        max_length = 0
+        col_letter = col[0].column_letter  # Get column letter (A, B, C, etc.)
         
-#         hours_num = len(tableized_week["rows"][day])
-
-#         local_col_pointer = global_col_pointer
-#         for year in tableized_week["cols"]:
-#             to_skip = 0
-#             for col in tableized_week["cols"][year]:
-#                 local_row_pointer = global_row_pointer
-#                 for lec in col[global_table_row_pointer : global_table_row_pointer + hours_num]:
-#                     local_row_pointer += 1
-
-#                     if to_skip > 0:
-#                         to_skip -= 1
-#                         continue
-
-#                     if lec is None:
-#                         continue
-
-#                     to_skip = lec["count"] -1
-                    
-#                     ws.cell(
-#                         row=local_row_pointer,
-#                         column=1+local_col_pointer+2,
-#                         value=lec["name"] + "\n" + lec["professorName"]
-#                     )
-#                     ws.merge_cells(
-#                         start_row=local_row_pointer,
-#                         start_column=1+local_col_pointer+2,
-#                         end_row=local_row_pointer+to_skip,
-#                         end_column=1+local_col_pointer+2
-#                     )
-
-#                     # local_row_pointer += to_skip
-                
-#                 local_col_pointer += 1
+        for cell in col:
+            if cell.value:
+                max_length = max(max_length, len(str(cell.value)))
         
-#         global_row_pointer += hours_num
-#         global_table_row_pointer += hours_num
+        ws.column_dimensions[col_letter].width = max_length
 
-#     wb.save("merged_cells.xlsx")
+def auto_adjust_row_height(ws):
+    for row in ws.iter_rows():
+        max_height = 15  # Default row height
+        for cell in row:
+            if cell.value:
+                lines = str(cell.value).count("\n") + 1  # Count line breaks
+                max_height = max(max_height, lines * 15)  # Adjust for multiline text
+        
+        ws.row_dimensions[row[0].row].height = max_height
 
-build_week_html_content(
-    tableize_combined_week_by_year(
-        combine_sequenced_lectures(
-            build_week()
-        )
+def get_max_dimentions(tableized_week):
+    rows_num = 0
+    for day in tableized_week["rows"]:
+        rows_num += len(tableized_week["rows"][day]) + 1 # fore headers
+
+    cols_num = 2
+    for year in tableized_week["cols"]:
+        years_columns_num = len(tableized_week["cols"][year])
+        cols_num += years_columns_num
+    
+    return rows_num, cols_num
+
+def build_week_excel_file(tableized_week):
+    header_fill = PatternFill(start_color="00FFFF", end_color="00FFFF", fill_type="solid")
+    cell_fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
+    alignment = Alignment(wrap_text=True, horizontal="center", vertical="center")  # Center alignment
+    day_alignment = Alignment(textRotation=90, horizontal="center", vertical="center")  # Center alignment
+    border = Border(
+        left=Side(style="thin"),
+        right=Side(style="thin"),
+        top=Side(style="thin"),
+        bottom=Side(style="thin"),
     )
-)
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+
+    def add_header(ws, row, col):
+        cell = ws.cell(row=1+row, column=1+col, value=f"Day")
+        cell.fill = header_fill
+        cell.alignment = alignment
+        cell.border = border
+
+        cell = ws.cell(row=1+row, column=1+col+1, value=f"Time")
+        cell.fill = header_fill
+        cell.alignment = alignment
+        cell.border = border
+
+        col += 2
+
+        for year in tableized_week["cols"]:
+            years_columns_num = len(tableized_week["cols"][year])
+            
+            cell = ws.cell(row=1+row, column=1+col, value=f"Year {year}")
+            cell.fill = header_fill
+            cell.alignment = alignment
+            cell.border = border
+
+            ws.merge_cells(
+                start_row=1+row,
+                start_column=1+col,
+                end_row=1+row,
+                end_column=1+col+years_columns_num -1
+            )
+
+            col += years_columns_num
+
+    global_row_pointer = 0
+    global_table_row_pointer = 0
+    global_col_pointer = 0
+
+
+    for day in tableized_week["rows"]:
+        add_header(ws, global_row_pointer, global_col_pointer)
+        global_row_pointer += 1
+
+        cell = ws.cell(row=1+global_row_pointer, column=1+global_col_pointer, value=day)
+        # cell.fill = cell_fill
+        cell.alignment = day_alignment
+        cell.border = border
+
+        ws.merge_cells(
+            start_row=1+global_row_pointer,
+            start_column=1+global_col_pointer,
+            end_row=1+global_row_pointer+len(tableized_week["rows"][day]) -1,
+            end_column=1+global_col_pointer
+        )
+
+        local_row_pointer = global_row_pointer
+        for hour in tableized_week["rows"][day]:
+            cell = ws.cell(row=1+local_row_pointer, column=1+global_col_pointer+1, value=f"{hour}:00 ~ {hour}:50")
+            # cell.fill = cell_fill
+            cell.alignment = alignment
+            cell.border = border
+            local_row_pointer += 1
+        
+        hours_num = len(tableized_week["rows"][day])
+
+        local_col_pointer = global_col_pointer
+        for year in tableized_week["cols"]:
+            # to_skip = 0
+            for col in tableized_week["cols"][year]:
+                local_row_pointer = global_row_pointer
+                for lec in col[global_table_row_pointer : global_table_row_pointer + hours_num]:
+                    local_row_pointer += 1
+
+
+                    # if to_skip > 0:
+                    #     to_skip -= 1
+                    #     continue
+
+                    if lec is None:
+                        continue
+
+                    if lec == {}:
+                        continue
+
+                    to_skip = lec["count"] -1
+                    
+                    cell = ws.cell(
+                        row=local_row_pointer,
+                        column=1+local_col_pointer+2,
+                        value=lec["name"] + "\n" + lec["professorName"]
+                    )
+                    cell.fill = cell_fill
+                    cell.alignment = alignment
+                    cell.border = border
+                    ws.merge_cells(
+                        start_row=local_row_pointer,
+                        start_column=1+local_col_pointer+2,
+                        end_row=local_row_pointer+to_skip,
+                        end_column=1+local_col_pointer+2
+                    )
+
+                    # local_row_pointer += to_skip
+                
+                local_col_pointer += 1
+        
+        global_row_pointer += hours_num
+        global_table_row_pointer += hours_num
+
+    rows_num, cols_num = get_max_dimentions(tableized_week)
+
+    for i in range(rows_num):
+        cell = ws.cell(row=1+i, column=cols_num)
+        b = cell.border
+        cell.border = Border(left=b.left, top=b.top, right=Side(style="thin"), bottom=b.bottom)
+
+    for i in range(cols_num):
+        cell = ws.cell(row=rows_num, column=1+i)
+        b = cell.border
+        cell.border = Border(left=b.left, top=b.top, right=b.right, bottom=Side(style="thin"))
+
+    auto_adjust_column_width(ws)
+    # auto_adjust_row_height(ws)
+
+    # wb.save("merged_cells.xlsx")
+    return wb

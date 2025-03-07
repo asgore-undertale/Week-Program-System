@@ -1,0 +1,1459 @@
+{
+    "Monday": {
+        "8": [
+            {
+                "code": "L006",
+                "professorId": 4,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Fizik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                "professorNumber": "P004",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L008",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Dfferansyel Denklemler",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L020",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L015",
+                "professorId": 7,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "9": [
+            {
+                "code": "L006",
+                "professorId": 4,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Fizik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                "professorNumber": "P004",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L008",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Dfferansyel Denklemler",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L020",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L015",
+                "professorId": 7,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "10": [
+            {
+                "code": "L006",
+                "professorId": 4,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Fizik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                "professorNumber": "P004",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L008",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Dfferansyel Denklemler",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L020",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L015",
+                "professorId": 7,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "11": [
+            {
+                "code": "L006",
+                "professorId": 4,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Fizik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                "professorNumber": "P004",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L008",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Dfferansyel Denklemler",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L020",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "13": [
+            {
+                "code": "L002",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 5,
+                "year": 1,
+                "name": "Algoritma ve Programlama II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L011",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Nesne Tabanl\u0131 Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L021",
+                "professorId": 9,
+                "studentIds": [
+                    4
+                ],
+                "hours": 4,
+                "year": 4,
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            },
+            {
+                "code": "L023",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "14": [
+            {
+                "code": "L002",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 5,
+                "year": 1,
+                "name": "Algoritma ve Programlama II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L011",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Nesne Tabanl\u0131 Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L021",
+                "professorId": 9,
+                "studentIds": [
+                    4
+                ],
+                "hours": 4,
+                "year": 4,
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            },
+            {
+                "code": "L023",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "15": [
+            {
+                "code": "L002",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 5,
+                "year": 1,
+                "name": "Algoritma ve Programlama II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L011",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Nesne Tabanl\u0131 Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L021",
+                "professorId": 9,
+                "studentIds": [
+                    4
+                ],
+                "hours": 4,
+                "year": 4,
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            },
+            {
+                "code": "L023",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "16": [
+            {
+                "code": "L002",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 5,
+                "year": 1,
+                "name": "Algoritma ve Programlama II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L011",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Nesne Tabanl\u0131 Programlama",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L021",
+                "professorId": 9,
+                "studentIds": [
+                    4
+                ],
+                "hours": 4,
+                "year": 4,
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            },
+            {
+                "code": "L023",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 4,
+                "year": 3,
+                "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "17": [
+            {
+                "code": "L002",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 5,
+                "year": 1,
+                "name": "Algoritma ve Programlama II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ]
+    },
+    "Tuesday": {
+        "8": [
+            {
+                "code": "L007",
+                "professorId": 5,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Matematik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L013",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L019",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veri Madencili\u011fine Giri\u015f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L028",
+                "professorId": 11,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "Optimizasyona Giri\u015f",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "9": [
+            {
+                "code": "L007",
+                "professorId": 5,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Matematik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L013",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L019",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veri Madencili\u011fine Giri\u015f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L028",
+                "professorId": 11,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "Optimizasyona Giri\u015f",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "10": [
+            {
+                "code": "L007",
+                "professorId": 5,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Matematik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L013",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L019",
+                "professorId": 9,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veri Madencili\u011fine Giri\u015f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L028",
+                "professorId": 11,
+                "studentIds": [
+                    4
+                ],
+                "hours": 3,
+                "year": 4,
+                "name": "Optimizasyona Giri\u015f",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1003"
+                ]
+            }
+        ],
+        "11": [
+            {
+                "code": "L007",
+                "professorId": 5,
+                "studentIds": [
+                    1
+                ],
+                "hours": 4,
+                "year": 1,
+                "name": "Matematik II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L013",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "13": [
+            {
+                "code": "L022",
+                "professorId": 10,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Bilgisayar Organizasyonu ve Mimarisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L026",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veritaban\u0131 II",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L029",
+                "professorId": 12,
+                "studentIds": [
+                    1
+                ],
+                "hours": 3,
+                "year": 1,
+                "name": "Elektrik Devreleri",
+                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                "professorNumber": "P012",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "14": [
+            {
+                "code": "L022",
+                "professorId": 10,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Bilgisayar Organizasyonu ve Mimarisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L026",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veritaban\u0131 II",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L029",
+                "professorId": 12,
+                "studentIds": [
+                    1
+                ],
+                "hours": 3,
+                "year": 1,
+                "name": "Elektrik Devreleri",
+                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                "professorNumber": "P012",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "15": [
+            {
+                "code": "L022",
+                "professorId": 10,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Bilgisayar Organizasyonu ve Mimarisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L026",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Veritaban\u0131 II",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L029",
+                "professorId": 12,
+                "studentIds": [
+                    1
+                ],
+                "hours": 3,
+                "year": 1,
+                "name": "Elektrik Devreleri",
+                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                "professorNumber": "P012",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "16": [
+            {
+                "code": "L022",
+                "professorId": 10,
+                "studentIds": [
+                    2
+                ],
+                "hours": 4,
+                "year": 2,
+                "name": "Bilgisayar Organizasyonu ve Mimarisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L001",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "M\u00fchendislk Et\u011f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L014",
+                "professorId": 7,
+                "studentIds": [
+                    3
+                ],
+                "hours": 2,
+                "year": 3,
+                "name": "Mobil Tabanl\u0131 Uygulamalar",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "17": [
+            {
+                "code": "L001",
+                "professorId": 1,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "M\u00fchendislk Et\u011f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            },
+            {
+                "code": "L014",
+                "professorId": 7,
+                "studentIds": [
+                    3
+                ],
+                "hours": 2,
+                "year": 3,
+                "name": "Mobil Tabanl\u0131 Uygulamalar",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ]
+    },
+    "Wednesday": {
+        "8": [
+            {
+                "code": "L003",
+                "professorId": 1,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Makine \u00d6\u011frenmesi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L024",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L004",
+                "professorId": 2,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "T\u00fcrk Dili II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                "professorNumber": "P002",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "9": [
+            {
+                "code": "L003",
+                "professorId": 1,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Makine \u00d6\u011frenmesi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L024",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L004",
+                "professorId": 2,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "T\u00fcrk Dili II",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                "professorNumber": "P002",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "10": [
+            {
+                "code": "L003",
+                "professorId": 1,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Makine \u00d6\u011frenmesi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L024",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            },
+            {
+                "code": "L005",
+                "professorId": 3,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "\u0130ngilizce II",
+                "professorName": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                "professorNumber": "P003",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "11": [
+            {
+                "code": "L005",
+                "professorId": 3,
+                "studentIds": [
+                    1
+                ],
+                "hours": 2,
+                "year": 1,
+                "name": "\u0130ngilizce II",
+                "professorName": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                "professorNumber": "P003",
+                "studentNumbers": [
+                    "S1000"
+                ]
+            }
+        ],
+        "13": [
+            {
+                "code": "L009",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L025",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Algoritma Analizi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "14": [
+            {
+                "code": "L009",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L025",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Algoritma Analizi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "15": [
+            {
+                "code": "L009",
+                "professorId": 5,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                "professorNumber": "P005",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L025",
+                "professorId": 10,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Algoritma Analizi",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                "professorNumber": "P010",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "16": [
+            {
+                "code": "L010",
+                "professorId": 6,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
+                "professorName": "Do\u00e7. Dr. Bilal ALTAN",
+                "professorNumber": "P006",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "17": [
+            {
+                "code": "L010",
+                "professorId": 6,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
+                "professorName": "Do\u00e7. Dr. Bilal ALTAN",
+                "professorNumber": "P006",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ]
+    },
+    "Thursday": {
+        "8": [
+            {
+                "code": "L016",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Algoritmalar",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L027",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bilgisayar A\u011flar\u0131",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "9": [
+            {
+                "code": "L016",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Algoritmalar",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L027",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bilgisayar A\u011flar\u0131",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "10": [
+            {
+                "code": "L016",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Algoritmalar",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            },
+            {
+                "code": "L027",
+                "professorId": 11,
+                "studentIds": [
+                    3
+                ],
+                "hours": 3,
+                "year": 3,
+                "name": "Bilgisayar A\u011flar\u0131",
+                "professorName": "Do\u00e7. Dr. Murat ASLAN",
+                "professorNumber": "P011",
+                "studentNumbers": [
+                    "S1002"
+                ]
+            }
+        ],
+        "11": [],
+        "13": [
+            {
+                "code": "L017",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Yapay Zeka",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "14": [
+            {
+                "code": "L017",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Yapay Zeka",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "15": [
+            {
+                "code": "L017",
+                "professorId": 8,
+                "studentIds": [
+                    2
+                ],
+                "hours": 3,
+                "year": 2,
+                "name": "Yapay Zeka",
+                "professorName": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                "professorNumber": "P008",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "16": [
+            {
+                "code": "L012",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "\u0130nsan Blgsayar Etkle\u015fm",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "17": [
+            {
+                "code": "L012",
+                "professorId": 7,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "\u0130nsan Blgsayar Etkle\u015fm",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                "professorNumber": "P007",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ]
+    },
+    "Friday": {
+        "8": [
+            {
+                "code": "L018",
+                "professorId": 9,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "Bili\u015fim Hukuku",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "9": [
+            {
+                "code": "L018",
+                "professorId": 9,
+                "studentIds": [
+                    2
+                ],
+                "hours": 2,
+                "year": 2,
+                "name": "Bili\u015fim Hukuku",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                "professorNumber": "P009",
+                "studentNumbers": [
+                    "S1001"
+                ]
+            }
+        ],
+        "10": [],
+        "11": [],
+        "13": [],
+        "14": [],
+        "15": [],
+        "16": [],
+        "17": []
+    }
+}

@@ -69,10 +69,10 @@ def create_database():
 def insert_dummy_data():
     # Insert dummy students
     students = [
-        (1000, "Hülya Kaya"),
-        (1001, "Hülya Çelik"),
-        (1002, "Ayşe Acar"),
-        (1003, "Fatma Eren"),
+        ("S1000", "Hülya Kaya"),
+        ("S1001", "Hülya Çelik"),
+        ("S1002", "Ayşe Acar"),
+        ("S1003", "Fatma Eren"),
     ]
     cursor.executemany("INSERT OR IGNORE INTO StudentTb (StudentNumber, Name) VALUES (?, ?)", students)
 
