@@ -69,9 +69,10 @@ def create_database():
 def insert_dummy_data():
     # Insert dummy students
     students = [
-        ("S001", "Alice"),
-        ("S002", "Bob"),
-        ("S003", "Charlie")
+        (1000, "Hülya Kaya"),
+        (1001, "Hülya Çelik"),
+        (1002, "Ayşe Acar"),
+        (1003, "Fatma Eren"),
     ]
     cursor.executemany("INSERT OR IGNORE INTO StudentTb (StudentNumber, Name) VALUES (?, ?)", students)
 
@@ -129,11 +130,34 @@ def insert_dummy_data():
     # Insert dummy lecture-student associations
     lecture_students = [
         (1, 1),
-        (2, 1),
-        (3, 2),
-        (1, 3),
+        (1, 2),
+        (1, 4),
+        (1, 5),
+        (1, 6),
+        (1, 7),
+        (1, 29),
         (2, 3),
-        (3, 3),
+        (2, 8),
+        (2, 9),
+        (2, 10),
+        (2, 11),
+        (2, 12),
+        (2, 13),
+        (2, 16),
+        (2, 17),
+        (2, 18),
+        (2, 22),
+        (3, 14),
+        (3, 19),
+        (3, 20),
+        (3, 23),
+        (3, 24),
+        (3, 25),
+        (3, 26),
+        (3, 27),
+        (4, 15),
+        (4, 21),
+        (4, 28),
     ]
     cursor.executemany("INSERT OR IGNORE INTO LectureStudentTb (StudentId, LectureProfessorId) VALUES (?, ?)", lecture_students)
 
@@ -199,7 +223,7 @@ def insert_dummy_data():
     # conn.close()
 
 if __name__ == "__main__":
-    conn = sqlite3.connect("UniversityDb.db")  # Create or connect to the database
+    conn = sqlite3.connect("Databases/UniversityDb.db")  # Create or connect to the database
     cursor = conn.cursor()
 
     create_database()

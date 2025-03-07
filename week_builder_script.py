@@ -2,6 +2,7 @@ import sqlite3
 import random
 from rich import print
 
+
 def get_lecture_id_by_code(code):
     lecture_id = None
     for row2 in lectures:
@@ -83,18 +84,18 @@ def get_shared_items_between_lists(list1, list2):
 def get_lecture_day_available_hours(lecture, week, day):
     empty_hours = []
     for hour in week[day]:
-        if not is_professor_available(lecture["professor"], hour, day):
-        # if not all(is_professor_available(p, hour, day) for p in lecture["professor"]):
+        if not is_professor_available(lecture["professorId"], hour, day):
+        # if not all(is_professor_available(p, hour, day) for p in lecture["professorId"]):
             continue
 
         for lec_ in week[day][hour]:
             # there can only be one professor for a lecture hour
-            if lec_["professor"] == lecture["professor"]:
+            if lec_["professorId"] == lecture["professorId"]:
                 break
             # we check for conflicts only for lectures with the same year
             if lec_["year"] == lecture["year"] and get_shared_items_between_lists(
-                lec_["students"],
-                lecture["students"]
+                lec_["studentIds"],
+                lecture["studentIds"]
             ):
                 break
         else:
@@ -172,7 +173,7 @@ def split_lecture_time(lecture):
     return [lec1, lec2]
 
 
-conn = sqlite3.connect("UniversityDb.db")  # Create or connect to the database
+conn = sqlite3.connect("Databases/UniversityDb.db")  # Create or connect to the database
 cursor = conn.cursor()
 
 lectures = cursor.execute("SELECT * FROM LectureTb").fetchall()
@@ -205,8 +206,8 @@ def build_week(is_random = False):
     LECTURES = [
         {
             'code': row[1],
-            "professor": row2[1],
-            "students": [
+            "professorId": row2[1],
+            "studentIds": [
                 row3[1]
                 for row3 in lectures_students
                 if row2[0] == row3[2]
@@ -225,11 +226,12 @@ def build_week(is_random = False):
         LECTURES.sort(key=lambda x: -x["hours"])
 
     for lec in LECTURES:
-        if not lec["students"]:
-            print(f"Lecture: {lec["code"]}, for Professor: {lec["professor"]} has been dropped!")
+        if not lec["studentIds"]:
+            print(f"Lecture: {lec["code"]}, for Professor: {lec["professorId"]} has been dropped!")
             print("Cause: No students take this lecture.")
-            continue
-        
+            # continue
+
+        lec = get_fully_detailed_lecture(lec)
         week = place_lecture_in_week(lec, WEEK)
 
     # TODO what if students have altan or usten
@@ -237,6 +239,19 @@ def build_week(is_random = False):
     # TODO: render print cause error on html
 
     return week
+
+def get_fully_detailed_lecture(lecture):
+    for row in lectures:
+        if lecture["code"] == row[1]:
+            lecture["name"] = row[2]
+            break
+
+    for row in professors:
+        if lecture["professorId"] == row[0]:
+            lecture["professorName"] = row[2]
+            break
+    
+    return lecture
 
 def combine_sequenced_lectures(week):
     for day in week:
@@ -251,7 +266,7 @@ def combine_sequenced_lectures(week):
             for l, lec in enumerate(week[day][hour]):
                 # deleted_num = 0
                 for l2, lec2 in enumerate(week[day][reversed_hours[h+1]]):
-                    if lec["code"] == lec2["code"] and lec["professor"] == lec2["professor"]:
+                    if lec["code"] == lec2["code"] and lec["professorId"] == lec2["professorId"]:
                         week[day][reversed_hours[h+1]][l2]["count"] += 1
                         # week[day][hour].pop(l)
                         to_delete.append(l)
@@ -262,3 +277,224 @@ def combine_sequenced_lectures(week):
                 week[day][hour].pop(d)
     
     return week
+
+def tableize_combined_week_by_year(combined_week, remove_unnecessary_nones = False):
+    cols_availibility_counter = {}
+    table = {
+        "rows": {},
+        "cols": {},
+    }
+    global_row_pointer = 0
+
+    for day in combined_week:
+        table["rows"][day] = {}
+
+        for hour in combined_week[day]:
+            table["rows"][day][hour] = {}
+
+            if not remove_unnecessary_nones:
+                for year in cols_availibility_counter:
+                    for i, item in enumerate(cols_availibility_counter[year]):
+                        if item != 0:
+                            table["cols"][year][i].append(None)
+
+            lectures = combined_week[day][hour][::-1]
+
+            for l in range(len(lectures)-1, -1, -1):
+                lec = lectures[l]
+
+                if lec["year"] not in cols_availibility_counter:
+                    cols_availibility_counter[lec["year"]] = []
+                    table["cols"][lec["year"]] = []
+
+                for year in cols_availibility_counter:
+
+                    if lec["year"] != year:
+                        continue
+
+                    for i, item in enumerate(cols_availibility_counter[year]):
+                        if item == 0:
+                            table["cols"][year][i].append(lec)
+                            cols_availibility_counter[year][i] = lec["count"]
+                            lectures.pop(l)
+                            break
+                    else:
+                        table["cols"][year].append([{} for _ in range(global_row_pointer)] + [lec])
+                        cols_availibility_counter[year].append(lec["count"])
+
+
+            for year in cols_availibility_counter:
+                for i, item in enumerate(cols_availibility_counter[year]):
+                    if item == 0:
+                        table["cols"][year][i].append({})
+                    else:
+                        cols_availibility_counter[year][i] -= 1
+
+            global_row_pointer += 1
+
+    table["cols"] = dict(sorted(table["cols"].items())) # to sort keys
+
+    return table
+
+def build_week_html_content(tableized_week):
+    table_content = "<table>"
+
+    header_content = """
+    <tr>
+        <td class="bordered header_row">Day</td>
+        <td class="bordered header_row">Time</td>""" + "".join(
+            f"""
+            <td class="bordered header_row" colspan="{len(tableized_week["cols"][year])}">Year {year}</td>
+            """
+            for year in tableized_week["cols"]
+        ) + """
+    </tr>
+    """
+    
+
+    global_table_row_pointer = 0
+
+    for day in tableized_week["rows"]:
+        table_content += header_content
+        
+        days_content = f"""
+            <td class="bordered vertical_writing" rowspan="{len(tableized_week["rows"][day])+1}">{day}</td>
+        """
+        
+        rows_content = []
+        for hour in tableized_week["rows"][day]:
+            rows_content.append(f"""
+                <tr><td class="bordered">{hour}:00 ~ {hour}:50</td>
+            """)
+        
+        for year in tableized_week["cols"]:
+            for col in tableized_week["cols"][year]:
+                for l, lec in enumerate(col[global_table_row_pointer : global_table_row_pointer + len(rows_content)]):
+                    if lec is None:
+                        continue
+
+                    if lec == {}:
+                        rows_content[l] += "<td></td>"
+                        continue
+
+                    span = lec["count"]
+
+                    # rows_content[l] += f"""<td rowspan="{span}" class="bordered" style="background-color: rgb(224, 224, 224);">{lec["name"]}<br>{lec["professorName"]}</td>"""
+        
+        global_table_row_pointer += len(rows_content)
+
+        for i in range(len(rows_content)):
+            rows_content[i] += "</tr>"
+        
+        days_content += "".join(rows_content)
+
+        table_content += days_content
+
+#             <tr>
+#     <td class="bordered">8:00 ~ 8:50</td>
+#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Fizik II<br>Dr. Öğr. Üyesi Dilan ALP</td>
+#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Dfferansyel Denklemler<br>Dr. Öğr. Üyesi Mustafa MIZRAK</td>
+#     <td rowspan="4" class="bordered" style="background-color: rgb(224, 224, 224);">Yazılım Mühendislği<br>Dr. Öğr. Üyesi Kenan DONUK</td>
+#     <td rowspan="3" class="bordered" style="background-color: rgb(224, 224, 224);">Gömülü Sistemi Programlama<br>Dr. Öğr. Üyesi Mehmet GÜL</td>
+# </tr>
+                
+
+    table_content += "</table>"
+
+    print(table_content)
+    return table_content
+
+
+# def build_week_excel_file(tableized_week):
+#     wb = openpyxl.Workbook()
+#     ws = wb.active
+
+#     def add_header(ws, row, col):
+#         ws.cell(row=1+row, column=1+col, value=f"Day")
+#         ws.cell(row=1+row, column=1+col+1, value=f"Time")
+
+#         col += 2
+
+#         for year in tableized_week["cols"]:
+#             years_columns_num = len(tableized_week["cols"][year])
+            
+#             ws.cell(row=1+row, column=1+col, value=f"Year {year}")
+#             ws.merge_cells(
+#                 start_row=1+row,
+#                 start_column=1+col,
+#                 end_row=1+row,
+#                 end_column=1+col+years_columns_num -1
+#             )
+
+#             col += years_columns_num
+
+#     global_row_pointer = 0
+#     global_table_row_pointer = 0
+#     global_col_pointer = 0
+
+
+#     for day in tableized_week["rows"]:
+#         add_header(ws, global_row_pointer, global_col_pointer)
+#         global_row_pointer += 1
+
+#         ws.cell(row=1+global_row_pointer, column=1+global_col_pointer, value=day)
+
+#         ws.merge_cells(
+#             start_row=1+global_row_pointer,
+#             start_column=1+global_col_pointer,
+#             end_row=1+global_row_pointer+len(tableized_week["rows"][day]) -1,
+#             end_column=1+global_col_pointer
+#         )
+
+#         local_row_pointer = global_row_pointer
+#         for hour in tableized_week["rows"][day]:
+#             ws.cell(row=1+local_row_pointer, column=1+global_col_pointer+1, value=f"{hour}:00 ~ {hour}:50")
+#             local_row_pointer += 1
+        
+#         hours_num = len(tableized_week["rows"][day])
+
+#         local_col_pointer = global_col_pointer
+#         for year in tableized_week["cols"]:
+#             to_skip = 0
+#             for col in tableized_week["cols"][year]:
+#                 local_row_pointer = global_row_pointer
+#                 for lec in col[global_table_row_pointer : global_table_row_pointer + hours_num]:
+#                     local_row_pointer += 1
+
+#                     if to_skip > 0:
+#                         to_skip -= 1
+#                         continue
+
+#                     if lec is None:
+#                         continue
+
+#                     to_skip = lec["count"] -1
+                    
+#                     ws.cell(
+#                         row=local_row_pointer,
+#                         column=1+local_col_pointer+2,
+#                         value=lec["name"] + "\n" + lec["professorName"]
+#                     )
+#                     ws.merge_cells(
+#                         start_row=local_row_pointer,
+#                         start_column=1+local_col_pointer+2,
+#                         end_row=local_row_pointer+to_skip,
+#                         end_column=1+local_col_pointer+2
+#                     )
+
+#                     # local_row_pointer += to_skip
+                
+#                 local_col_pointer += 1
+        
+#         global_row_pointer += hours_num
+#         global_table_row_pointer += hours_num
+
+#     wb.save("merged_cells.xlsx")
+
+build_week_html_content(
+    tableize_combined_week_by_year(
+        combine_sequenced_lectures(
+            build_week()
+        )
+    )
+)
