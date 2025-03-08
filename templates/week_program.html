@@ -12,9 +12,9 @@
 
     <br>
     <br>
-    <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&professors_number={{professors_number}}"><button>Download html Week Program</button></a>
-    <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&professors_number={{professors_number}}"><button>Download json Week Program</button></a>
-    <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&professors_number={{professors_number}}"><button>Download excel Week Program</button></a>
+    <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
+    <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
+    <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a>
 
     <div id="weekProgramContainer"></div>
 
@@ -44,7 +44,7 @@
 
         async function displayWeekProgram() {
             try {
-                let response = await fetch("/get_week_program?type=html&students_number={{students_number}}&professors_number={{professors_number}}");
+                let response = await fetch("/get_week_program?type=html&students_number={{students_number}}&{{professors_numbers}}".replace("amp;", ""));
                 let weekProgram = await response.text();
 
                 let container = document.getElementById("weekProgramContainer");

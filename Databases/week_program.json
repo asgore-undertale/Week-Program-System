@@ -3,10 +3,6 @@
         "8": [
             {
                 "code": "L006",
-                "professorId": 4,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Fizik II",
@@ -18,10 +14,6 @@
             },
             {
                 "code": "L008",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Dfferansyel Denklemler",
@@ -33,10 +25,6 @@
             },
             {
                 "code": "L020",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -48,10 +36,6 @@
             },
             {
                 "code": "L015",
-                "professorId": 7,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
@@ -65,10 +49,6 @@
         "9": [
             {
                 "code": "L006",
-                "professorId": 4,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Fizik II",
@@ -80,10 +60,6 @@
             },
             {
                 "code": "L008",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Dfferansyel Denklemler",
@@ -95,10 +71,6 @@
             },
             {
                 "code": "L020",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -110,10 +82,6 @@
             },
             {
                 "code": "L015",
-                "professorId": 7,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
@@ -127,10 +95,6 @@
         "10": [
             {
                 "code": "L006",
-                "professorId": 4,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Fizik II",
@@ -142,10 +106,6 @@
             },
             {
                 "code": "L008",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Dfferansyel Denklemler",
@@ -157,10 +117,6 @@
             },
             {
                 "code": "L020",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -172,10 +128,6 @@
             },
             {
                 "code": "L015",
-                "professorId": 7,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
@@ -189,10 +141,6 @@
         "11": [
             {
                 "code": "L006",
-                "professorId": 4,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Fizik II",
@@ -204,10 +152,6 @@
             },
             {
                 "code": "L008",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Dfferansyel Denklemler",
@@ -219,10 +163,6 @@
             },
             {
                 "code": "L020",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -236,10 +176,6 @@
         "13": [
             {
                 "code": "L002",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 5,
                 "year": 1,
                 "name": "Algoritma ve Programlama II",
@@ -251,10 +187,6 @@
             },
             {
                 "code": "L011",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Nesne Tabanl\u0131 Programlama",
@@ -266,10 +198,6 @@
             },
             {
                 "code": "L021",
-                "professorId": 9,
-                "studentIds": [
-                    4
-                ],
                 "hours": 4,
                 "year": 4,
                 "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
@@ -281,10 +209,6 @@
             },
             {
                 "code": "L023",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
@@ -298,10 +222,6 @@
         "14": [
             {
                 "code": "L002",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 5,
                 "year": 1,
                 "name": "Algoritma ve Programlama II",
@@ -313,10 +233,6 @@
             },
             {
                 "code": "L011",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Nesne Tabanl\u0131 Programlama",
@@ -328,10 +244,6 @@
             },
             {
                 "code": "L021",
-                "professorId": 9,
-                "studentIds": [
-                    4
-                ],
                 "hours": 4,
                 "year": 4,
                 "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
@@ -343,10 +255,6 @@
             },
             {
                 "code": "L023",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
@@ -360,10 +268,6 @@
         "15": [
             {
                 "code": "L002",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 5,
                 "year": 1,
                 "name": "Algoritma ve Programlama II",
@@ -375,10 +279,6 @@
             },
             {
                 "code": "L011",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Nesne Tabanl\u0131 Programlama",
@@ -390,10 +290,6 @@
             },
             {
                 "code": "L021",
-                "professorId": 9,
-                "studentIds": [
-                    4
-                ],
                 "hours": 4,
                 "year": 4,
                 "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
@@ -405,10 +301,6 @@
             },
             {
                 "code": "L023",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
@@ -422,10 +314,6 @@
         "16": [
             {
                 "code": "L002",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 5,
                 "year": 1,
                 "name": "Algoritma ve Programlama II",
@@ -437,10 +325,6 @@
             },
             {
                 "code": "L011",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Nesne Tabanl\u0131 Programlama",
@@ -452,10 +336,6 @@
             },
             {
                 "code": "L021",
-                "professorId": 9,
-                "studentIds": [
-                    4
-                ],
                 "hours": 4,
                 "year": 4,
                 "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
@@ -467,10 +347,6 @@
             },
             {
                 "code": "L023",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 4,
                 "year": 3,
                 "name": "Bilgisayar M\u00fchendisli\u011fi Uygulamalar\u0131",
@@ -484,10 +360,6 @@
         "17": [
             {
                 "code": "L002",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 5,
                 "year": 1,
                 "name": "Algoritma ve Programlama II",
@@ -503,10 +375,6 @@
         "8": [
             {
                 "code": "L007",
-                "professorId": 5,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Matematik II",
@@ -518,10 +386,6 @@
             },
             {
                 "code": "L013",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "G\u00f6rsel Programlama Dilleri",
@@ -533,10 +397,6 @@
             },
             {
                 "code": "L019",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -548,10 +408,6 @@
             },
             {
                 "code": "L028",
-                "professorId": 11,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "Optimizasyona Giri\u015f",
@@ -565,10 +421,6 @@
         "9": [
             {
                 "code": "L007",
-                "professorId": 5,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Matematik II",
@@ -580,10 +432,6 @@
             },
             {
                 "code": "L013",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "G\u00f6rsel Programlama Dilleri",
@@ -595,10 +443,6 @@
             },
             {
                 "code": "L019",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -610,10 +454,6 @@
             },
             {
                 "code": "L028",
-                "professorId": 11,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "Optimizasyona Giri\u015f",
@@ -627,10 +467,6 @@
         "10": [
             {
                 "code": "L007",
-                "professorId": 5,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Matematik II",
@@ -642,10 +478,6 @@
             },
             {
                 "code": "L013",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "G\u00f6rsel Programlama Dilleri",
@@ -657,10 +489,6 @@
             },
             {
                 "code": "L019",
-                "professorId": 9,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -672,10 +500,6 @@
             },
             {
                 "code": "L028",
-                "professorId": 11,
-                "studentIds": [
-                    4
-                ],
                 "hours": 3,
                 "year": 4,
                 "name": "Optimizasyona Giri\u015f",
@@ -689,10 +513,6 @@
         "11": [
             {
                 "code": "L007",
-                "professorId": 5,
-                "studentIds": [
-                    1
-                ],
                 "hours": 4,
                 "year": 1,
                 "name": "Matematik II",
@@ -704,10 +524,6 @@
             },
             {
                 "code": "L013",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "G\u00f6rsel Programlama Dilleri",
@@ -721,10 +537,6 @@
         "13": [
             {
                 "code": "L022",
-                "professorId": 10,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -736,10 +548,6 @@
             },
             {
                 "code": "L026",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veritaban\u0131 II",
@@ -751,10 +559,6 @@
             },
             {
                 "code": "L029",
-                "professorId": 12,
-                "studentIds": [
-                    1
-                ],
                 "hours": 3,
                 "year": 1,
                 "name": "Elektrik Devreleri",
@@ -768,10 +572,6 @@
         "14": [
             {
                 "code": "L022",
-                "professorId": 10,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -783,10 +583,6 @@
             },
             {
                 "code": "L026",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veritaban\u0131 II",
@@ -798,10 +594,6 @@
             },
             {
                 "code": "L029",
-                "professorId": 12,
-                "studentIds": [
-                    1
-                ],
                 "hours": 3,
                 "year": 1,
                 "name": "Elektrik Devreleri",
@@ -815,10 +607,6 @@
         "15": [
             {
                 "code": "L022",
-                "professorId": 10,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -830,10 +618,6 @@
             },
             {
                 "code": "L026",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Veritaban\u0131 II",
@@ -845,10 +629,6 @@
             },
             {
                 "code": "L029",
-                "professorId": 12,
-                "studentIds": [
-                    1
-                ],
                 "hours": 3,
                 "year": 1,
                 "name": "Elektrik Devreleri",
@@ -862,10 +642,6 @@
         "16": [
             {
                 "code": "L022",
-                "professorId": 10,
-                "studentIds": [
-                    2
-                ],
                 "hours": 4,
                 "year": 2,
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -877,10 +653,6 @@
             },
             {
                 "code": "L001",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "M\u00fchendislk Et\u011f",
@@ -892,10 +664,6 @@
             },
             {
                 "code": "L014",
-                "professorId": 7,
-                "studentIds": [
-                    3
-                ],
                 "hours": 2,
                 "year": 3,
                 "name": "Mobil Tabanl\u0131 Uygulamalar",
@@ -909,10 +677,6 @@
         "17": [
             {
                 "code": "L001",
-                "professorId": 1,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "M\u00fchendislk Et\u011f",
@@ -924,10 +688,6 @@
             },
             {
                 "code": "L014",
-                "professorId": 7,
-                "studentIds": [
-                    3
-                ],
                 "hours": 2,
                 "year": 3,
                 "name": "Mobil Tabanl\u0131 Uygulamalar",
@@ -943,10 +703,6 @@
         "8": [
             {
                 "code": "L003",
-                "professorId": 1,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Makine \u00d6\u011frenmesi",
@@ -958,10 +714,6 @@
             },
             {
                 "code": "L024",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
@@ -973,10 +725,6 @@
             },
             {
                 "code": "L004",
-                "professorId": 2,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "T\u00fcrk Dili II",
@@ -990,10 +738,6 @@
         "9": [
             {
                 "code": "L003",
-                "professorId": 1,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Makine \u00d6\u011frenmesi",
@@ -1005,10 +749,6 @@
             },
             {
                 "code": "L024",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
@@ -1020,10 +760,6 @@
             },
             {
                 "code": "L004",
-                "professorId": 2,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "T\u00fcrk Dili II",
@@ -1037,10 +773,6 @@
         "10": [
             {
                 "code": "L003",
-                "professorId": 1,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Makine \u00d6\u011frenmesi",
@@ -1052,10 +784,6 @@
             },
             {
                 "code": "L024",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
@@ -1067,10 +795,6 @@
             },
             {
                 "code": "L005",
-                "professorId": 3,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "\u0130ngilizce II",
@@ -1084,10 +808,6 @@
         "11": [
             {
                 "code": "L005",
-                "professorId": 3,
-                "studentIds": [
-                    1
-                ],
                 "hours": 2,
                 "year": 1,
                 "name": "\u0130ngilizce II",
@@ -1101,10 +821,6 @@
         "13": [
             {
                 "code": "L009",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Olas\u0131l\u0131k ve \u0130statstk",
@@ -1116,10 +832,6 @@
             },
             {
                 "code": "L025",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Algoritma Analizi",
@@ -1133,10 +845,6 @@
         "14": [
             {
                 "code": "L009",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Olas\u0131l\u0131k ve \u0130statstk",
@@ -1148,10 +856,6 @@
             },
             {
                 "code": "L025",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Algoritma Analizi",
@@ -1165,10 +869,6 @@
         "15": [
             {
                 "code": "L009",
-                "professorId": 5,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Olas\u0131l\u0131k ve \u0130statstk",
@@ -1180,10 +880,6 @@
             },
             {
                 "code": "L025",
-                "professorId": 10,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Algoritma Analizi",
@@ -1197,10 +893,6 @@
         "16": [
             {
                 "code": "L010",
-                "professorId": 6,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
@@ -1214,10 +906,6 @@
         "17": [
             {
                 "code": "L010",
-                "professorId": 6,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
@@ -1233,10 +921,6 @@
         "8": [
             {
                 "code": "L016",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Algoritmalar",
@@ -1248,10 +932,6 @@
             },
             {
                 "code": "L027",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bilgisayar A\u011flar\u0131",
@@ -1265,10 +945,6 @@
         "9": [
             {
                 "code": "L016",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Algoritmalar",
@@ -1280,10 +956,6 @@
             },
             {
                 "code": "L027",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bilgisayar A\u011flar\u0131",
@@ -1297,10 +969,6 @@
         "10": [
             {
                 "code": "L016",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Algoritmalar",
@@ -1312,10 +980,6 @@
             },
             {
                 "code": "L027",
-                "professorId": 11,
-                "studentIds": [
-                    3
-                ],
                 "hours": 3,
                 "year": 3,
                 "name": "Bilgisayar A\u011flar\u0131",
@@ -1330,10 +994,6 @@
         "13": [
             {
                 "code": "L017",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Yapay Zeka",
@@ -1347,10 +1007,6 @@
         "14": [
             {
                 "code": "L017",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Yapay Zeka",
@@ -1364,10 +1020,6 @@
         "15": [
             {
                 "code": "L017",
-                "professorId": 8,
-                "studentIds": [
-                    2
-                ],
                 "hours": 3,
                 "year": 2,
                 "name": "Yapay Zeka",
@@ -1381,10 +1033,6 @@
         "16": [
             {
                 "code": "L012",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "\u0130nsan Blgsayar Etkle\u015fm",
@@ -1398,10 +1046,6 @@
         "17": [
             {
                 "code": "L012",
-                "professorId": 7,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "\u0130nsan Blgsayar Etkle\u015fm",
@@ -1417,10 +1061,6 @@
         "8": [
             {
                 "code": "L018",
-                "professorId": 9,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "Bili\u015fim Hukuku",
@@ -1434,10 +1074,6 @@
         "9": [
             {
                 "code": "L018",
-                "professorId": 9,
-                "studentIds": [
-                    2
-                ],
                 "hours": 2,
                 "year": 2,
                 "name": "Bili\u015fim Hukuku",

@@ -5,54 +5,54 @@ import openpyxl
 from openpyxl.styles import PatternFill, Alignment, Border, Side
 
 
-def get_lecture_id_by_code(code):
-    lecture_id = None
-    for row2 in lectures:
-        if row2[1] == code:
-            lecture_id = row2[0]
-            break
+# def get_lecture_id_by_code(code):
+#     lecture_id = None
+#     for row2 in lectures:
+#         if row2[1] == code:
+#             lecture_id = row2[0]
+#             break
     
-    return lecture_id
+#     return lecture_id
 
-def is_professor_available(professor_id, hour, day):
+def is_professor_available(professor_id, hour, day, professors_time):
     for row in professors_time:
         if row[1] == professor_id and row[2] == hour and row[3] == day:
             return True
     return False
 
-def get_professor_conflicts_num(lectures, hour, day):
-    conflicts_num = 0
-    professors_ids = []
+# def get_professor_conflicts_num(lectures, hour, day):
+#     conflicts_num = 0
+#     professors_ids = []
 
-    for lec in lectures:
-        lec_id = get_lecture_id_by_code(lec[0])
+#     for lec in lectures:
+#         lec_id = get_lecture_id_by_code(lec[0])
                 
-        for row2 in lectures_professores:
-            if row2[2] == lec_id:
-                if row2[1] in professors_ids:
-                    conflicts_num += 1
-                else:
-                    if not is_professor_available(row2[1], hour, day):
-                        conflicts_num += 1
-                    professors_ids.append(row2[1])
+#         for row2 in lectures_professores:
+#             if row2[2] == lec_id:
+#                 if row2[1] in professors_ids:
+#                     conflicts_num += 1
+#                 else:
+#                     if not is_professor_available(row2[1], hour, day):
+#                         conflicts_num += 1
+#                     professors_ids.append(row2[1])
     
-    return conflicts_num
+#     return conflicts_num
 
-def get_student_conflicts_num(lectures):
-    conflicts_num = 0
-    students_ids = []
+# def get_student_conflicts_num(lectures):
+#     conflicts_num = 0
+#     students_ids = []
 
-    for lec in lectures:
-        lec_id = get_lecture_id_by_code(lec[0])
+#     for lec in lectures:
+#         lec_id = get_lecture_id_by_code(lec[0])
                 
-        for row2 in lectures_students:
-            if row2[2] == lec_id:
-                if row2[1] in students_ids:
-                    conflicts_num += 1
-                else:
-                    students_ids.append(row2[1])
+#         for row2 in lectures_students:
+#             if row2[2] == lec_id:
+#                 if row2[1] in students_ids:
+#                     conflicts_num += 1
+#                 else:
+#                     students_ids.append(row2[1])
     
-    return conflicts_num
+#     return conflicts_num
 
 def get_sequence_subset(list_, subset_size):
     return [
@@ -83,11 +83,10 @@ def get_shared_items_between_lists(list1, list2):
     
     return shared_items
 
-def get_lecture_day_available_hours(lecture, week, day):
+def get_lecture_day_available_hours(lecture, week, day, professors_time):
     empty_hours = []
     for hour in week[day]:
-        if not is_professor_available(lecture["professorId"], hour, day):
-        # if not all(is_professor_available(p, hour, day) for p in lecture["professorId"]):
+        if not is_professor_available(lecture["professorId"], hour, day, professors_time):
             continue
 
         for lec_ in week[day][hour]:
@@ -128,10 +127,10 @@ def get_best_hours(hours_list, acceptable_threshold = None):
     
     return max_score_hours, max_score
 
-def place_lecture_in_week(lecture, week):
+def place_lecture_in_week(lecture, week, professors_time):
     best_hours, best_score, best_day = None, None, None
     for day in week:
-        empty_hours = get_lecture_day_available_hours(lecture, week, day)
+        empty_hours = get_lecture_day_available_hours(lecture, week, day, professors_time)
 
         hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
@@ -152,16 +151,12 @@ def place_lecture_in_week(lecture, week):
         splitted_lectures = split_lecture_time(lecture)
 
         for splitted_lecture in splitted_lectures:
-            week = place_lecture_in_week(splitted_lecture, week)
+            week = place_lecture_in_week(splitted_lecture, week, professors_time)
         
         return week
 
     for hour in best_hours:
-        # if lec in WEEK[best_day][hour]:
-        #     WEEK[best_day][hour][lec]["professores"] += lecture["professores"]
-        # else:
-            # WEEK[best_day][hour][lec] = lecture
-        week[best_day][hour].append(lecture)
+        week[best_day][hour].append(lecture.copy())
     
     return week
 
@@ -174,19 +169,17 @@ def split_lecture_time(lecture):
 
     return [lec1, lec2]
 
-
-conn = sqlite3.connect("Databases/UniversityDb.db")  # Create or connect to the database
-cursor = conn.cursor()
-
-lectures = cursor.execute("SELECT * FROM LectureTb").fetchall()
-lectures_professores = cursor.execute("SELECT * FROM LectureProfessorTb").fetchall()
-lectures_students = cursor.execute("SELECT * FROM LectureStudentTb").fetchall()
-professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
-students = cursor.execute("SELECT * FROM StudentTb").fetchall()
-professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
-
-
 def build_week(is_random = False):
+    conn = sqlite3.connect("Databases/UniversityDb.db")
+    cursor = conn.cursor()
+
+    lectures = cursor.execute("SELECT * FROM LectureTb").fetchall()
+    lectures_professores = cursor.execute("SELECT * FROM LectureProfessorTb").fetchall()
+    lectures_students = cursor.execute("SELECT * FROM LectureStudentTb").fetchall()
+    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
+    students = cursor.execute("SELECT * FROM StudentTb").fetchall()
+    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+
     WEEK = dict(
         (day, 
             dict([
@@ -233,16 +226,17 @@ def build_week(is_random = False):
             print("Cause: No students take this lecture.")
             # continue
 
-        lec = get_fully_detailed_lecture(lec)
-        week = place_lecture_in_week(lec, WEEK)
+        # lec = get_fully_detailed_lecture(lec)
+        week = place_lecture_in_week(lec, WEEK, professors_time)
 
-    # TODO what if students have altan or usten
-    # TODO: db imports need to be refreshed with every request
-    # TODO: render print cause error on html
+    for day in week:
+        for hour in week[day]:
+            for l, lec in enumerate(week[day][hour]):
+                week[day][hour][l] = get_fully_detailed_lecture(lec, lectures, students, professors)
 
     return week
 
-def get_fully_detailed_lecture(lecture):
+def get_fully_detailed_lecture(lecture, lectures, students, professors):
     for row in lectures:
         if lecture["code"] == row[1]:
             lecture["name"] = row[2]
@@ -251,7 +245,7 @@ def get_fully_detailed_lecture(lecture):
     for row in professors:
         if lecture["professorId"] == row[0]:
             lecture["professorName"] = row[2]
-            # del lecture["professorId"] # it is safer to remove any database info
+            del lecture["professorId"] # it is safer to remove any database info
             lecture["professorNumber"] = row[1]
             break
     
@@ -262,7 +256,7 @@ def get_fully_detailed_lecture(lecture):
                 lecture["studentNumbers"].append(row[1])
                 break
     
-    # del lecture["studentIds"]
+    del lecture["studentIds"]
     
     return lecture
 
@@ -274,22 +268,18 @@ def combine_sequenced_lectures(week):
 
     for day in week:
         reversed_hours = list(week[day].keys())[::-1]
-        print(reversed_hours)
         for h, hour in enumerate(reversed_hours[:-1]):
             to_delete = []
-            for l, lec in enumerate(week[day][hour]):
-                # deleted_num = 0
+            for l in range(len(week[day][hour])-1, -1, -1):
+                lec = week[day][hour][l]
+            # for l, lec in enumerate(week[day][hour]):
                 for l2, lec2 in enumerate(week[day][reversed_hours[h+1]]):
-                    if lec["code"] == lec2["code"] and lec["professorId"] == lec2["professorId"]:
+                    if lec["code"] == lec2["code"] and lec["professorNumber"] == lec2["professorNumber"]:
                         week[day][reversed_hours[h+1]][l2]["count"] += week[day][hour][l]["count"]
-                        # week[day][hour].pop(l)
-                        to_delete.append(l)
-                        # deleted_num += 1
+                        week[day][hour].pop(l)
+                        # to_delete.append(l)
 
                         break
-            
-            for d in to_delete[::-1]:
-                week[day][hour].pop(d)
     
     return week
 
