@@ -326,3 +326,76 @@ def build_week_excel_file(tableized_week):
 
     # wb.save("merged_cells.xlsx")
     return wb
+
+def build_time_table_html_content(times_list):
+    days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+    ]
+
+    hours = [
+        8, 9, 10, 11, 13, 14, 15, 16, 17
+    ]
+
+    style = """<style>
+table {
+    border-collapse: collapse;
+}
+td, tr, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+tr th {
+    background-color: aqua;
+}
+button {
+    margin: 2px;
+}</style>"""
+
+    table_content = style + "<table id='schedule-table'>"
+
+    header_content = """<thead>
+<tr>
+    <th>Time</th>""" + "".join(f"""
+    <th value="{day}">{day}</th>
+    """
+    for day in days
+) + """
+</tr>
+</thead>"""
+
+    body_content = """<tbody>""" + "".join(
+"<tr>" + f"""<td value="{hour}">{hour}:00 ~ {hour}:50</td>""" + "".join(
+        """<td onclick="this.classList.toggle('selected');"></td>"""
+        for day in days
+    ) + "</tr>"
+    for hour in hours
+) + """
+</tbody>"""
+        # if hour == 12
+        #         <td class="break"></td>
+        #     else
+    
+    foot_content = """<tfoot>
+    <tr>
+        <td>
+            <button onclick="saveFreeTime()">Save</button>
+        </td>""" + "".join(
+        f"""<td>
+    <button onclick="eraseDay({d+1})">Erase</button>
+    <button onclick="toggleDay({d+1})">Toggle</button>
+</td>"""
+        for d in range(len(days))
+    ) + """</tr>
+</tfoot>"""
+
+    table_content += header_content + body_content + foot_content
+
+    table_content += "</table>"
+
+    return table_content

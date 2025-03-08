@@ -7,6 +7,15 @@ from io import BytesIO
 
 app = Flask(__name__)
 
+def get_prof_id_by_number(cursor, professors_number):
+    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+
+    for prof in professors:
+        if prof[1] == professors_number:
+            return prof[0]
+    else:
+        return None
+
 @app.route("/")
 def home():
     return render_template("login.html")
@@ -38,27 +47,67 @@ def professor_time():
     else:
         professor_name = None
 
-    days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-    ]
-
-    hours = [
-        8, 9, 10, 11, 12, 13, 14, 15, 16, 17
-    ]
-
     return render_template(
         "professor_time.html",
         professors_number=professors_number,
         professor_name=professor_name,
         professors=professors,
-        professors_time=professors_time,
-        days=days,
-        hours=hours,
     )
+
+@app.route("/get_professor_time_table")
+def get_professor_time_table():
+    professors_number = request.args.get('professors_number', type=str)
+
+    conn = sqlite3.connect("databases/UniversityDb.db")
+    cursor = conn.cursor()
+
+    professor_id = get_prof_id_by_number(cursor, professors_number)
+
+    if professor_id is None:
+        return {"error": "Professor not found."}, 400
+
+    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb WHERE Id = ?", (professor_id,)).fetchall()
+
+    # return app.response_class( # to remove key sorting
+    #     response=json.dumps(professors_time, ensure_ascii=False, indent=4, sort_keys=False),
+    #     status=200,
+    #     mimetype="application/json"
+    # )
+    html_string = build_time_table_html_content(professors_time)
+
+    return html_string
+
+@app.route("/professor_time", methods=["POST"])
+def save_professor_time():
+    json_data = request.get_json()
+
+    if not json_data or not len(json_data):
+        return {"error": "Invalid JSON data"}, 400
+
+    try:
+        professors_number = json_data[0][0]
+    except:
+        return {"error": "No prof number."}, 400
+
+    conn = sqlite3.connect("databases/UniversityDb.db")
+    cursor = conn.cursor()
+
+    professor_id = get_prof_id_by_number(cursor, professors_number)
+
+    if professor_id is None:
+        return {"error": "Professor not found."}, 400
+
+    json_data = list(map(
+        lambda x: (professor_id, x[1], x[2]),
+        json_data
+    ))
+
+    cursor.execute("DELETE FROM TimeProfessorTb WHERE professorId = ?", (professor_id,))
+    print(json_data)
+    cursor.executemany("INSERT OR IGNORE INTO TimeProfessorTb (ProfessorId, Hour, Day) VALUES (?, ?, ?)", json_data)
+    conn.commit()
+
+    return {"message": "Data saved successfully"}, 200
 
 @app.route("/week_program")
 def week_program():

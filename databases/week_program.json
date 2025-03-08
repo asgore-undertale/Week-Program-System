@@ -558,12 +558,12 @@
                 ]
             },
             {
-                "code": "L029",
-                "hours": 3,
+                "code": "L001",
+                "hours": 2,
                 "year": 1,
-                "name": "Elektrik Devreleri",
-                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                "professorNumber": "P012",
+                "name": "M\u00fchendislk Et\u011f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
                 "studentNumbers": [
                     "S1000"
                 ]
@@ -593,12 +593,12 @@
                 ]
             },
             {
-                "code": "L029",
-                "hours": 3,
+                "code": "L001",
+                "hours": 2,
                 "year": 1,
-                "name": "Elektrik Devreleri",
-                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                "professorNumber": "P012",
+                "name": "M\u00fchendislk Et\u011f",
+                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                "professorNumber": "P001",
                 "studentNumbers": [
                     "S1000"
                 ]
@@ -652,12 +652,12 @@
                 ]
             },
             {
-                "code": "L001",
-                "hours": 2,
+                "code": "L029",
+                "hours": 3,
                 "year": 1,
-                "name": "M\u00fchendislk Et\u011f",
-                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                "professorNumber": "P001",
+                "name": "Elektrik Devreleri",
+                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                "professorNumber": "P012",
                 "studentNumbers": [
                     "S1000"
                 ]
@@ -676,12 +676,12 @@
         ],
         "17": [
             {
-                "code": "L001",
-                "hours": 2,
+                "code": "L029",
+                "hours": 3,
                 "year": 1,
-                "name": "M\u00fchendislk Et\u011f",
-                "professorName": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                "professorNumber": "P001",
+                "name": "Elektrik Devreleri",
+                "professorName": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                "professorNumber": "P012",
                 "studentNumbers": [
                     "S1000"
                 ]

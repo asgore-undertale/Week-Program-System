@@ -14,43 +14,8 @@
     {% if professor_name != None %}
     <h4 id="current_professor">{{professor_name}}</h4>
     
-    <table id="schedule-table">
-        <thead>
-            <tr>
-                <th>Time</th>
-                {% for day in days %}
-                    <th>{{day}}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for hour in hours %}
-                <tr>
-                    <td>{{hour}}:00 ~ {{hour}}:50</td>
-                    {% for day in days %}
-                        {% if hour == 12 %}
-                            <td class="break"></td>
-                        {% else %}
-                            <td onclick="this.classList.toggle('selected');"></td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <button onclick="saveFreeTime()">Save</button>
-                </td>
-                {% for day in days %}
-                    <td>
-                        <button onclick="eraseDay({{loop.index}})">Erase</button>
-                        <button onclick="toggleDay({{loop.index}})">Toggle</button>
-                    </td>
-                {% endfor %}
-            </tr>
-        </tfoot>
-    </table>
+    <div id="timeTableContainer"></div>
+    
     <br>
     {% endif %}
 
@@ -62,6 +27,15 @@
     <br>
 
     <script>
+        async function displayTimeTable() {
+            var response = await fetch("/get_professor_time_table?type=html&professors_number={{professors_number}}");
+            
+            let weekProgram = await response.text();
+            
+            let container = document.getElementById("timeTableContainer");
+            container.innerHTML = weekProgram;
+        }
+
         function toggleDay(dayIndex) {
             console.log
             const cells = document.querySelectorAll(`#schedule-table tbody tr td:nth-child(${dayIndex + 1})`);
@@ -82,9 +56,39 @@
             });
         }
         
-        function saveFreeTime() {
-            
+        async function saveFreeTime() {
+            let prof_time_data = []
+
+            days_row = Array.from(document.querySelectorAll("#schedule-table thead tr th"));
+
+            rows = Array.from(document.querySelectorAll("#schedule-table tbody tr"));
+
+            for (let i = 0; i < rows.length; i++) {
+                cells = Array.from(rows[i].querySelectorAll("td"));
+
+                for (let j = 1; j < cells.length; j++) {
+                    if (cells[j].classList.contains('selected')) {
+                        prof_time_data.push(["{{professors_number}}", cells[0].getAttribute("value"), days_row[j].getAttribute("value")]);
+                    }
+                }
+            }
+
+            let response = await fetch("/professor_time", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(prof_time_data),
+            });
+
+            if (response.ok) {
+                alert("Saved");
+            } else {
+                alert("Error");
+            }
         }
+        
+        displayTimeTable()
     </script>
 </body>
 </html>
