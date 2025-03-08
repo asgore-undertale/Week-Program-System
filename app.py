@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request#, redirect #, url_for, jsonify
-from week_builder_script import *
+from pyscripts.week_generator import *
+from pyscripts.table_builder import *
 import json
 import os
 from io import BytesIO
@@ -18,6 +19,47 @@ def login():
 def process_login():
     return render_template("login.html")
 
+@app.route("/professor_time")
+def professor_time():
+    conn = sqlite3.connect("databases/UniversityDb.db")
+    cursor = conn.cursor()
+
+    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
+
+    professors_number = request.args.get('professors_number', type=str)
+
+    professors.sort(key=lambda x: x[2])
+
+    for prof in professors:
+        if prof[1] == professors_number:
+            professor_name = prof[2]
+            break
+    else:
+        professor_name = None
+
+    days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+    ]
+
+    hours = [
+        8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+    ]
+
+    return render_template(
+        "professor_time.html",
+        professors_number=professors_number,
+        professor_name=professor_name,
+        professors=professors,
+        professors_time=professors_time,
+        days=days,
+        hours=hours,
+    )
+
 @app.route("/week_program")
 def week_program():
     students_number = request.args.get('students_number', type=str)
@@ -28,7 +70,7 @@ def week_program():
         professors_numbers
     ))
 
-    conn = sqlite3.connect("Databases/UniversityDb.db")
+    conn = sqlite3.connect("databases/UniversityDb.db")
     cursor = conn.cursor()
 
     professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
@@ -56,7 +98,7 @@ def generate_week_program():
     #     mimetype="application/json"
     # )
 
-    with open("Databases/week_program.json", "w") as f:
+    with open("databases/week_program.json", "w") as f:
         json.dump(week_program, f, indent=4)
 
     return {
@@ -79,13 +121,13 @@ def get_week_program():
     if students_number == "None":
         students_number = None
 
-    if not os.path.exists("Databases/week_program.json"):
+    if not os.path.exists("databases/week_program.json"):
         return {
             "status": 400,
             "message": "Week program not generated. Use /generate_week_program to generate it."
         }
 
-    with open("Databases/week_program.json", "r") as f:
+    with open("databases/week_program.json", "r") as f:
         json_data = f.read()
         week_program = json.loads(json_data)
         # for day in week_program:

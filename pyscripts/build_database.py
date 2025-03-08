@@ -223,7 +223,7 @@ def insert_dummy_data():
     # conn.close()
 
 if __name__ == "__main__":
-    conn = sqlite3.connect("Databases/UniversityDb.db")  # Create or connect to the database
+    conn = sqlite3.connect("databases/UniversityDb.db")  # Create or connect to the database
     cursor = conn.cursor()
 
     create_database()

@@ -1,0 +1,30 @@
+form {
+    border: 1px solid black;
+}
+.selected {
+    background-color: green;
+}
+.break {
+    background-color: #e0e0e0;
+    pointer-events: none;
+}
+table {
+    border-collapse: collapse;
+}
+td, tr, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+tr th {
+    background-color: aqua;
+}
+button {
+    margin: 2px;
+}
+nav {
+    /* margin-bottom: 10px; */
+    padding: 10px;
+    border: solid black 1px;
+}

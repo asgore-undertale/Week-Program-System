@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Week Builder</title>
-    <style>
-        form {
-            border: 1px solid black;
-        }
-    </style>
+    <title>Week Program</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
-<body>
-    <h1>Welcome to the Week Builder</h1>
+    <nav>
+        <a href='professor_time'><button>Professor Time</button></a>
+    </nav>
+    <br>
+    
+    {% if role == "student" %}
+        <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+        <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
+        <span>Only my lectures</span>
+        <br>
+        <br>
+    {% endif %}
 
     <button onclick="buildWeekProgram()">Build Week Program</button>
-    <!-- <button onclick="displayWeekProgram()">Display Week Program</button> -->
+    <br>
 
-    <br>
-    <br>
     <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
     <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
     <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
@@ -24,8 +28,13 @@
     <button onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">Download json Week Program</button></>
     <button onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">Download excel Week Program</button></>
     <br>
-    <br>
 
+    <h2>Week Program</h2>
+
+    <div id="weekProgramContainer"></div>
+
+    <br>
+    <br>
     <form>
         {% if role == "admin" %}
             <label for="students_number">Students Number:</label>
@@ -33,7 +42,7 @@
             <input type="text" id="students_number" name="students_number" value="{{students_number}}">
             <br>
             <br>
-        {% elif role == "student" %}
+        {% elif role == "student" and students_number != None %}
             <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
         {% endif %}
 
@@ -47,16 +56,6 @@
         <br>
         <input type="submit" value="Submit">
     </form>
-    
-    <br>
-    {% if role == "student" %}
-        <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
-        <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
-        Only my lectures
-        <br>
-    {% endif %}
-
-    <div id="weekProgramContainer"></div>
 
     <script>
         async function buildWeekProgram() {
@@ -70,22 +69,26 @@
         async function add_filters_to_url(url) {
             let e = document.getElementsByName("only_my_lectures");
 
-            if (e.length === 0 || e[0].checked) {
+            if ((e.length === 0 || e[0].checked) && "{{students_number}}" !== "None") {
                 url += "&students_number={{students_number}}";
             }
             url += "&{{professors_numbers}}";
             url = url.replaceAll("amp;", "");
+
+            // if (url.endswith("?")) {
+            //     url = url.slice(0, -1);
+            // }
 
             return url;
         }
 
         async function displayWeekProgram() {
             var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
-
+            
             let weekProgram = await response.text();
-
+            
             let container = document.getElementById("weekProgramContainer");
-            container.innerHTML = "<h2>Week Program</h2>" + weekProgram;
+            container.innerHTML = weekProgram;
         }
 
         async function downloadWeekProgram(url) {

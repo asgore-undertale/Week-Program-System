@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor Time</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <nav>
+        <a href='week_program'><button>Week Program</button></a>
+    </nav>
+
+    <h2>Professor Time Table</h2>
+    {% if professor_name != None %}
+    <h4 id="current_professor">{{professor_name}}</h4>
+    
+    <table id="schedule-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                {% for day in days %}
+                    <th>{{day}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for hour in hours %}
+                <tr>
+                    <td>{{hour}}:00 ~ {{hour}}:50</td>
+                    {% for day in days %}
+                        {% if hour == 12 %}
+                            <td class="break"></td>
+                        {% else %}
+                            <td onclick="this.classList.toggle('selected');"></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <button onclick="saveFreeTime()">Save</button>
+                </td>
+                {% for day in days %}
+                    <td>
+                        <button onclick="eraseDay({{loop.index}})">Erase</button>
+                        <button onclick="toggleDay({{loop.index}})">Toggle</button>
+                    </td>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    {% endif %}
+
+    <div>
+        {% for professor in professors %}
+            <a href="professor_time?professors_number={{professor[1]}}">{{ professor[2] }}</a><br>
+        {% endfor %}
+    </div>
+    <br>
+
+    <script>
+        function toggleDay(dayIndex) {
+            console.log
+            const cells = document.querySelectorAll(`#schedule-table tbody tr td:nth-child(${dayIndex + 1})`);
+            const allSelected = Array.from(cells).every(cell => cell.classList.contains('selected'));
+            cells.forEach(cell => {
+                if (!cell.classList.contains('break')) {
+                    cell.classList.toggle('selected');
+                }
+            });
+        }
+
+        function eraseDay(dayIndex) {
+            const cells = document.querySelectorAll(`#schedule-table tbody tr td:nth-child(${dayIndex + 1})`);
+            cells.forEach(cell => {
+                if (!cell.classList.contains('break')) {
+                    cell.classList.toggle('selected', false);
+                }
+            });
+        }
+        
+        function saveFreeTime() {
+            
+        }
+    </script>
+</body>
+</html>
