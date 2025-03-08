@@ -6,9 +6,17 @@ from io import BytesIO
 
 app = Flask(__name__)
 
-# @app.route("/")
-# def home():
-#     return render_template("index.html")
+@app.route("/")
+def home():
+    return render_template("login.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/login", methods=["POST"])
+def process_login():
+    return render_template("login.html")
 
 @app.route("/week_program")
 def week_program():
@@ -20,7 +28,23 @@ def week_program():
         professors_numbers
     ))
 
-    return render_template("week_program.html", students_number=students_number, professors_numbers=professors_numbers)
+    conn = sqlite3.connect("Databases/UniversityDb.db")
+    cursor = conn.cursor()
+
+    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+
+    # role = cursor.execute("SELECT * FROM UserTb WHERE student_id = ?", (student_id,)).fetchone()
+    # role = "admin"
+    # role = "professor"
+    role = "student"
+
+    return render_template(
+        "week_program.html", 
+        students_number=students_number, 
+        professors_numbers=professors_numbers, 
+        professors=professors,
+        role=role
+    )
 
 @app.route("/generate_week_program", methods=["POST"])
 def generate_week_program():
@@ -62,7 +86,8 @@ def get_week_program():
         }
 
     with open("Databases/week_program.json", "r") as f:
-        week_program = json.load(f)
+        json_data = f.read()
+        week_program = json.loads(json_data)
         # for day in week_program:
         #     week_program[day] = {
         #         int(k): v

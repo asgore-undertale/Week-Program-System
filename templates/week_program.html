@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Week Builder</title>
+    <style>
+        form {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to the Week Builder</h1>
@@ -12,47 +17,82 @@
 
     <br>
     <br>
-    <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
+    <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
     <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
-    <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a>
+    <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">Download html Week Program</button></a>
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">Download json Week Program</button></>
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">Download excel Week Program</button></>
+    <br>
+    <br>
+
+    <form>
+        {% if role == "admin" %}
+            <label for="students_number">Students Number:</label>
+            <br>
+            <input type="text" id="students_number" name="students_number" value="{{students_number}}">
+            <br>
+            <br>
+        {% elif role == "student" %}
+            <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+        {% endif %}
+
+        <label for="professors_numbers">Professors:</label>
+        <br>
+        {% for professor in professors %}
+            <input type="checkbox" name="professors_numbers" value="{{professor[1]}}" {% if professor[1] in professors_numbers %}checked{% endif %}>
+            {{professor[2]}}
+            <br>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    
+    <br>
+    {% if role == "student" %}
+        <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+        <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
+        Only my lectures
+        <br>
+    {% endif %}
 
     <div id="weekProgramContainer"></div>
 
     <script>
-        displayWeekProgram()
-
         async function buildWeekProgram() {
-            try {
-                let response = await fetch("/generate_week_program", {
-                    method: "POST",
-                    // body: JSON.stringify({ user_id: 123 })
-                });
+            let response = await fetch("/generate_week_program", {
+                method: "POST",
+            });
 
-                // if (response.status != 200) {
-                //     throw new Error("Failed to build week program.");
-                // }
+            displayWeekProgram()
+        }
 
-                // let container = document.getElementById("weekProgramContainer");
-                // container.innerHTML = "<h2>Week program built successfully.</h2>";
+        async function add_filters_to_url(url) {
+            let e = document.getElementsByName("only_my_lectures");
 
-                displayWeekProgram()
-
-            } catch (error) {
-                console.error("Error fetching week program:", error);
+            if (e.length === 0 || e[0].checked) {
+                url += "&students_number={{students_number}}";
             }
+            url += "&{{professors_numbers}}";
+            url = url.replaceAll("amp;", "");
+
+            return url;
         }
 
         async function displayWeekProgram() {
-            try {
-                let response = await fetch("/get_week_program?type=html&students_number={{students_number}}&{{professors_numbers}}".replace("amp;", ""));
-                let weekProgram = await response.text();
+            var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
 
-                let container = document.getElementById("weekProgramContainer");
-                container.innerHTML = "<h2>Week Program</h2>" + weekProgram;
-            } catch (error) {
-                console.error("Error fetching week program:", error);
-            }
+            let weekProgram = await response.text();
+
+            let container = document.getElementById("weekProgramContainer");
+            container.innerHTML = "<h2>Week Program</h2>" + weekProgram;
         }
+
+        async function downloadWeekProgram(url) {
+            window.location.href = await add_filters_to_url(url);
+        }
+
+        displayWeekProgram()
     </script>
 </body>
 </html>
