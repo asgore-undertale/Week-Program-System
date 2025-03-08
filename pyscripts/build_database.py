@@ -216,7 +216,11 @@ def insert_dummy_data():
     ]
 
     # Insert dummy professor schedule
-    time_professors = [(i+1, s[1], d) for i in range(len(professors)) for d in WEEKDAYS for s in sample]
+    time_professors = [
+        (i+1, s[1], d)
+        for i in range(len(professors)) 
+        for d in WEEKDAYS for s in sample
+    ]
     cursor.executemany("INSERT OR IGNORE INTO TimeProfessorTb (ProfessorId, Hour, Day) VALUES (?, ?, ?)", time_professors)
 
     conn.commit()

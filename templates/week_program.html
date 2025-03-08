@@ -85,6 +85,10 @@
         async function displayWeekProgram() {
             var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
             
+            if (!response.ok) {
+                alert((await response.json())["message"])
+            }
+
             let weekProgram = await response.text();
             
             let container = document.getElementById("weekProgramContainer");

@@ -64,11 +64,11 @@ def get_items_difference_sum(list_):
         result += abs(list_[i] - list_[i-1])
     return result
 
-def get_items_distance_from_point_sum(list_, point):
-    result = 0
-    for item in list_:
-        result += abs(item - point)
-    return result
+# def get_items_distance_from_point_sum(list_, point):
+#     result = 0
+#     for item in list_:
+#         result += abs(item - point)
+#     return result
 
 def get_shared_items_between_lists(list1, list2):
     shared_items = []

@@ -34,7 +34,7 @@ def professor_time():
     cursor = conn.cursor()
 
     professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
-    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
+    # professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
 
     professors_number = request.args.get('professors_number', type=str)
 
@@ -153,7 +153,7 @@ def generate_week_program():
     return {
         "status": 200,
         "message": "Week program built successfully."
-    }
+    }, 200
 
 # @app.route("/get_week_program/student_id/<int:student_id>", methods=["GET"])
 # def get_json_week_program(student_id):
@@ -173,8 +173,8 @@ def get_week_program():
     if not os.path.exists("databases/week_program.json"):
         return {
             "status": 400,
-            "message": "Week program not generated. Use /generate_week_program to generate it."
-        }
+            "message": "Week program not generated."
+        }, 400
 
     with open("databases/week_program.json", "r") as f:
         json_data = f.read()
@@ -256,6 +256,9 @@ def get_week_program():
             return response
 
     elif data_type == "pdf":
+        pass
+
+    elif data_type == "png":
         pass
 
 
