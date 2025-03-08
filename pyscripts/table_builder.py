@@ -328,6 +328,13 @@ def build_week_excel_file(tableized_week):
     return wb
 
 def build_time_table_html_content(times_list):
+    def is_in_list(day, hour):
+        for item in times_list:
+            if item[2] == hour and item[3] == day:
+                return True
+        
+        return False
+
     days = [
         "Monday",
         "Tuesday",
@@ -371,7 +378,7 @@ button {
 
     body_content = """<tbody>""" + "".join(
 "<tr>" + f"""<td value="{hour}">{hour}:00 ~ {hour}:50</td>""" + "".join(
-        """<td onclick="this.classList.toggle('selected');"></td>"""
+        f"""<td class="{is_in_list(day, hour) * "selected"}" onclick="this.classList.toggle('selected');"></td>"""
         for day in days
     ) + "</tr>"
     for hour in hours

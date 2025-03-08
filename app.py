@@ -66,7 +66,7 @@ def get_professor_time_table():
     if professor_id is None:
         return {"error": "Professor not found."}, 400
 
-    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb WHERE Id = ?", (professor_id,)).fetchall()
+    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb WHERE ProfessorId = ?", (professor_id,)).fetchall()
 
     # return app.response_class( # to remove key sorting
     #     response=json.dumps(professors_time, ensure_ascii=False, indent=4, sort_keys=False),
@@ -103,9 +103,9 @@ def save_professor_time():
     ))
 
     cursor.execute("DELETE FROM TimeProfessorTb WHERE professorId = ?", (professor_id,))
-    print(json_data)
     cursor.executemany("INSERT OR IGNORE INTO TimeProfessorTb (ProfessorId, Hour, Day) VALUES (?, ?, ?)", json_data)
     conn.commit()
+    conn.close()
 
     return {"message": "Data saved successfully"}, 200
 
