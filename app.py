@@ -207,6 +207,26 @@ def generate_week_program():
         "message": "Week program built successfully."
     }, 200
 
+@app.route("/remove_week_program", methods=["POST"])
+@login_required
+def remove_week_program():
+    # if Role.query.filter_by(id=current_user.role_id).first().name != "Admin":
+    if current_user.role_id != 1:
+        return {
+            "message": "Unauthorized."
+        }, 401
+
+    if os.path.exists("databases/week_program.json"):
+        os.remove("databases/week_program.json")
+
+        return {
+            "message": "Week program removed successfully."
+        }, 200
+    else:
+        return {
+            "message": "Week program not found."
+        }, 400
+
 # @app.route("/get_week_program/student_id/<int:student_id>", methods=["GET"])
 # def get_json_week_program(student_id):
 
@@ -223,7 +243,7 @@ def get_week_program():
 
     if not os.path.exists("databases/week_program.json"):
         return {
-            "message": "Week program not generated."
+            "message": "Week program not found."
         }, 400
 
     with open("databases/week_program.json", "r") as f:

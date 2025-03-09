@@ -10,13 +10,17 @@ from models import *
     
 #     return lecture_id
 
-def is_professor_available(professor_id, hour, day):
-    time = TimeProfessor.query.filter_by(professor_id=professor_id, hour=hour, day=day).first()
+# def is_professor_available(lecture, hour, day):
+# # def is_professor_available(professor_id, hour, day):
+#     # professor_time = TimeProfessor.query.filter_by(professor_id=professor_id, hour=hour, day=day).first()
 
-    if time is None:
-        return False
+#     # if professor_time is None:
+#     #     return False
+
+#     return hour in lecture["professor"]["freeTime"][day]:
+#         return False
     
-    return True
+#     return True
 
     # for row in professors_time:
     #     if row[1] == professor_id and row[2] == hour and row[3] == day:
@@ -86,21 +90,29 @@ def get_shared_items_between_lists(list1, list2):
     
     return shared_items
 
-def get_lecture_day_available_hours(lecture, week, day):
+def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
     empty_hours = []
     for hour in week[day]:
-        if not is_professor_available(lecture["professorId"], hour, day):
+        # if not is_professor_available(lecture, hour, day):
+        if hour not in lecture["professor"]["freeTime"][day]:
+        # if not is_professor_available(lecture["professor"]["id"], hour, day):
             continue
 
         for lec_ in week[day][hour]:
             # there can only be one professor for a lecture hour
-            if lec_["professorId"] == lecture["professorId"]:
+            if lec_["professor"]["id"] == lecture["professor"]["id"]:
                 break
             # we check for conflicts only for lectures with the same year
             if lec_["year"] == lecture["year"] and get_shared_items_between_lists(
                 lec_["studentIds"],
                 lecture["studentIds"]
             ):
+                break
+
+            if lec_["lectureHall"]['id'] == lecture_hall['id']:
+                break
+
+            if lecture_hall['capacity'] < len(lecture["studentIds"]):
                 break
         else:
             empty_hours.append(hour)
@@ -114,15 +126,15 @@ def score_hours(hours):
     # return - diff - distance_from_point
     return - diff
 
-def get_best_hours(hours_list, acceptable_threshold = None):
+def get_best_hours(hours_list): # , acceptable_threshold = None
     max_score = None
     max_score_hours = None
 
     for hours in hours_list:
         score = score_hours(hours)
 
-        if acceptable_threshold is not None and score >= acceptable_threshold:
-            return hours, score
+        # if acceptable_threshold is not None and score >= acceptable_threshold:
+        #     return hours, score
         
         if max_score is None or score > max_score:
             max_score = score
@@ -130,22 +142,24 @@ def get_best_hours(hours_list, acceptable_threshold = None):
     
     return max_score_hours, max_score
 
-def place_lecture_in_week(lecture, week):
-    best_hours, best_score, best_day = None, None, None
+def place_lecture_in_week(lecture, week, lecture_halls):
+    best_hours, best_score, best_day, best_lecture_hall = None, None, None, None
     for day in week:
-        empty_hours = get_lecture_day_available_hours(lecture, week, day)
+        for lec_hall in lecture_halls:
+            empty_hours = get_lecture_day_available_hours(lecture, week, day, lec_hall)
 
-        hours_list = get_sequence_subset(empty_hours, lecture["hours"])
+            hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
-        hours, score = get_best_hours(hours_list)
+            hours, score = get_best_hours(hours_list)
 
-        if score is None:
-            continue
+            if score is None:
+                continue
 
-        if best_score is None or score > best_score:
-            best_score = score
-            best_hours = hours
-            best_day = day
+            if best_score is None or score > best_score: # or (hours[0] < best_hours[0] and score >= best_score):
+                best_score = score
+                best_hours = hours
+                best_day = day
+                best_lecture_hall = lec_hall
 
     if best_hours is None:
         if lecture["hours"] == 1:
@@ -157,6 +171,8 @@ def place_lecture_in_week(lecture, week):
             week = place_lecture_in_week(splitted_lecture, week, professors_time)
         
         return week
+
+    lecture["lectureHall"] = best_lecture_hall
 
     for hour in best_hours:
         week[best_day][hour].append(lecture.copy())
@@ -194,7 +210,25 @@ def build_week(is_random = False):
     detailed_lectures = [
         {
             'code': lec.code,
-            'professorId': lec_prof.professor_id,
+            'name': lec.name,
+            'professor': {
+                'id': lec_prof.professor_id,
+                # 'name': lec_prof.professor.name,
+                # 'number': lec_prof.professor.number,
+                'freeTime': {
+                    day: [
+                        time_slot.hour
+                        for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id, day=day).all()
+                    ]
+                    for day in WEEK
+                    # for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id).group_by(TimeProfessor.day).all()
+                }
+            },
+            'lectureHall': {
+                'id': None,
+                'name': None,
+                'capacity': None
+            },
             'studentIds': [
                 lec_student.student_id
                 for lec_student in LectureStudent.query.filter(LectureStudent.lecture_professor_id == lec_prof.id).all()
@@ -202,6 +236,15 @@ def build_week(is_random = False):
             'hours': lec.hours,
             'year': lec.year}
         for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
+    ]
+
+    lecture_halls = [
+        {
+            'id': lec_hall.id,
+            'name': lec_hall.name,
+            'capacity': lec_hall.capacity
+        }
+        for lec_hall in db.session.query(LectureHall).all()
     ]
 
 
@@ -212,11 +255,11 @@ def build_week(is_random = False):
 
     for lec in detailed_lectures:
         if not lec["studentIds"]:
-            print(f"Lecture: {lec["code"]}, for Professor: {lec["professorId"]} has been dropped!")
+            print(f"Lecture: {lec["code"]}, for Professor: {lec["professor"]["id"]} has been dropped!")
             print("Cause: No students take this lecture.")
             continue
 
-        week = place_lecture_in_week(lec, WEEK)
+        week = place_lecture_in_week(lec, WEEK, lecture_halls)
 
     for day in week:
         for hour in week[day]:
@@ -226,13 +269,18 @@ def build_week(is_random = False):
     return week
 
 def get_fully_detailed_lecture(detailed_lecture):
-    lecture = Lecture.query.filter(Lecture.code == detailed_lecture["code"]).first()
-    detailed_lecture["name"] = lecture.name
+    # lecture = Lecture.query.filter(Lecture.code == detailed_lecture["code"]).first()
+    # detailed_lecture["name"] = lecture.name
 
-    professor = Professor.query.filter(Professor.id == detailed_lecture["professorId"]).first()
-    detailed_lecture["professorName"] = professor.name
-    detailed_lecture["professorNumber"] = professor.number
-    del detailed_lecture["professorId"] # it is safer to remove any database info
+    professor = Professor.query.filter(Professor.id == detailed_lecture["professor"]["id"]).first()
+    detailed_lecture["professor"] = {
+        "name": professor.name,
+        "number": professor.number
+    }
+
+    # del detailed_lecture["professor"]["id"] # it is safer to remove any database info
+    # del detailed_lecture["professor"]["freeTime"]
+    # del detailed_lecture["professor"]
 
     students = Student.query.filter(Student.id.in_(detailed_lecture["studentIds"])).all()
     detailed_lecture["studentNumbers"] = [

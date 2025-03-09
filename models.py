@@ -51,6 +51,12 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
+class LectureHall(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+
+
 def seed_data(app, bcrypt):
     with app.app_context():
         if not Student.query.first():  # Check if table is empty
@@ -304,6 +310,24 @@ def seed_data(app, bcrypt):
                     role_id="3"
                 ),
                 students
+            ))
+        
+        if not LectureHall.query.first():
+            lecture_halls = [
+                ("LH001", 10),
+                ("LH002", 10),
+                ("LH003", 10),
+                ("LH004", 10),
+                ("LH005", 10),
+                ("LH006", 10),
+                ("LH007", 10),
+            ]
+            db.session.add_all(map(
+                lambda x: LectureHall(
+                    name=x[0],
+                    capacity=x[1]
+                ),
+                lecture_halls
             ))
 
         db.session.commit()
