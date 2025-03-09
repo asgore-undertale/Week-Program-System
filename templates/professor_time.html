@@ -21,7 +21,7 @@
 
     <div>
         {% for professor in professors %}
-            <a href="professor_time?professors_number={{professor[1]}}">{{ professor[2] }}</a><br>
+            <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
         {% endfor %}
     </div>
     <br>

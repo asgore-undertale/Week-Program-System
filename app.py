@@ -1,20 +1,34 @@
 from flask import Flask, render_template, Response, request#, redirect #, url_for, jsonify
-from pyscripts.week_generator import *
-from pyscripts.table_builder import *
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+# from flask_bcrypt import Bcrypt
+# from flask_wtf.csrf import CSRFProtect
+
+from week_generator import *
+from table_builder import *
+# from pyscripts.week_generator import *
+# from pyscripts.table_builder import *
 import json
 import os
 from io import BytesIO
+from rich import print
+
+from config import Config
+from models import *
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
-def get_prof_id_by_number(cursor, professors_number):
-    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+db.init_app(app)
 
-    for prof in professors:
-        if prof[1] == professors_number:
-            return prof[0]
-    else:
-        return None
+with app.app_context():
+    db.create_all()
+    seed_data(app)
+
+# csrf = CSRFProtect(app)
+# bcrypt = Bcrypt(app)
+# login_manager = LoginManager(app)
+# login_manager.login_view = 'login'
 
 @app.route("/")
 def home():
@@ -30,23 +44,13 @@ def process_login():
 
 @app.route("/professor_time")
 def professor_time():
-    conn = sqlite3.connect("databases/UniversityDb.db")
-    cursor = conn.cursor()
-
-    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
-    # professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
-
     professors_number = request.args.get('professors_number', type=str)
 
-    professors.sort(key=lambda x: x[2])
-
-    for prof in professors:
-        if prof[1] == professors_number:
-            professor_name = prof[2]
-            break
-    else:
-        professor_name = None
-
+    professors = Professor.query.order_by(Professor.name).all()
+    
+    professor = next((prof for prof in professors if prof.number == professors_number), None)
+    professor_name = professor.name if professor else None
+    
     return render_template(
         "professor_time.html",
         professors_number=professors_number,
@@ -58,15 +62,14 @@ def professor_time():
 def get_professor_time_table():
     professors_number = request.args.get('professors_number', type=str)
 
-    conn = sqlite3.connect("databases/UniversityDb.db")
-    cursor = conn.cursor()
+    professor = Professor.query.filter_by(number=professors_number).first()
 
-    professor_id = get_prof_id_by_number(cursor, professors_number)
-
-    if professor_id is None:
+    if professor is None:
         return {"error": "Professor not found."}, 400
+    
+    professor_id = professor.id
 
-    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb WHERE ProfessorId = ?", (professor_id,)).fetchall()
+    professors_time = TimeProfessor.query.filter_by(professor_id=professor_id).all()
 
     # return app.response_class( # to remove key sorting
     #     response=json.dumps(professors_time, ensure_ascii=False, indent=4, sort_keys=False),
@@ -89,23 +92,20 @@ def save_professor_time():
     except:
         return {"error": "No prof number."}, 400
 
-    conn = sqlite3.connect("databases/UniversityDb.db")
-    cursor = conn.cursor()
+    professor = Professor.query.filter_by(number=professors_number).first()
 
-    professor_id = get_prof_id_by_number(cursor, professors_number)
-
-    if professor_id is None:
+    if professor is None:
         return {"error": "Professor not found."}, 400
 
-    json_data = list(map(
-        lambda x: (professor_id, x[1], x[2]),
-        json_data
-    ))
+    professor_id = professor.id
 
-    cursor.execute("DELETE FROM TimeProfessorTb WHERE professorId = ?", (professor_id,))
-    cursor.executemany("INSERT OR IGNORE INTO TimeProfessorTb (ProfessorId, Hour, Day) VALUES (?, ?, ?)", json_data)
-    conn.commit()
-    conn.close()
+    TimeProfessor.query.filter_by(professor_id=professor_id).delete()
+    db.session.add_all(map(lambda x: TimeProfessor(professor_id=professor_id, hour=x[1], day=x[2]), json_data))
+    db.session.commit()
+
+    # cursor.executemany("INSERT OR IGNORE INTO TimeProfessorTb (ProfessorId, Hour, Day) VALUES (?, ?, ?)", json_data)
+    # conn.commit()
+    # conn.close()
 
     return {"message": "Data saved successfully"}, 200
 
@@ -119,10 +119,10 @@ def week_program():
         professors_numbers
     ))
 
-    conn = sqlite3.connect("databases/UniversityDb.db")
-    cursor = conn.cursor()
+    # conn = sqlite3.connect("databases/UniversityDb.db")
+    # cursor = conn.cursor()
 
-    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
+    professors = Professor.query.order_by(Professor.name).all()
 
     # role = cursor.execute("SELECT * FROM UserTb WHERE student_id = ?", (student_id,)).fetchone()
     # role = "admin"
@@ -177,8 +177,7 @@ def get_week_program():
         }, 400
 
     with open("databases/week_program.json", "r") as f:
-        json_data = f.read()
-        week_program = json.loads(json_data)
+        week_program = json.loads(f.read())
         # for day in week_program:
         #     week_program[day] = {
         #         int(k): v
@@ -205,7 +204,9 @@ def get_week_program():
 
     if data_type == "json":
         if do_download == True:
-            response = Response(json_data)
+            response = Response(
+                json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False) # to use filters
+            )
             response.headers["Content-Type"] = "application/json"
             response.headers["Content-Disposition"] = "attachment; filename=week_program.json"
 

@@ -329,11 +329,13 @@ def build_week_excel_file(tableized_week):
 
 def build_time_table_html_content(times_list):
     def is_in_list(day, hour):
-        for item in times_list:
-            if item[2] == hour and item[3] == day:
-                return True
-        
-        return False
+        item = next((item for item in times_list if item.hour == hour and item.day == day), None)
+
+        if item is None:
+            return False
+
+        return True
+
 
     days = [
         "Monday",
@@ -362,6 +364,9 @@ tr th {
 }
 button {
     margin: 2px;
+}
+.selected {
+    background-color: green;
 }</style>"""
 
     table_content = style + "<table id='schedule-table'>"
@@ -387,6 +392,7 @@ button {
         # if hour == 12
         #         <td class="break"></td>
         #     else
+        # f"""<td class="{is_in_list(day, hour) * "selected"}" onclick="this.classList.toggle('selected');"></td>"""
     
     foot_content = """<tfoot>
     <tr>

@@ -1,7 +1,5 @@
-import sqlite3
 import random
-# from rich import print
-
+from models import *
 
 # def get_lecture_id_by_code(code):
 #     lecture_id = None
@@ -12,11 +10,18 @@ import random
     
 #     return lecture_id
 
-def is_professor_available(professor_id, hour, day, professors_time):
-    for row in professors_time:
-        if row[1] == professor_id and row[2] == hour and row[3] == day:
-            return True
-    return False
+def is_professor_available(professor_id, hour, day):
+    time = TimeProfessor.query.filter_by(professor_id=professor_id, hour=hour, day=day).first()
+
+    if time is None:
+        return False
+    
+    return True
+
+    # for row in professors_time:
+    #     if row[1] == professor_id and row[2] == hour and row[3] == day:
+    #         return True
+    # return False
 
 # def get_professor_conflicts_num(lectures, hour, day):
 #     conflicts_num = 0
@@ -81,10 +86,10 @@ def get_shared_items_between_lists(list1, list2):
     
     return shared_items
 
-def get_lecture_day_available_hours(lecture, week, day, professors_time):
+def get_lecture_day_available_hours(lecture, week, day):
     empty_hours = []
     for hour in week[day]:
-        if not is_professor_available(lecture["professorId"], hour, day, professors_time):
+        if not is_professor_available(lecture["professorId"], hour, day):
             continue
 
         for lec_ in week[day][hour]:
@@ -125,10 +130,10 @@ def get_best_hours(hours_list, acceptable_threshold = None):
     
     return max_score_hours, max_score
 
-def place_lecture_in_week(lecture, week, professors_time):
+def place_lecture_in_week(lecture, week):
     best_hours, best_score, best_day = None, None, None
     for day in week:
-        empty_hours = get_lecture_day_available_hours(lecture, week, day, professors_time)
+        empty_hours = get_lecture_day_available_hours(lecture, week, day)
 
         hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
@@ -168,16 +173,6 @@ def split_lecture_time(lecture):
     return [lec1, lec2]
 
 def build_week(is_random = False):
-    conn = sqlite3.connect("databases/UniversityDb.db")
-    cursor = conn.cursor()
-
-    lectures = cursor.execute("SELECT * FROM LectureTb").fetchall()
-    lectures_professores = cursor.execute("SELECT * FROM LectureProfessorTb").fetchall()
-    lectures_students = cursor.execute("SELECT * FROM LectureStudentTb").fetchall()
-    professors_time = cursor.execute("SELECT * FROM TimeProfessorTb").fetchall()
-    students = cursor.execute("SELECT * FROM StudentTb").fetchall()
-    professors = cursor.execute("SELECT * FROM ProfessorTb").fetchall()
-
     WEEK = dict(
         (day, 
             dict([
@@ -196,64 +191,54 @@ def build_week(is_random = False):
         ]
     )
 
-    LECTURES = [
+    detailed_lectures = [
         {
-            'code': row[1],
-            "professorId": row2[1],
-            "studentIds": [
-                row3[1]
-                for row3 in lectures_students
-                if row2[0] == row3[2]
+            'code': lec.code,
+            'professorId': lec_prof.professor_id,
+            'studentIds': [
+                lec_student.student_id
+                for lec_student in LectureStudent.query.filter(LectureStudent.lecture_professor_id == lec_prof.id).all()
             ],
-            "hours": row[3],
-            "year": row[4],
-        }
-        for row in lectures
-        for row2 in lectures_professores
-        if row[0] == row2[2]
+            'hours': lec.hours,
+            'year': lec.year}
+        for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
 
-    if is_random:
-        random.shuffle(LECTURES)
-    else:
-        LECTURES.sort(key=lambda x: -x["hours"])
 
-    for lec in LECTURES:
+    if is_random:
+        random.shuffle(detailed_lectures)
+    else:
+        detailed_lectures.sort(key=lambda x: -x["hours"])
+
+    for lec in detailed_lectures:
         if not lec["studentIds"]:
             print(f"Lecture: {lec["code"]}, for Professor: {lec["professorId"]} has been dropped!")
             print("Cause: No students take this lecture.")
-            # continue
+            continue
 
-        # lec = get_fully_detailed_lecture(lec)
-        week = place_lecture_in_week(lec, WEEK, professors_time)
+        week = place_lecture_in_week(lec, WEEK)
 
     for day in week:
         for hour in week[day]:
             for l, lec in enumerate(week[day][hour]):
-                week[day][hour][l] = get_fully_detailed_lecture(lec, lectures, students, professors)
+                week[day][hour][l] = get_fully_detailed_lecture(lec)
 
     return week
 
-def get_fully_detailed_lecture(lecture, lectures, students, professors):
-    for row in lectures:
-        if lecture["code"] == row[1]:
-            lecture["name"] = row[2]
-            break
+def get_fully_detailed_lecture(detailed_lecture):
+    lecture = Lecture.query.filter(Lecture.code == detailed_lecture["code"]).first()
+    detailed_lecture["name"] = lecture.name
 
-    for row in professors:
-        if lecture["professorId"] == row[0]:
-            lecture["professorName"] = row[2]
-            del lecture["professorId"] # it is safer to remove any database info
-            lecture["professorNumber"] = row[1]
-            break
-    
-    lecture["studentNumbers"] = []
-    for student_id in lecture["studentIds"]:
-        for row in students:
-            if student_id == row[0]:
-                lecture["studentNumbers"].append(row[1])
-                break
-    
-    del lecture["studentIds"]
-    
-    return lecture
+    professor = Professor.query.filter(Professor.id == detailed_lecture["professorId"]).first()
+    detailed_lecture["professorName"] = professor.name
+    detailed_lecture["professorNumber"] = professor.number
+    del detailed_lecture["professorId"] # it is safer to remove any database info
+
+    students = Student.query.filter(Student.id.in_(detailed_lecture["studentIds"])).all()
+    detailed_lecture["studentNumbers"] = [
+        student.number
+        for student in students
+    ]
+    del detailed_lecture["studentIds"]
+
+    return detailed_lecture

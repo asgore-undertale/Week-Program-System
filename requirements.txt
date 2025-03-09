@@ -1,2 +1,6 @@
-Flask==2.2.2
 openpyxl
+flask
+flask-login
+flask-sqlalchemy
+flask-bcrypt
+flask-wtf

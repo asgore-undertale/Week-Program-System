@@ -49,8 +49,8 @@
         <label for="professors_numbers">Professors:</label>
         <br>
         {% for professor in professors %}
-            <input type="checkbox" name="professors_numbers" value="{{professor[1]}}" {% if professor[1] in professors_numbers %}checked{% endif %}>
-            {{professor[2]}}
+            <input type="checkbox" name="professors_numbers" value="{{professor.number}}" {% if professor.number in professors_numbers %}checked{% endif %}>
+            {{professor.name}}
             <br>
         {% endfor %}
         <br>
