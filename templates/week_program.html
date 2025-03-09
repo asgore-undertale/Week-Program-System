@@ -6,20 +6,27 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
     <nav>
-        <a href='professor_time'><button>Professor Time</button></a>
+        {% if current_user.role_id == 1 or current_user.role_id == 2 %}
+        <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'><button>Professor Time</button></a>
+        {% endif %}
+        <a href='/logout'><button>Logout</button></a>
     </nav>
     <br>
     
-    {% if role == "student" %}
+    <!-- if role == "Student" %} -->
+    {% if current_user.role_id == 3 %}
         <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
         <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
         <span>Only my lectures</span>
         <br>
         <br>
     {% endif %}
-
+    
+    <!-- if role == "Admin" %} -->
+    {% if current_user.role_id == 1 %}
     <button onclick="buildWeekProgram()">Build Week Program</button>
     <br>
+    {% endif %}
 
     <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
     <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
@@ -36,13 +43,15 @@
     <br>
     <br>
     <form>
-        {% if role == "admin" %}
-            <label for="students_number">Students Number:</label>
-            <br>
-            <input type="text" id="students_number" name="students_number" value="{{students_number}}">
-            <br>
-            <br>
-        {% elif role == "student" and students_number != None %}
+        <!-- if role == "Admin" %} -->
+        {% if current_user.role_id == 1 %}
+        <label for="students_number">Students Number:</label>
+        <br>
+        <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
+        <br>
+        <br>
+        <!-- elif role == "Student" and students_number != None %} -->
+        {% elif current_user.role_id == 3 and students_number != None %}
             <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
         {% endif %}
 
@@ -69,7 +78,7 @@
         async function add_filters_to_url(url) {
             let e = document.getElementsByName("only_my_lectures");
 
-            if ((e.length === 0 || e[0].checked) && "{{students_number}}" !== "None") {
+            if ((e.length === 0 || e[0].checked) && "{{students_number}}" !== "None" && "{{students_number}}" !== "") {
                 url += "&students_number={{students_number}}";
             }
             url += "&{{professors_numbers}}";
@@ -85,14 +94,16 @@
         async function displayWeekProgram() {
             var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
             
-            if (!response.ok) {
-                alert((await response.json())["message"])
+            let container = document.getElementById("weekProgramContainer");
+
+            if (response.ok) {
+                let weekProgram = await response.text();
+                container.innerHTML = weekProgram;
+            }
+            else {
+                container.innerHTML = (await response.json())["message"];
             }
 
-            let weekProgram = await response.text();
-            
-            let container = document.getElementById("weekProgramContainer");
-            container.innerHTML = weekProgram;
         }
 
         async function downloadWeekProgram(url) {

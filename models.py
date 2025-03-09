@@ -41,22 +41,24 @@ class LectureStudent(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     lecture_professor_id = db.Column(db.Integer, db.ForeignKey('lecture_professor.id'), nullable=False)
 
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)  # Admin, User, etc.
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    role = db.Column(db.String(50), nullable=False)  # Admin, User, etc.
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
-# def seed_data():
-def seed_data(app):
+def seed_data(app, bcrypt):
     with app.app_context():
-            
         if not Student.query.first():  # Check if table is empty
             students = [
-                ("S1000", "Hülya Kaya"),
-                ("S1001", "Hülya Çelik"),
-                ("S1002", "Ayşe Acar"),
-                ("S1003", "Fatma Eren"),
+                ("S0000000", "Hülya Kaya"),
+                ("S0000001", "Hülya Çelik"),
+                ("S0000002", "Ayşe Acar"),
+                ("S0000003", "Fatma Eren"),
             ]
             db.session.add_all(map(
                 lambda x: Student(
@@ -245,6 +247,63 @@ def seed_data(app):
                     day=x[2]
                 ),
                 time_professors
+            ))
+
+        if not Role.query.first():
+            roles = [
+                ("Admin"),
+                ("Professor"),
+                ("Student"),
+            ]
+            db.session.add_all(map(
+                lambda x: Role(
+                    name=x
+                ),
+                roles
+            ))
+        
+        if not Admin.query.first():
+            admins = [
+                ("A000", "Doç. Dr. Mahmut DİRİK"),
+                ("A001", "Dr. Öğr. Üyesi Emrullah GAZİOĞLU"),
+            ]
+            db.session.add_all(map(
+                lambda x: Admin(
+                    number=x[0],
+                    name=x[1]
+                ),
+                admins
+            ))
+
+        if not User.query.first():
+            admins = Admin.query.all()
+            db.session.add_all(map(
+                lambda x: User(
+                    number=x.number,
+                    password=bcrypt.generate_password_hash("123"),
+                    role_id="1"
+                ),
+                admins
+            ))
+
+            profs = Professor.query.all()
+            db.session.add_all(map(
+                lambda x: User(
+                    number=x.number,
+                    password=bcrypt.generate_password_hash("123"),
+                    role_id="2"
+                ),
+                profs
+            ))
+
+            students = Student.query.all()
+            db.session.add_all(map(
+                lambda x: User(
+                    number=x.number,
+                    password=bcrypt.generate_password_hash("123"),
+                    role_id="3"
+                ),
+                students
             ))
 
         db.session.commit()
