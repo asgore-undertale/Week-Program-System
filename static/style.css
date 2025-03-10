@@ -1,6 +1,11 @@
-form {
+.bordered {
     border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
 }
+
+/* form {
+} */
 .break {
     background-color: #e0e0e0;
     pointer-events: none;
@@ -20,8 +25,11 @@ tr th {
 button {
     margin: 2px;
 }
-nav {
-    /* margin-bottom: 10px; */
-    padding: 10px;
-    border: solid black 1px;
+.filters {
+    width: 20%;
+    float: left;
+}
+.week_table {
+    width:75%;
+    float: left;
 }

@@ -5,74 +5,72 @@
     <title>Week Program</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
-    <nav class="bordered">
-        <!-- <a href='/week_editor'><button>Week Editor</button></a> -->
+    <nav>
+        <a href='/week_editor'><button>Week Editor</button></a>
         {% if current_user.role_id == 1 or current_user.role_id == 2 %}
             <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'><button>Professor Time</button></a>
         {% endif %}
         <a href='/logout'><button>Logout</button></a>
     </nav>
+    <br>
 
-    <div class="filters">
-        <form class="bordered">
-            <!-- if role == "Admin" %} -->
-            {% if current_user.role_id == 1 %}
-                <label for="students_number">Students Number:</label>
-                <br>
-                <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
-                <br>
-                <br>
-            <!-- elif role == "Student" and students_number != None %} -->
-            {% elif current_user.role_id == 3 and students_number != None %}
-                <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
-            {% endif %}
+    <form>
+        <!-- if role == "Admin" %} -->
+        {% if current_user.role_id == 1 %}
+            <label for="students_number">Students Number:</label>
+            <br>
+            <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
+            <br>
+            <br>
+        <!-- elif role == "Student" and students_number != None %} -->
+        {% elif current_user.role_id == 3 and students_number != None %}
+            <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+        {% endif %}
 
-            <label for="professors_numbers">Professors:</label>
+        <label for="professors_numbers">Professors:</label>
+        <br>
+        {% for professor in professors %}
+            <input type="checkbox" name="professors_numbers" value="{{professor.number}}" {% if professor.number in professors_numbers %}checked{% endif %}>
+            {{professor.name}}
             <br>
-            {% for professor in professors %}
-                <input type="checkbox" name="professors_numbers" value="{{professor.number}}" {% if professor.number in professors_numbers %}checked{% endif %}>
-                {{professor.name}}
-                <br>
-            {% endfor %}
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 
-        <div class="bordered">
-            <!-- if role == "Student" %} -->
-            {% if current_user.role_id == 3 %}
-                <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
-                <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
-                <span>Only my lectures</span>
-                <br>
-                <br>
-            {% endif %}
-            
-            <!-- if role == "Admin" %} -->
-            {% if current_user.role_id == 1 %}
-                <button onclick="buildWeekProgram()">Build Week Program</button>
-                <br>
-                <button id="confirmButton" onclick="confirmWeekProgram()" style="display: none;">Confirm Week Program</button>
-                <br>
-                <button onclick="removeWeekProgram()">Remove Week Program</button>
-                <br>
-                <br>
-            {% endif %}
-            <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
-            <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
-            <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">Download html Week Program</button></a>
-            <br>
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">Download json Week Program</button></>
-            <br>
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">Download excel Week Program</button></>
-        </div>
-    </div>
+    <br>
 
-    <div class="week_table bordered">
-        <h2>Week Program</h2>
-        <div id="weekProgramContainer"></div>
-    </div>
+    <!-- if role == "Student" %} -->
+    {% if current_user.role_id == 3 %}
+        <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+        <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
+        <span>Only my lectures</span>
+        <br>
+        <br>
+    {% endif %}
+    
+    <!-- if role == "Admin" %} -->
+    {% if current_user.role_id == 1 %}
+        <button onclick="buildWeekProgram()">Build Week Program</button>
+        <br>
+        <button id="confirmButton" onclick="confirmWeekProgram()" style="display: none;">Confirm Week Program</button>
+        <br>
+        <button onclick="removeWeekProgram()">Remove Week Program</button>
+        <br>
+        <br>
+    {% endif %}
+    <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
+    <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
+    <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">Download html Week Program</button></a>
+    <br>
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">Download json Week Program</button></>
+    <br>
+    <button onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">Download excel Week Program</button></>
+
+    <h2>Week Program</h2>
+
+    <div id="weekProgramContainer"></div>
 
     <script>
         var week_program = null;

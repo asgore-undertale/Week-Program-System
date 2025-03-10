@@ -6,27 +6,28 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <nav>
-        <a href='week_program'><button>Week Program</button></a>
+    <nav class="bordered">
+        <!-- <a href='/week_editor'><button>Week Editor</button></a> -->
+        <a href='/week_program'><button>Week Program</button></a>
+        <a href='/logout'><button>Logout</button></a>
     </nav>
 
-    <h2>Professor Time Table</h2>
-    {% if professor_name != None %}
-    <h4 id="current_professor">{{professor_name}}</h4>
-    
-    <div id="timeTableContainer"></div>
-    
-    <br>
-    {% endif %}
-
     {% if current_user.role_id == 1 %}
-        <div>
+        <div class="filters bordered">
             {% for professor in professors %}
                 <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
             {% endfor %}
         </div>
-        <br>
+        <!-- <br> -->
     {% endif %}
+
+    <div class="bordered week_table">
+        <h2>Professor Time Table</h2>
+        {% if professor_name != None %}
+            <h4 id="current_professor">{{professor_name}}</h4>
+            <div id="timeTableContainer"></div>
+        {% endif %}
+    </div>
 
     <script>
         async function displayTimeTable() {

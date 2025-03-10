@@ -200,12 +200,17 @@ def generate_week_program():
             "message": "Unauthorized."
         }, 401
 
-    with open("databases/week_program.json", "w") as f:
-        json.dump(week_program, f, indent=4)
+    # with open("databases/week_program.json", "w") as f:
+    #     json.dump(week_program, f, indent=4)
 
-    return {
-        "message": "Week program built successfully."
-    }, 200
+    # return {
+    #     "message": "Week program built successfully."
+    # }, 200
+    return app.response_class( # to remove key sorting
+        response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
+        status=200,
+        mimetype="application/json"
+    )
 
 @app.route("/remove_week_program", methods=["POST"])
 @login_required
@@ -267,6 +272,41 @@ def get_week_program():
 
                 week_program[day][hour].pop(l)
 
+    return build_week_program_(week_program, data_type, do_download)
+
+@app.route("/build_week_program", methods=["POST"])
+@login_required
+def build_week_program():
+    if current_user.role_id != 1:
+        return {
+            "message": "Unauthorized."
+        }, 401
+    
+    data_type = request.args.get('type', type=str)
+    do_download = request.args.get('download', type=bool)
+
+    week_program = request.get_json()
+
+    return build_week_program_(week_program, data_type, do_download)
+
+@app.route("/confirm_week_program", methods=["POST"])
+@login_required
+def confirm_week_program():
+    if current_user.role_id != 1:
+        return {
+            "message": "Unauthorized."
+        }, 401
+    
+    week_program = request.get_json()
+
+    with open("databases/week_program.json", "w") as f:
+        json.dump(week_program, f, indent=4)
+
+    return {
+        "message": "Week program confirmed successfully."
+    }, 200
+
+def build_week_program_(week_program, data_type, do_download):
     if data_type == "json":
         if do_download == True:
             response = Response(

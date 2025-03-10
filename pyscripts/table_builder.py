@@ -87,7 +87,7 @@ def build_week_html_content(tableized_week):
     td, th {
         padding: 5px;
     }
-    .bordered {
+    .bordered_cell {
         border: 1px solid black;
         text-align: center;
         vertical-align: middle;
@@ -110,10 +110,10 @@ def build_week_html_content(tableized_week):
     table_content = style + "<table>"
 
     header_content = """<tr>
-    <th class="bordered header_cell">Day</th>
-    <th class="bordered header_cell">Time</th>""" + "".join(
+    <th class="bordered_cell header_cell">Day</th>
+    <th class="bordered_cell header_cell">Time</th>""" + "".join(
         f"""
-        <th class="bordered header_cell" colspan="{len(tableized_week["cols"][year])}">Year {year}</th>
+        <th class="bordered_cell header_cell" colspan="{len(tableized_week["cols"][year])}">Year {year}</th>
         """
         for year in tableized_week["cols"]
     ) + """
@@ -125,11 +125,11 @@ def build_week_html_content(tableized_week):
     for day in tableized_week["rows"]:
         table_content += header_content
         
-        days_content = f"""<td class="bordered vertical_writing" rowspan="{len(tableized_week["rows"][day])+1}">{day}</td>"""
+        days_content = f"""<td class="bordered_cell vertical_writing" rowspan="{len(tableized_week["rows"][day])+1}">{day}</td>"""
         
         rows_content = []
         for hour in tableized_week["rows"][day]:
-            rows_content.append(f"""<tr><td class="bordered">{hour}:00 ~ {hour}:50</td>""")
+            rows_content.append(f"""<tr><td class="bordered_cell">{hour}:00 ~ {hour}:50</td>""")
         
         for year in tableized_week["cols"]:
             for col in tableized_week["cols"][year]:
@@ -143,8 +143,8 @@ def build_week_html_content(tableized_week):
 
                     span = lec["count"]
 
-                    rows_content[l] += f"""<td rowspan="{span}" class="bordered lec_cell">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["lectureHall"]["name"]}</td>"""
-                    # rows_content[l] += f"""<td rowspan="{span}" class="bordered lec_cell">{lec["name"]}<br>{lec["professorName"]}</td>"""
+                    rows_content[l] += f"""<td rowspan="{span}" class="bordered_cell lec_cell">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["lectureHall"]["name"]}</td>"""
+                    # rows_content[l] += f"""<td rowspan="{span}" class="bordered_cell lec_cell">{lec["name"]}<br>{lec["professorName"]}</td>"""
         
         global_table_row_pointer += len(rows_content)
 
