@@ -25,11 +25,15 @@ tr th {
 button {
     margin: 2px;
 }
+
+.container {
+    display: flex;
+}
+
 .filters {
     width: 20%;
-    float: left;
 }
+
 .week_table {
-    width:75%;
-    float: left;
+    flex: 1;
 }

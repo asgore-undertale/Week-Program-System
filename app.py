@@ -29,7 +29,8 @@ with app.app_context():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    # return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 
 @app.route("/")
@@ -102,7 +103,15 @@ def get_professor_time_table():
 
     professors_time = TimeProfessor.query.filter_by(professor_id=professor_id).all()
 
-    html_string = build_time_table_html_content(professors_time)
+    professors_time_dict = [
+        {
+            "hour": item.hour,
+            "day": item.day
+        }
+        for item in professors_time
+    ]
+
+    html_string = build_time_table_html_content(professors_time_dict)
 
     return html_string
 
@@ -261,13 +270,13 @@ def get_week_program():
                 if not len(professors_numbers) and students_number is None:
                     continue
 
-                if professors_numbers is not None and students_number is None and lecture["professorNumber"] in professors_numbers:
+                if professors_numbers is not None and students_number is None and lecture["professor"]["number"] in professors_numbers:
                     continue
 
                 if students_number is not None and not len(professors_numbers) and students_number in lecture["studentNumbers"]:
                     continue
 
-                if professors_numbers is not None and students_number is not None and lecture["professorNumber"] in professors_numbers and students_number in lecture["studentNumbers"]:
+                if professors_numbers is not None and students_number is not None and lecture["professor"]["number"] in professors_numbers and students_number in lecture["studentNumbers"]:
                     continue
 
                 week_program[day][hour].pop(l)
@@ -369,4 +378,5 @@ def build_week_program_(week_program, data_type, do_download):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run()

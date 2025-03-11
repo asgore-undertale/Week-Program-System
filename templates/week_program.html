@@ -13,65 +13,76 @@
         <a href='/logout'><button>Logout</button></a>
     </nav>
 
-    <div class="filters">
-        <form class="bordered">
-            <!-- if role == "Admin" %} -->
-            {% if current_user.role_id == 1 %}
-                <label for="students_number">Students Number:</label>
-                <br>
-                <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
-                <br>
-                <br>
-            <!-- elif role == "Student" and students_number != None %} -->
-            {% elif current_user.role_id == 3 and students_number != None %}
-                <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
-            {% endif %}
+    <div class="container">
+        <div class="filters">
+            <form class="bordered">
+                <!-- if role == "Admin" %} -->
+                {% if current_user.role_id == 1 %}
+                    <label for="students_number">Students Number:</label>
+                    <br>
+                    <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
+                    <br>
+                    <br>
+                <!-- elif role == "Student" and students_number != None %} -->
+                {% elif current_user.role_id == 3 and students_number != None %}
+                    <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
+                {% endif %}
 
-            <label for="professors_numbers">Professors:</label>
-            <br>
-            {% for professor in professors %}
-                <input type="checkbox" name="professors_numbers" value="{{professor.number}}" {% if professor.number in professors_numbers %}checked{% endif %}>
-                {{professor.name}}
+                <label for="professors_numbers">Professors:</label>
                 <br>
-            {% endfor %}
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+                {% for professor in professors %}
+                    <input type="checkbox" name="professors_numbers" value="{{professor.number}}" {% if professor.number in professors_numbers %}checked{% endif %}>
+                    {{professor.name}}
+                    <br>
+                {% endfor %}
+                <br>
+                <input type="submit" value="Submit">
+            </form>
 
-        <div class="bordered">
             <!-- if role == "Student" %} -->
             {% if current_user.role_id == 3 %}
+            <div class="bordered">
                 <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
                 <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
                 <span>Only my lectures</span>
                 <br>
                 <br>
+            </div>
             {% endif %}
-            
+
+            <div class="bordered">
+                <label>Download:</label>
+                <br>
+                <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
+                <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
+                <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
+                <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">html</a>
+                <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">json</a>
+                <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">excel</a>
+            </div>
+                
             <!-- if role == "Admin" %} -->
             {% if current_user.role_id == 1 %}
-                <button onclick="buildWeekProgram()">Build Week Program</button>
+            <div class="bordered">
+                <button onclick="buildWeekProgram()">Build Week Program (Temporary)</button>
                 <br>
-                <button id="confirmButton" onclick="confirmWeekProgram()" style="display: none;">Confirm Week Program</button>
+                <button onclick="startNewWeekProgram()">Create a new Week Program (Not implemented)</button>
                 <br>
+                <button id="confirmButton" onclick="confirmWeekProgram()" style="display: none;">Confirm Week Program<br></button>
                 <button onclick="removeWeekProgram()">Remove Week Program</button>
-                <br>
-                <br>
+            </div>
             {% endif %}
-            <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
-            <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
-            <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">Download html Week Program</button></a>
-            <br>
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">Download json Week Program</button></>
-            <br>
-            <button onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">Download excel Week Program</button></>
         </div>
-    </div>
 
-    <div class="week_table bordered">
-        <h2>Week Program</h2>
-        <div id="weekProgramContainer"></div>
+        <div class="week_table bordered">
+            <h2>Week Program</h2>
+            <div id="weekProgramContainer"></div>
+        </div>
+
+        <!-- <div class="week_table bordered" style="display: none;">
+            <h2>Creating a new Week Program</h2>
+            <div id="weekProgramEditorContainer"></div>
+        </div> -->
     </div>
 
     <script>
@@ -88,6 +99,41 @@
 
             return url;
         }
+
+        // async function startNewWeekProgram() {
+        //     let e = document.getElementById("weekProgramContainer").parentElement;
+        //     e.style.display = "none";
+        //     let e2 = document.getElementById("weekProgramEditorContainer").parentElement;
+        //     e2.style.display = "block";
+
+        //     week_program = Object.fromEntries(
+        //         ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => [
+        //             day,
+        //             Object.fromEntries([8, 9, 10, 11, 13, 14, 15, 16, 17].map(hour => [hour, []]))
+        //         ])
+        //     );
+            
+        //     let response2 = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(week_program),
+        //     });
+
+        //     let container = document.getElementById("weekProgramEditorContainer");
+
+        //     if (response2.ok) {
+        //         let weekProgram = await response2.text();
+        //         container.innerHTML = weekProgram;
+        //     }
+        //     else {
+        //         container.innerHTML = (await response2.json())["message"];
+        //     }
+        //     // displayWeekProgram()
+
+        //     document.getElementById("confirmButton").style.display = "block";
+        // }
 
         async function buildWeekProgram() {
             let response = await fetch("/generate_week_program", {
@@ -106,7 +152,7 @@
 
             let container = document.getElementById("weekProgramContainer");
 
-            if (response.ok) {
+            if (response2.ok) {
                 let weekProgram = await response2.text();
                 container.innerHTML = weekProgram;
             }

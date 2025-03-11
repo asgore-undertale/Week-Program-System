@@ -189,15 +189,13 @@ def split_lecture_time(lecture):
     return [lec1, lec2]
 
 def build_week(is_random = False):
-    WEEK = dict(
-        (day, 
-            dict([
-                (hour, [])
-                for hour in [
-                    8, 9, 10, 11, 13, 14, 15, 16, 17
-                ]
-            ])
-        )
+    WEEK = {
+        day: {
+            hour: []
+            for hour in [
+                8, 9, 10, 11, 13, 14, 15, 16, 17
+            ]
+        }
         for day in [
             "Monday",
             "Tuesday",
@@ -205,7 +203,7 @@ def build_week(is_random = False):
             "Thursday",
             "Friday",
         ]
-    )
+    }
 
     detailed_lectures = [
         {

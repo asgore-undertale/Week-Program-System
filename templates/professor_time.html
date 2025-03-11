@@ -12,21 +12,23 @@
         <a href='/logout'><button>Logout</button></a>
     </nav>
 
-    {% if current_user.role_id == 1 %}
-        <div class="filters bordered">
-            {% for professor in professors %}
-                <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
-            {% endfor %}
-        </div>
-        <!-- <br> -->
-    {% endif %}
-
-    <div class="bordered week_table">
-        <h2>Professor Time Table</h2>
-        {% if professor_name != None %}
-            <h4 id="current_professor">{{professor_name}}</h4>
-            <div id="timeTableContainer"></div>
+    <div class="container">
+        {% if current_user.role_id == 1 %}
+            <div class="filters bordered">
+                {% for professor in professors %}
+                    <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
+                {% endfor %}
+            </div>
+            <!-- <br> -->
         {% endif %}
+
+        <div class="week_table bordered">
+            <h2>Professor Time Table</h2>
+            {% if professor_name != None %}
+                <h4 id="current_professor">{{professor_name}}</h4>
+                <div id="timeTableContainer"></div>
+            {% endif %}
+        </div>
     </div>
 
     <script>
