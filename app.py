@@ -186,6 +186,15 @@ def week_program():
 
     professors = Professor.query.order_by(Professor.name).all()
 
+    if current_user.role_id == 1:
+        detailed_lectures = get_detailed_lectures()
+        detailed_lectures.sort(key=lambda x: x["name"])
+
+        for i in range(len(detailed_lectures)):
+            detailed_lectures[i] = get_fully_detailed_lecture(detailed_lectures[i])
+    else:
+        detailed_lectures = None
+
     # role = Role.query.filter_by(id=current_user.role_id).first().name
 
     return render_template(
@@ -193,6 +202,7 @@ def week_program():
         students_number=students_number, 
         professors_numbers=professors_numbers, 
         professors=professors,
+        lectures=detailed_lectures,
         # role=role
         # role_id=current_user.role_id
         current_user=current_user
@@ -201,13 +211,22 @@ def week_program():
 @app.route("/generate_week_program", methods=["POST"])
 @login_required
 def generate_week_program():
-    week_program = build_week()
-
     # if Role.query.filter_by(id=current_user.role_id).first().name != "Admin":
     if current_user.role_id != 1:
         return {
             "message": "Unauthorized."
         }, 401
+
+
+    week_program = request.get_json()
+    if week_program is not None:
+        for day in list(week_program.keys()):
+            for hour, value in list(week_program[day].items()):
+                week_program[day][int(hour)] = value
+                del week_program[day][hour]
+        print(week_program)
+
+    week_program = build_week(week_program)
 
     # with open("databases/week_program.json", "w") as f:
     #     json.dump(week_program, f, indent=4)
@@ -298,6 +317,21 @@ def build_week_program():
 
     return build_week_program_(week_program, data_type, do_download)
 
+# @app.route("/build_week_editor_program", methods=["POST"])
+# @login_required
+# def build_week_editor_program():
+#     if current_user.role_id != 1:
+#         return {
+#             "message": "Unauthorized."
+#         }, 401
+    
+#     data_type = request.args.get('type', type=str)
+#     do_download = request.args.get('download', type=bool)
+
+#     week_program = request.get_json()
+
+#     return build_week_program_(week_program, data_type, do_download)
+
 @app.route("/confirm_week_program", methods=["POST"])
 @login_required
 def confirm_week_program():
@@ -376,6 +410,25 @@ def build_week_program_(week_program, data_type, do_download):
     elif data_type == "png":
         pass
 
+
+# @app.route("/week_editor")
+# @login_required
+# def week_editor():
+#     if current_user.role_id != 1:
+#         return "Unauthorized", 401
+    
+#     # lectures = Lecture.query.order_by(Lecture.name).all()
+#     detailed_lectures = get_detailed_lectures()
+#     detailed_lectures.sort(key=lambda x: x["name"])
+
+#     for i in range(len(detailed_lectures)):
+#         detailed_lectures[i] = get_fully_detailed_lecture(detailed_lectures[i])
+
+#     return render_template(
+#         "week_editor.html", 
+#         lectures=detailed_lectures,
+#         current_user=current_user
+#     )
 
 if __name__ == '__main__':
     # app.run(debug=True)

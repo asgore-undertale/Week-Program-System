@@ -858,18 +858,18 @@
                 ]
             },
             {
-                "code": "L029",
-                "name": "Elektrik Devreleri",
+                "code": "L004",
+                "name": "T\u00fcrk Dili II",
                 "professor": {
-                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                    "number": "P012"
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                    "number": "P002"
                 },
                 "lectureHall": {
                     "id": 4,
                     "name": "LH004",
                     "capacity": 10
                 },
-                "hours": 3,
+                "hours": 2,
                 "year": 1,
                 "studentNumbers": [
                     "S0000000"
@@ -932,18 +932,18 @@
                 ]
             },
             {
-                "code": "L029",
-                "name": "Elektrik Devreleri",
+                "code": "L004",
+                "name": "T\u00fcrk Dili II",
                 "professor": {
-                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                    "number": "P012"
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                    "number": "P002"
                 },
                 "lectureHall": {
                     "id": 4,
                     "name": "LH004",
                     "capacity": 10
                 },
-                "hours": 3,
+                "hours": 2,
                 "year": 1,
                 "studentNumbers": [
                     "S0000000"
@@ -1003,24 +1003,6 @@
                 "year": 4,
                 "studentNumbers": [
                     "S0000003"
-                ]
-            },
-            {
-                "code": "L029",
-                "name": "Elektrik Devreleri",
-                "professor": {
-                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                    "number": "P012"
-                },
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "hours": 3,
-                "year": 1,
-                "studentNumbers": [
-                    "S0000000"
                 ]
             }
         ],
@@ -1120,24 +1102,6 @@
                 "studentNumbers": [
                     "S0000002"
                 ]
-            },
-            {
-                "code": "L005",
-                "name": "\u0130ngilizce II",
-                "professor": {
-                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
-                    "number": "P003"
-                },
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "hours": 2,
-                "year": 1,
-                "studentNumbers": [
-                    "S0000000"
-                ]
             }
         ],
         "9": [
@@ -1175,24 +1139,6 @@
                 "year": 3,
                 "studentNumbers": [
                     "S0000002"
-                ]
-            },
-            {
-                "code": "L005",
-                "name": "\u0130ngilizce II",
-                "professor": {
-                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
-                    "number": "P003"
-                },
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "hours": 2,
-                "year": 1,
-                "studentNumbers": [
-                    "S0000000"
                 ]
             }
         ],
@@ -1351,11 +1297,11 @@
         ],
         "16": [
             {
-                "code": "L004",
-                "name": "T\u00fcrk Dili II",
+                "code": "L005",
+                "name": "\u0130ngilizce II",
                 "professor": {
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
-                    "number": "P002"
+                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                    "number": "P003"
                 },
                 "lectureHall": {
                     "id": 1,
@@ -1407,11 +1353,11 @@
         ],
         "17": [
             {
-                "code": "L004",
-                "name": "T\u00fcrk Dili II",
+                "code": "L005",
+                "name": "\u0130ngilizce II",
                 "professor": {
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
-                    "number": "P002"
+                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                    "number": "P003"
                 },
                 "lectureHall": {
                     "id": 1,
@@ -1680,28 +1626,69 @@
         ]
     },
     "Friday": {
-        "8": [
-            {
-                "code": "L018",
-                "name": "Bili\u015fim Hukuku",
-                "professor": {
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "hours": 2,
-                "year": 2,
-                "studentNumbers": [
-                    "S0000001"
-                ]
-            }
-        ],
+        "8": [],
         "9": [
             {
+                "code": "L029",
+                "name": "Elektrik Devreleri",
+                "professor": {
+                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                    "number": "P012"
+                },
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "hours": 3,
+                "year": 1,
+                "studentNumbers": [
+                    "S0000000"
+                ]
+            }
+        ],
+        "10": [
+            {
+                "code": "L029",
+                "name": "Elektrik Devreleri",
+                "professor": {
+                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                    "number": "P012"
+                },
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "hours": 3,
+                "year": 1,
+                "studentNumbers": [
+                    "S0000000"
+                ]
+            }
+        ],
+        "11": [
+            {
+                "code": "L029",
+                "name": "Elektrik Devreleri",
+                "professor": {
+                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                    "number": "P012"
+                },
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "hours": 3,
+                "year": 1,
+                "studentNumbers": [
+                    "S0000000"
+                ]
+            }
+        ],
+        "13": [
+            {
                 "code": "L018",
                 "name": "Bili\u015fim Hukuku",
                 "professor": {
@@ -1720,10 +1707,26 @@
                 ]
             }
         ],
-        "10": [],
-        "11": [],
-        "13": [],
-        "14": [],
+        "14": [
+            {
+                "code": "L018",
+                "name": "Bili\u015fim Hukuku",
+                "professor": {
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
+                },
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "hours": 2,
+                "year": 2,
+                "studentNumbers": [
+                    "S0000001"
+                ]
+            }
+        ],
         "15": [],
         "16": [],
         "17": []

@@ -1,5 +1,6 @@
 import random
 from models import *
+from rich import print
 
 # def get_lecture_id_by_code(code):
 #     lecture_id = None
@@ -168,7 +169,7 @@ def place_lecture_in_week(lecture, week, lecture_halls):
         splitted_lectures = split_lecture_time(lecture)
 
         for splitted_lecture in splitted_lectures:
-            week = place_lecture_in_week(splitted_lecture, week, professors_time)
+            week = place_lecture_in_week(splitted_lecture, week, lecture_halls)
         
         return week
 
@@ -188,24 +189,8 @@ def split_lecture_time(lecture):
 
     return [lec1, lec2]
 
-def build_week(is_random = False):
-    WEEK = {
-        day: {
-            hour: []
-            for hour in [
-                8, 9, 10, 11, 13, 14, 15, 16, 17
-            ]
-        }
-        for day in [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-        ]
-    }
-
-    detailed_lectures = [
+def get_detailed_lectures():
+    return [
         {
             'code': lec.code,
             'name': lec.name,
@@ -218,7 +203,14 @@ def build_week(is_random = False):
                         time_slot.hour
                         for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id, day=day).all()
                     ]
-                    for day in WEEK
+                    # for day in WEEK
+                    for day in [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                    ]
                     # for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id).group_by(TimeProfessor.day).all()
                 }
             },
@@ -235,6 +227,26 @@ def build_week(is_random = False):
             'year': lec.year}
         for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
+
+def build_week(week_program = None, is_random = False):
+    if week_program is None:
+        week_program = {
+            day: {
+                hour: []
+                for hour in [
+                    8, 9, 10, 11, 13, 14, 15, 16, 17
+                ]
+            }
+            for day in [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+            ]
+        }
+
+    detailed_lectures = get_detailed_lectures()
 
     lecture_halls = [
         {
@@ -257,7 +269,7 @@ def build_week(is_random = False):
             print("Cause: No students take this lecture.")
             continue
 
-        week = place_lecture_in_week(lec, WEEK, lecture_halls)
+        week = place_lecture_in_week(lec, week_program, lecture_halls)
 
     for day in week:
         for hour in week[day]:
@@ -272,6 +284,7 @@ def get_fully_detailed_lecture(detailed_lecture):
 
     professor = Professor.query.filter(Professor.id == detailed_lecture["professor"]["id"]).first()
     detailed_lecture["professor"] = {
+        "id": professor.id,
         "name": professor.name,
         "number": professor.number
     }
@@ -285,6 +298,6 @@ def get_fully_detailed_lecture(detailed_lecture):
         student.number
         for student in students
     ]
-    del detailed_lecture["studentIds"]
+    # del detailed_lecture["studentIds"]
 
     return detailed_lecture

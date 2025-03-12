@@ -5,25 +5,44 @@
     <title>Week Program</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
-    <nav class="bordered">
-        <!-- <a href='/week_editor'><button>Week Editor</button></a> -->
-        {% if current_user.role_id == 1 or current_user.role_id == 2 %}
-            <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'><button>Professor Time</button></a>
-        {% endif %}
-        <a href='/logout'><button>Logout</button></a>
-    </nav>
+    {% include 'navbar.html' %}
 
     <div class="container">
         <div class="filters">
+            {% if current_user.role_id == 1 %}                   
+                <div class="bordered">
+                    <button onclick="">New</button>
+                    <!-- <br> -->
+                    <button onclick="">Auto fill</button>
+                    <!-- <br> -->
+                    <button onclick="">Erase</button>
+                    <!-- <br> -->
+                    <button onclick="">Confirm</button>
+                    <!-- <br> -->
+                    <button onclick="">Remove</button>
+                    <!-- <a href="#" onclick="">New</a>
+                    <a href="#" onclick="">Auto fill</a>
+                    <a href="#" onclick="">Erase</a>
+                    <a href="#" onclick="">Confirm</a>
+                    <a href="#" onclick="">Remove</a> -->
+                </div>
+
+                <form class="bordered">
+                    <label>Lectures:</label>
+                    {% for lecture in lectures %}
+                        <br>
+                        <a href="#" onclick="updateCurrentLecture(event, {{ loop.index-1 }})">{{lecture.name}}</a>
+                    {% endfor %}
+                </form>
+            {% endif %}
+
             <form class="bordered">
-                <!-- if role == "Admin" %} -->
                 {% if current_user.role_id == 1 %}
                     <label for="students_number">Students Number:</label>
                     <br>
                     <input type="text" id="students_number" name="students_number" {% if students_number != None %}value="{{students_number}}"{% endif %}>
                     <br>
                     <br>
-                <!-- elif role == "Student" and students_number != None %} -->
                 {% elif current_user.role_id == 3 and students_number != None %}
                     <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
                 {% endif %}
@@ -39,7 +58,6 @@
                 <input type="submit" value="Submit">
             </form>
 
-            <!-- if role == "Student" %} -->
             {% if current_user.role_id == 3 %}
             <div class="bordered">
                 <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
@@ -53,41 +71,19 @@
             <div class="bordered">
                 <label>Download:</label>
                 <br>
-                <!-- <a href="/get_week_program?download=True&type=html&students_number={{students_number}}&{{professors_numbers}}"><button>Download html Week Program</button></a>
-                <a href="/get_week_program?download=True&type=json&students_number={{students_number}}&{{professors_numbers}}"><button>Download json Week Program</button></a>
-                <a href="/get_week_program?download=True&type=excel&students_number={{students_number}}&{{professors_numbers}}"><button>Download excel Week Program</button></a> -->
                 <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=html')">html</a>
                 <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=json')">json</a>
                 <a href="#" onclick="downloadWeekProgram('/get_week_program?download=True&type=excel')">excel</a>
             </div>
-                
-            <!-- if role == "Admin" %} -->
-            {% if current_user.role_id == 1 %}
-            <div class="bordered">
-                <button onclick="buildWeekProgram()">Build Week Program (Temporary)</button>
-                <br>
-                <button onclick="startNewWeekProgram()">Create a new Week Program (Not implemented)</button>
-                <br>
-                <button id="confirmButton" onclick="confirmWeekProgram()" style="display: none;">Confirm Week Program<br></button>
-                <button onclick="removeWeekProgram()">Remove Week Program</button>
-            </div>
-            {% endif %}
         </div>
 
         <div class="week_table bordered">
             <h2>Week Program</h2>
             <div id="weekProgramContainer"></div>
         </div>
-
-        <!-- <div class="week_table bordered" style="display: none;">
-            <h2>Creating a new Week Program</h2>
-            <div id="weekProgramEditorContainer"></div>
-        </div> -->
     </div>
 
     <script>
-        var week_program = null;
-
         async function add_filters_to_url(url) {
             let e = document.getElementsByName("only_my_lectures");
 
@@ -98,6 +94,74 @@
             url = url.replaceAll("amp;", "");
 
             return url;
+        }
+
+        async function displayWeekProgram() {
+            var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
+            
+            let container = document.getElementById("weekProgramContainer");
+
+            if (response.ok) {
+                let weekProgram = await response.text();
+                container.innerHTML = weekProgram;
+            }
+            else {
+                container.innerHTML = (await response.json())["message"];
+            }
+
+        }
+
+        async function downloadWeekProgram(url) {
+            window.location.href = await add_filters_to_url(url);
+        }
+
+        let current_lecture_index = null;
+        let lectures = {{lectures | tojson}};
+        var lectures_hours = null;
+        var week_program = null;
+
+        function EraseWeekProgram() {
+            week_program = Object.fromEntries(
+                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => [
+                    day,
+                    Object.fromEntries([8, 9, 10, 11, 13, 14, 15, 16, 17].map(hour => [hour, []]))
+                ])
+            );
+
+            lectures_hours = lectures.map(obj => obj.hours);
+
+            displayWeekProgram()
+        }
+
+        function updateCurrentLecture(event, index) {
+            current_lecture_index = index;
+        }
+
+        function placeLecture(event) {
+            if (current_lecture_index === null) {
+                return;
+            }
+
+            let day = event.target.getAttribute("day");
+            let hour = event.target.getAttribute("hour");
+            let year = event.target.getAttribute("year");
+
+            
+            if (year != lectures[current_lecture_index]["year"]) {
+                return;
+            }
+            
+            const index = week_program[day][hour].indexOf(lectures[current_lecture_index]);
+
+            if (index !== -1) {
+                week_program[day][hour].splice(index, 1);
+                lectures_hours[current_lecture_index] += 1
+            } else if (lectures_hours[current_lecture_index] > 0) {
+                week_program[day][hour].push(lectures[current_lecture_index]);
+                lectures_hours[current_lecture_index] -= 1
+            }
+
+            displayWeekProgram()
         }
 
         // async function startNewWeekProgram() {
@@ -135,84 +199,110 @@
         //     document.getElementById("confirmButton").style.display = "block";
         // }
 
-        async function buildWeekProgram() {
-            let response = await fetch("/generate_week_program", {
-                method: "POST",
-            });
+        // async function buildWeekProgram() {
+        //     let response2 = await fetch("/generate_week_program", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(week_program),
+        //     });
+
+        //     week_program = await response2.json();
+
+        //     displayWeekProgram()
+        // }
+
+        // async function removeWeekProgram() {
+        //     await fetch("/remove_week_program", {
+        //         method: "POST",
+        //     });
+
+        //     displayWeekProgram()
+        // }
+
+        // async function displayWeekProgram() {
+        //     // var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
+
+        //     let response = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(week_program),
+        //     });
             
-            week_program = await response.json();
+        //     let container = document.getElementById("weekProgramContainer");
+
+        //     if (response.ok) {
+        //         container.innerHTML = await response.text();;
+        //     }
+        //     else {
+        //         container.innerHTML = (await response.json())["message"];
+        //     }
+
+        // }
+
+        // async function confirmWeekProgram() {
+        //     if (week_program == null) {
+        //         alert("Build week program first");
+        //         return;
+        //     }
             
-            let response2 = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(week_program),
-            });
+        //     let response = await fetch("/confirm_week_program", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(week_program),
+        //     });
 
-            let container = document.getElementById("weekProgramContainer");
+        //     alert((await response.json())["message"]);
+        //     if (response.ok) {
+        //         document.getElementById("confirmButton").style.display = "none";
+        //     }
+        //     // else {
+        //     //     alert((await response.json())["message"]);
+        //     // }
+        // }
 
-            if (response2.ok) {
-                let weekProgram = await response2.text();
-                container.innerHTML = weekProgram;
-            }
-            else {
-                container.innerHTML = (await response2.json())["message"];
-            }
-            // displayWeekProgram()
+        // async function downloadWeekProgram(type) {
+        //     // window.location.href = await add_filters_to_url(`/build_week_program?download=True&type=${type}`);
 
-            document.getElementById("confirmButton").style.display = "block";
-        }
+        //     // window.location.href = await fetch(await add_filters_to_url(`/build_week_program?download=True&type=${type}`), {
+        //     //     method: "POST",
+        //     //     headers: {
+        //     //         "Content-Type": "application/json",
+        //     //     },
+        //     //     body: JSON.stringify(week_program),
+        //     // });
+        //     const url = await add_filters_to_url(`/build_week_program?download=True&type=${type}`);
 
-        async function removeWeekProgram() {
-            await fetch("/remove_week_program", {
-                method: "POST",
-            });
+        //     const response = await fetch(url, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(week_program),
+        //     });
 
-            displayWeekProgram()
-        }
+        //     if (!response.ok) {
+        //         console.error("Failed to download file");
+        //         return;
+        //     }
 
-        async function displayWeekProgram() {
-            var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
-            
-            let container = document.getElementById("weekProgramContainer");
+        //     const blob = await response.blob();
+        //     const downloadUrl = URL.createObjectURL(blob);
 
-            if (response.ok) {
-                let weekProgram = await response.text();
-                container.innerHTML = weekProgram;
-            }
-            else {
-                container.innerHTML = (await response.json())["message"];
-            }
+        //     const a = document.createElement("a");
+        //     a.href = downloadUrl;
+        //     a.download = `week_program.${type}`; // Set the filename
+        //     document.body.appendChild(a);
+        //     a.click();
+        //     document.body.removeChild(a);
 
-        }
-
-        async function confirmWeekProgram() {
-            if (week_program == null) {
-                alert("Build week program first");
-                return;
-            }
-            
-            let response = await fetch("/confirm_week_program", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(week_program),
-            });
-
-            alert((await response.json())["message"]);
-            if (response.ok) {
-                document.getElementById("confirmButton").style.display = "none";
-            }
-            // else {
-            //     alert((await response.json())["message"]);
-            // }
-        }
-
-        async function downloadWeekProgram(url) {
-            window.location.href = await add_filters_to_url(url);
-        }
+        //     URL.revokeObjectURL(downloadUrl);
+        // }
 
         displayWeekProgram()
     </script>

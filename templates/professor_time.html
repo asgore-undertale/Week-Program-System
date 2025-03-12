@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <nav class="bordered">
-        <!-- <a href='/week_editor'><button>Week Editor</button></a> -->
-        <a href='/week_program'><button>Week Program</button></a>
-        <a href='/logout'><button>Logout</button></a>
-    </nav>
+    {% include 'navbar.html' %}
 
     <div class="container">
         {% if current_user.role_id == 1 %}
@@ -19,7 +15,6 @@
                     <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
                 {% endfor %}
             </div>
-            <!-- <br> -->
         {% endif %}
 
         <div class="week_table bordered">
@@ -92,8 +87,10 @@
                 alert((await response.json())["message"]);
             }
         }
-        
-        displayTimeTable()
-    </script>
+
+        {% if professors_number %}        
+            displayTimeTable()
+        {% endif %}
+</script>
 </body>
 </html>
