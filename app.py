@@ -218,15 +218,24 @@ def generate_week_program():
         }, 401
 
 
-    week_program = request.get_json()
-    if week_program is not None:
-        for day in list(week_program.keys()):
-            for hour, value in list(week_program[day].items()):
-                week_program[day][int(hour)] = value
-                del week_program[day][hour]
-        print(week_program)
+    # week_program = request.get_json()
+    # if week_program is not None:
+    #     for day in list(week_program.keys()):
+    #         for hour, value in list(week_program[day].items()):
+    #             week_program[day][int(hour)] = value
+    #             del week_program[day][hour]
+    #     print(week_program)
+    # week_program = build_week(week_program)
 
-    week_program = build_week(week_program)
+
+    # best_week_program = None
+    # best_score = None
+
+    # for i in range(100):
+    week_program, score = build_week()
+        # if best_score is None or best_score < score:
+        #     best_score = score
+        #     best_week_program = week_program
 
     # with open("databases/week_program.json", "w") as f:
     #     json.dump(week_program, f, indent=4)
@@ -236,6 +245,7 @@ def generate_week_program():
     # }, 200
     return app.response_class( # to remove key sorting
         response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
+        # response=json.dumps(best_week_program, ensure_ascii=False, indent=4, sort_keys=False),
         status=200,
         mimetype="application/json"
     )

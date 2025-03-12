@@ -11,15 +11,13 @@
         <div class="filters">
             {% if current_user.role_id == 1 %}                   
                 <div class="bordered">
-                    <button onclick="">New</button>
+                    <button onclick="EraseWeekProgram()">New</button>
                     <!-- <br> -->
-                    <button onclick="">Auto fill</button>
+                    <button onclick="buildWeekProgram()">Auto fill</button>
                     <!-- <br> -->
-                    <button onclick="">Erase</button>
+                    <button onclick="confirmWeekProgram()">Confirm</button>
                     <!-- <br> -->
-                    <button onclick="">Confirm</button>
-                    <!-- <br> -->
-                    <button onclick="">Remove</button>
+                    <button onclick="removeWeekProgram()">Remove</button>
                     <!-- <a href="#" onclick="">New</a>
                     <a href="#" onclick="">Auto fill</a>
                     <a href="#" onclick="">Erase</a>
@@ -63,8 +61,6 @@
                 <input type="hidden" id="students_number" name="students_number" value="{{students_number}}">
                 <input type="checkbox" name="only_my_lectures" onchange="displayWeekProgram()">
                 <span>Only my lectures</span>
-                <br>
-                <br>
             </div>
             {% endif %}
 
@@ -84,6 +80,12 @@
     </div>
 
     <script>
+        let current_lecture_index = null;
+        let lectures = {{lectures | tojson}};
+        var lectures_hours = null;
+        // var lectures_hours = lectures.map(obj => obj.hours);
+        var week_program = null;
+
         async function add_filters_to_url(url) {
             let e = document.getElementsByName("only_my_lectures");
 
@@ -96,29 +98,26 @@
             return url;
         }
 
-        async function displayWeekProgram() {
-            var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
+        async function getWeekProgram() {
+            const response2 = await fetch(await add_filters_to_url("/get_week_program?type=json"));
             
-            let container = document.getElementById("weekProgramContainer");
-
-            if (response.ok) {
-                let weekProgram = await response.text();
-                container.innerHTML = weekProgram;
-            }
-            else {
-                container.innerHTML = (await response.json())["message"];
+            if (!response2.ok) {
+                let container = document.getElementById("weekProgramContainer");
+                container.innerHTML = (await response2.json())["message"];
+                week_program = null;
+                return;
             }
 
+            week_program = await response2.json();
         }
 
-        async function downloadWeekProgram(url) {
-            window.location.href = await add_filters_to_url(url);
-        }
+        async function removeWeekProgram() {
+            await fetch("/remove_week_program", {
+                method: "POST",
+            });
 
-        let current_lecture_index = null;
-        let lectures = {{lectures | tojson}};
-        var lectures_hours = null;
-        var week_program = null;
+            getWeekProgram()
+        }
 
         function EraseWeekProgram() {
             week_program = Object.fromEntries(
@@ -131,6 +130,65 @@
             lectures_hours = lectures.map(obj => obj.hours);
 
             displayWeekProgram()
+        }
+
+        async function confirmWeekProgram() {
+            if (week_program === null) {
+                alert("Build week program first");
+                return;
+            }
+            
+            let response = await fetch("/confirm_week_program", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(week_program),
+            });
+
+            alert((await response.json())["message"]);
+        }
+
+        async function buildWeekProgram() {
+            let response2 = await fetch("/generate_week_program", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(week_program),
+            });
+
+            week_program = await response2.json();
+
+            displayWeekProgram()
+        }
+
+
+        async function displayWeekProgram() {
+            if (week_program === null) {
+                return;
+            }
+
+            let container = document.getElementById("weekProgramContainer");
+
+            let response = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(week_program),
+            });
+
+            if (response.ok) {
+                container.innerHTML = await response.text();
+            }
+            else {
+                container.innerHTML = (await response.json())["message"];
+            }
+        }
+
+        async function downloadWeekProgram(url) {
+            window.location.href = await add_filters_to_url(url);
         }
 
         function updateCurrentLecture(event, index) {
@@ -163,108 +221,6 @@
 
             displayWeekProgram()
         }
-
-        // async function startNewWeekProgram() {
-        //     let e = document.getElementById("weekProgramContainer").parentElement;
-        //     e.style.display = "none";
-        //     let e2 = document.getElementById("weekProgramEditorContainer").parentElement;
-        //     e2.style.display = "block";
-
-        //     week_program = Object.fromEntries(
-        //         ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => [
-        //             day,
-        //             Object.fromEntries([8, 9, 10, 11, 13, 14, 15, 16, 17].map(hour => [hour, []]))
-        //         ])
-        //     );
-            
-        //     let response2 = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(week_program),
-        //     });
-
-        //     let container = document.getElementById("weekProgramEditorContainer");
-
-        //     if (response2.ok) {
-        //         let weekProgram = await response2.text();
-        //         container.innerHTML = weekProgram;
-        //     }
-        //     else {
-        //         container.innerHTML = (await response2.json())["message"];
-        //     }
-        //     // displayWeekProgram()
-
-        //     document.getElementById("confirmButton").style.display = "block";
-        // }
-
-        // async function buildWeekProgram() {
-        //     let response2 = await fetch("/generate_week_program", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(week_program),
-        //     });
-
-        //     week_program = await response2.json();
-
-        //     displayWeekProgram()
-        // }
-
-        // async function removeWeekProgram() {
-        //     await fetch("/remove_week_program", {
-        //         method: "POST",
-        //     });
-
-        //     displayWeekProgram()
-        // }
-
-        // async function displayWeekProgram() {
-        //     // var response = await fetch(await add_filters_to_url("/get_week_program?type=html"));
-
-        //     let response = await fetch(await add_filters_to_url("/build_week_program?type=html"), {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(week_program),
-        //     });
-            
-        //     let container = document.getElementById("weekProgramContainer");
-
-        //     if (response.ok) {
-        //         container.innerHTML = await response.text();;
-        //     }
-        //     else {
-        //         container.innerHTML = (await response.json())["message"];
-        //     }
-
-        // }
-
-        // async function confirmWeekProgram() {
-        //     if (week_program == null) {
-        //         alert("Build week program first");
-        //         return;
-        //     }
-            
-        //     let response = await fetch("/confirm_week_program", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(week_program),
-        //     });
-
-        //     alert((await response.json())["message"]);
-        //     if (response.ok) {
-        //         document.getElementById("confirmButton").style.display = "none";
-        //     }
-        //     // else {
-        //     //     alert((await response.json())["message"]);
-        //     // }
-        // }
 
         // async function downloadWeekProgram(type) {
         //     // window.location.href = await add_filters_to_url(`/build_week_program?download=True&type=${type}`);
@@ -304,7 +260,12 @@
         //     URL.revokeObjectURL(downloadUrl);
         // }
 
-        displayWeekProgram()
+        async function displayUpdatedWeek() {
+            await getWeekProgram();
+            await displayWeekProgram();
+        }
+
+        displayUpdatedWeek();
     </script>
 </body>
 </html>

@@ -123,11 +123,13 @@ def seed_data(app, bcrypt):
                 ("L022", "Bilgisayar Organizasyonu ve Mimarisi", 4, 2),
                 ("L023", "Bilgisayar Mühendisliği Uygulamaları", 4, 3),
                 ("L024", "Biçimsel Diller ve Otomata Teorisi", 3, 3),
-                ("L025", "Algoritma Analizi", 3, 3),
+                ("L025", "Algoritma Analizi", 3, 4),
                 ("L026", "Veritabanı II", 3, 3),
                 ("L027", "Bilgisayar Ağları", 3, 3),
                 ("L028", "Optimizasyona Giriş", 3, 4),
                 ("L029", "Elektrik Devreleri", 3, 1),
+                ("L030", "Temel Bilgi Teknolojiler", 2, 1),
+                ("L031", "Mikroişlemciler", 5, 2),
             ]
             db.session.add_all(map(
                 lambda x: Lecture(
@@ -139,6 +141,48 @@ def seed_data(app, bcrypt):
                 lectures
             ))
 
+        if not LectureProfessor.query.first():
+            lecture_professors = [
+                (1, 1), # 1
+                (1, 2), # 2
+                (1, 3), # 3
+                (2, 4), # 4
+                (3, 5), # 5
+                (4, 6), # 6
+                (5, 7), # 7
+                (5, 8), # 8
+                (5, 9), # 9
+                (6, 10), # 10
+                (7, 11), # 11
+                (7, 12), # 12
+                (7, 13), # 13
+                (7, 14), # 14
+                (7, 15), # 15
+                (8, 16), # 16
+                (8, 17), # 17
+                (9, 18), # 18
+                (9, 19), # 19
+                (9, 20), # 20
+                (9, 21), # 21
+                (10, 22), # 22
+                (10, 23), # 23
+                (10, 24), # 24
+                (10, 25), # 25
+                (11, 26), # 26
+                (11, 27), # 27
+                (11, 28), # 28
+                (12, 29), # 29
+                (11, 30), # 30
+                (10, 31), # 31
+            ]
+            db.session.add_all(map(
+                lambda x: LectureProfessor(
+                    professor_id=x[0],
+                    lecture_id=x[1]
+                ),
+                lecture_professors
+            ))
+
         if not LectureStudent.query.first():
             lecture_students = [
                 (1, 1),
@@ -148,27 +192,29 @@ def seed_data(app, bcrypt):
                 (1, 6),
                 (1, 7),
                 (1, 29),
+                (2, 30),
                 (2, 3),
                 (2, 8),
                 (2, 9),
                 (2, 10),
                 (2, 11),
-                (2, 12),
-                (2, 13),
-                (2, 16),
+                (3, 12),
+                (3, 13),
+                (3, 16),
                 (2, 17),
-                (2, 18),
+                (3, 18),
                 (2, 22),
+                (3, 31),
                 (3, 14),
                 (3, 19),
                 (3, 20),
                 (3, 23),
                 (3, 24),
-                (3, 25),
                 (3, 26),
                 (3, 27),
                 (4, 15),
                 (4, 21),
+                (4, 25),
                 (4, 28),
             ]
             db.session.add_all(map(
@@ -177,46 +223,6 @@ def seed_data(app, bcrypt):
                     lecture_professor_id=x[1],
                 ),
                 lecture_students
-            ))
-
-        if not LectureProfessor.query.first():
-            lecture_professors = [
-                (1, 1),
-                (1, 2),
-                (1, 3),
-                (2, 4),
-                (3, 5),
-                (4, 6),
-                (5, 7),
-                (5, 8),
-                (5, 9),
-                (6, 10),
-                (7, 11),
-                (7, 12),
-                (7, 13),
-                (7, 14),
-                (7, 15),
-                (8, 16),
-                (8, 17),
-                (9, 18),
-                (9, 19),
-                (9, 20),
-                (9, 21),
-                (10, 22),
-                (10, 23),
-                (10, 24),
-                (10, 25),
-                (11, 26),
-                (11, 27),
-                (11, 28),
-                (12, 29),
-            ]
-            db.session.add_all(map(
-                lambda x: LectureProfessor(
-                    professor_id=x[0],
-                    lecture_id=x[1]
-                ),
-                lecture_professors
             ))
 
         if not TimeProfessor.query.first():
