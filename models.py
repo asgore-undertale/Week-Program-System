@@ -61,10 +61,10 @@ def seed_data(app, bcrypt):
     with app.app_context():
         if not Student.query.first():  # Check if table is empty
             students = [
-                ("S0000000", "Hülya Kaya"),
-                ("S0000001", "Hülya Çelik"),
-                ("S0000002", "Ayşe Acar"),
-                ("S0000003", "Fatma Eren"),
+                ("S001", "Hülya Kaya"),
+                ("S002", "Hülya Çelik"),
+                ("S003", "Ayşe Acar"),
+                ("S004", "Fatma Eren"),
             ]
             db.session.add_all(map(
                 lambda x: Student(
@@ -276,8 +276,8 @@ def seed_data(app, bcrypt):
         
         if not Admin.query.first():
             admins = [
-                ("A000", "Doç. Dr. Mahmut DİRİK"),
-                ("A001", "Dr. Öğr. Üyesi Emrullah GAZİOĞLU"),
+                ("A001", "Doç. Dr. Mahmut DİRİK"),
+                ("A002", "Dr. Öğr. Üyesi Emrullah GAZİOĞLU"),
             ]
             db.session.add_all(map(
                 lambda x: Admin(

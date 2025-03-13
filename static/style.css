@@ -34,6 +34,14 @@ button {
     width: 20%;
 }
 
-.week_table {
+.week-table {
     flex: 1;
+}
+
+.copy-right {
+    float: right;
+}
+
+a {
+    margin-left: 10px;
 }

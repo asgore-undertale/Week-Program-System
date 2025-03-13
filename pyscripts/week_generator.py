@@ -1,7 +1,10 @@
 import random
+# from unittest import result
 from models import *
 from rich import print
 import copy
+# import concurrent.futures
+# import itertools
 
 # def get_lecture_id_by_code(code):
 #     lecture_id = None
@@ -110,16 +113,16 @@ def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
             if lec_["professor"]["id"] == lecture["professor"]["id"]:
                 break
 
-            # if lec_["year"] == lecture["year"] and get_shared_items_between_lists(
-            #         lec_["studentIds"],
-            #         lecture["studentIds"]
-            #     ):
-            #         break
-            if get_shared_items_between_lists(
+            if lec_["year"] == lecture["year"] and get_shared_items_between_lists(
                     lec_["studentIds"],
                     lecture["studentIds"]
                 ):
                     break
+            # if get_shared_items_between_lists(
+            #         lec_["studentIds"],
+            #         lecture["studentIds"]
+            #     ):
+            #         break
 
             if lec_["lectureHall"]['id'] == lecture_hall['id']:
                 break
@@ -227,11 +230,16 @@ def get_day_score(week, day, lecture):
     
     return score
 
+def get_lecture_hall_score(lecture_hall, lecture):
+    return - abs(lecture_hall["capacity"] - len(lecture["studentIds"]))
+
 def place_lecture_in_week(lecture, week, lecture_halls):
     best_hours, best_score, best_day, best_lecture_hall = None, None, None, None
     for day in week:
         day_score = get_day_score(week, day, lecture)
         for lec_hall in lecture_halls:
+            lec_hall_score = get_lecture_hall_score(lec_hall, lecture)
+            
             empty_hours = get_lecture_day_available_hours(lecture, week, day, lec_hall)
 
             hours_list = get_sequence_subset(empty_hours, lecture["hours"])
@@ -241,7 +249,7 @@ def place_lecture_in_week(lecture, week, lecture_halls):
             if score is None:
                 continue
 
-            score += day_score
+            score += day_score + lec_hall_score
 
             if best_score is None or score > best_score: # or (hours[0] < best_hours[0] and score >= best_score):
                 best_score = score
@@ -251,14 +259,23 @@ def place_lecture_in_week(lecture, week, lecture_halls):
 
     if best_hours is None:
         if lecture["hours"] == 1:
-            raise Exception("Could not place lecture " + lecture["code"])
+            # raise Exception("Could not place lecture " + lecture["code"])
+            # print("Could not place lecture " + lecture["code"])
+        
+            return None, None
             
         splitted_lectures = split_lecture_time(lecture)
 
         best_score = 0
 
         for splitted_lecture in splitted_lectures:
-            week, score = place_lecture_in_week(splitted_lecture, week, lecture_halls)
+            week_, score = place_lecture_in_week(splitted_lecture, week, lecture_halls)
+
+            if score is None:
+                continue
+
+            week = week_
+
             best_score += score
         
         return week, best_score
@@ -318,34 +335,36 @@ def get_detailed_lectures():
         for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
 
-def build_week(is_random = True):
-    # if week_program is None:
-    week_program = {
-        day: {
-            hour: []
-            for hour in [
-                8, 9, 10, 11, 13, 14, 15, 16, 17
+def build_week(week_program = None, detailed_lectures = None, lecture_halls = None, is_random = True):
+    if week_program is None:
+        week_program = {
+            day: {
+                hour: []
+                for hour in [
+                    8, 9, 10, 11, 13, 14, 15, 16, 17
+                ]
+            }
+            for day in [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
             ]
         }
-        for day in [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
+
+    if detailed_lectures is None:
+        detailed_lectures = get_detailed_lectures()
+
+    if lecture_halls is None:
+        lecture_halls = [
+            {
+                'id': lec_hall.id,
+                'name': lec_hall.name,
+                'capacity': lec_hall.capacity
+            }
+            for lec_hall in db.session.query(LectureHall).all()
         ]
-    }
-
-    detailed_lectures = get_detailed_lectures()
-
-    lecture_halls = [
-        {
-            'id': lec_hall.id,
-            'name': lec_hall.name,
-            'capacity': lec_hall.capacity
-        }
-        for lec_hall in db.session.query(LectureHall).all()
-    ]
 
 
     lecs = {}
@@ -355,24 +374,35 @@ def build_week(is_random = True):
         else:
             lecs[lec["professor"]["id"]] = [lec]
     
-    detailed_lectures = []
     lec_groups = dict(sorted(lecs.items(), key=lambda item: sum(v["hours"] for v in item[1]), reverse=True))
     lec_groups = dict(sorted(lec_groups.items(), key=lambda item: sum(v["year"] for v in item[1]), reverse=True))
-    for group in list(lec_groups.values()):
-        if is_random:
-            random.shuffle(group)
-        detailed_lectures.extend(group)
+
+    count = 100
+
+    results = [
+        build_week_(copy.deepcopy(week_program), copy.deepcopy(lec_groups), copy.deepcopy(lecture_halls), is_random)
+        for _ in range(count)
+    ]
 
 
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     results = list(executor.map(build_week_, (copy.deepcopy(week_program) for _ in range(count)), (copy.deepcopy(lec_groups) for _ in range(count)), (copy.deepcopy(lecture_halls) for _ in range(count)), (is_random for _ in range(count))))
+        # results = list(executor.map(build_week_, (copy.deepcopy(week_program) for _ in range(count)), lec_groups_permutations, (copy.deepcopy(lecture_halls) for _ in range(count)), (is_random for _ in range(count))))
+
+    # print(len(lec_groups))
+    # lec_groups_permutations = list(itertools.permutations(lec_groups))
+    # print(1)
+    # i = len(lec_groups_permutations)
+    # print(i)
+    # input()
+        
     best_week_program = None
     best_score = None
 
-    for i in range(1):
-        test_week_program, score = build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls))
+    for test_week_program, score in results:
         if best_score is None or best_score < score:
             best_score = score
             best_week_program = test_week_program
-            # print(list(map(lambda x: x["name"], detailed_lectures)))
 
     for day in best_week_program:
         for hour in best_week_program[day]:
@@ -381,7 +411,13 @@ def build_week(is_random = True):
 
     return best_week_program, best_score
 
-def build_week_(week_program, detailed_lectures, lecture_halls):
+def build_week_(week_program, lec_groups, lecture_halls, is_random):
+    detailed_lectures = []
+    for group in list(lec_groups.values()):
+        if is_random:
+            random.shuffle(group)
+        detailed_lectures.extend(group)
+    
     total_score = 0
 
     for lec in detailed_lectures:
@@ -390,10 +426,21 @@ def build_week_(week_program, detailed_lectures, lecture_halls):
             print("Cause: No students take this lecture.")
             continue
 
-        week_program, score = place_lecture_in_week(lec, week_program, lecture_halls)
+        if not lec["hours"]:
+            # print(f"Lecture: {lec["code"]}, for Professor: {lec["professor"]["id"]} has been dropped!")
+            # print("Cause: No hours.")
+            continue
+
+        week_program_, score = place_lecture_in_week(lec, week_program, lecture_halls)
+
+        if score is None:
+            continue
+
+        week_program = week_program_
+
         total_score += score
 
-    print(total_score)
+    # print(total_score)
 
     return week_program, total_score
 
@@ -402,11 +449,13 @@ def get_fully_detailed_lecture(detailed_lecture):
     # detailed_lecture["name"] = lecture.name
 
     professor = Professor.query.filter(Professor.id == detailed_lecture["professor"]["id"]).first()
-    detailed_lecture["professor"] = {
-        "id": professor.id,
-        "name": professor.name,
-        "number": professor.number
-    }
+    detailed_lecture["professor"]["name"] = professor.name
+    detailed_lecture["professor"]["number"] = professor.number
+    
+    # detailed_lecture["professor"] = {
+    #     "name": professor.name,
+    #     "number": professor.number
+    # }
 
     # del detailed_lecture["professor"]["id"] # it is safer to remove any database info
     # del detailed_lecture["professor"]["freeTime"]

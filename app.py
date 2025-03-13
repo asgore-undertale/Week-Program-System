@@ -11,6 +11,7 @@ from models import *
 import json
 import os
 from io import BytesIO
+import copy
 
 
 app = Flask(__name__)
@@ -217,35 +218,45 @@ def generate_week_program():
             "message": "Unauthorized."
         }, 401
 
+    data = request.get_json()
 
-    # week_program = request.get_json()
+    if data is None:
+        week_program, score = build_week()
+
+    else:
+        if "week_program" not in data:
+            return {
+                "message": "No week program data provided."
+            }, 400
+        if "detailed_lectures" not in data:
+            return {
+                "message": "No detailed lectures data provided."
+            }, 400
+
+        if data["week_program"] != None:
+            week = {
+                day: {
+                    int(hour): value
+                    for hour, value in hour_values.items()
+                }
+                for day, hour_values in data["week_program"].items()
+            }
+
+        week_program, score = build_week(
+            week,
+            copy.deepcopy(data["detailed_lectures"]),
+        )
+
     # if week_program is not None:
     #     for day in list(week_program.keys()):
     #         for hour, value in list(week_program[day].items()):
     #             week_program[day][int(hour)] = value
     #             del week_program[day][hour]
     #     print(week_program)
-    # week_program = build_week(week_program)
+    
 
-
-    # best_week_program = None
-    # best_score = None
-
-    # for i in range(100):
-    week_program, score = build_week()
-        # if best_score is None or best_score < score:
-        #     best_score = score
-        #     best_week_program = week_program
-
-    # with open("databases/week_program.json", "w") as f:
-    #     json.dump(week_program, f, indent=4)
-
-    # return {
-    #     "message": "Week program built successfully."
-    # }, 200
     return app.response_class( # to remove key sorting
         response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
-        # response=json.dumps(best_week_program, ensure_ascii=False, indent=4, sort_keys=False),
         status=200,
         mimetype="application/json"
     )
@@ -277,7 +288,6 @@ def remove_week_program():
 @login_required
 def get_week_program():
     data_type = request.args.get('type', type=str)
-    do_download = request.args.get('download', type=bool)
     professors_numbers = request.args.getlist('professors_numbers')
     students_number = request.args.get('students_number', type=str)
 
@@ -310,15 +320,15 @@ def get_week_program():
 
                 week_program[day][hour].pop(l)
 
-    return build_week_program_(week_program, data_type, do_download)
+    return build_week_program_(week_program, data_type, False)
 
 @app.route("/build_week_program", methods=["POST"])
 @login_required
 def build_week_program():
-    if current_user.role_id != 1:
-        return {
-            "message": "Unauthorized."
-        }, 401
+    # if current_user.role_id != 1:
+    #     return {
+    #         "message": "Unauthorized."
+    #     }, 401
     
     data_type = request.args.get('type', type=str)
     do_download = request.args.get('download', type=bool)
@@ -327,18 +337,21 @@ def build_week_program():
 
     return build_week_program_(week_program, data_type, do_download)
 
-# @app.route("/build_week_editor_program", methods=["POST"])
+
+# @app.route("/download_week_program")
 # @login_required
-# def build_week_editor_program():
-#     if current_user.role_id != 1:
-#         return {
-#             "message": "Unauthorized."
-#         }, 401
+# def download_week_program():
+#     # if current_user.role_id != 1:
+#     #     return {
+#     #         "message": "Unauthorized."
+#     #     }, 401
     
 #     data_type = request.args.get('type', type=str)
 #     do_download = request.args.get('download', type=bool)
+#     professors_numbers = request.args.getlist('professors_numbers')
+#     students_number = request.args.get('students_number', type=str)
 
-#     week_program = request.get_json()
+#     week_program = get_week_program()
 
 #     return build_week_program_(week_program, data_type, do_download)
 
@@ -395,24 +408,24 @@ def build_week_program_(week_program, data_type, do_download):
             return html_string
 
     elif data_type == "excel":
-        if do_download == True:
-            tableized_week_program = tableize_combined_week_by_year(
-                combine_sequenced_lectures(
-                    week_program
-                )
+        # if do_download == True:
+        tableized_week_program = tableize_combined_week_by_year(
+            combine_sequenced_lectures(
+                week_program
             )
+        )
 
-            wb = build_week_excel_file(tableized_week_program)
+        wb = build_week_excel_file(tableized_week_program)
 
-            excel_buffer = BytesIO()
-            wb.save(excel_buffer)
-            excel_buffer.seek(0)
+        excel_buffer = BytesIO()
+        wb.save(excel_buffer)
+        excel_buffer.seek(0)
 
-            response = Response(excel_buffer)
-            response.headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            response.headers["Content-Disposition"] = "attachment; filename=week_program.xlsx"
+        response = Response(excel_buffer)
+        response.headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        response.headers["Content-Disposition"] = "attachment; filename=week_program.xlsx"
 
-            return response
+        return response
 
     elif data_type == "pdf":
         pass

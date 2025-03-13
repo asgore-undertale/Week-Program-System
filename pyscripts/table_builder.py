@@ -105,6 +105,9 @@ def build_week_html_content(tableized_week):
     .lec_cell {
         background-color: rgb(224, 224, 224);
     }
+    .lec_cell_locked {
+        background-color: rgb(255, 200, 200);
+    }
     .year_header {
         width: 250px
     }
@@ -160,7 +163,7 @@ def build_week_html_content(tableized_week):
 
                     span = lec["count"]
 
-                    rows_content[l] += f"""<td rowspan="{span}" day='{day}' hour='{hours[l]}' year='{year}' onclick='placeLecture(event)' class="bordered_cell lec_cell">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["lectureHall"]["name"]}</td>"""
+                    rows_content[l] += f"""<td rowspan="{span}" day='{day}' hour='{hours[l]}' year='{year}' onclick='placeLecture(event)' class="bordered_cell lec_cell {("locked" in lec and lec["locked"]) * "lec_cell_locked"}">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["lectureHall"]["name"]}</td>"""
                     # rows_content[l] += f"""<td rowspan="{span}" class="bordered_cell lec_cell">{lec["name"]}<br>{lec["professorName"]}</td>"""
         
         global_table_row_pointer += len(rows_content)
@@ -307,7 +310,8 @@ def build_week_excel_file(tableized_week):
                     cell = ws.cell(
                         row=local_row_pointer,
                         column=1+local_col_pointer+2,
-                        value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + lec["lectureHall"]["name"]
+                        # value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + lec["lectureHall"]["name"]
+                        value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + str(lec["lectureHall"]["name"])
                         # value=lec["name"] + "\n" + lec["professorName"]
                     )
                     cell.fill = cell_fill
@@ -339,7 +343,7 @@ def build_week_excel_file(tableized_week):
         b = cell.border
         cell.border = Border(left=b.left, top=b.top, right=b.right, bottom=Side(style="thin"))
 
-    auto_adjust_column_width(ws)
+    # auto_adjust_column_width(ws)
     # auto_adjust_row_height(ws)
 
     # wb.save("merged_cells.xlsx")
