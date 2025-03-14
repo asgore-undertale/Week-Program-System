@@ -1,70 +1,8 @@
 import random
-# from unittest import result
 from models import *
 from rich import print
 import copy
-# import concurrent.futures
-# import itertools
-
-# def get_lecture_id_by_code(code):
-#     lecture_id = None
-#     for row2 in lectures:
-#         if row2[1] == code:
-#             lecture_id = row2[0]
-#             break
-    
-#     return lecture_id
-
-# def is_professor_available(lecture, hour, day):
-# # def is_professor_available(professor_id, hour, day):
-#     # professor_time = TimeProfessor.query.filter_by(professor_id=professor_id, hour=hour, day=day).first()
-
-#     # if professor_time is None:
-#     #     return False
-
-#     return hour in lecture["professor"]["freeTime"][day]:
-#         return False
-    
-#     return True
-
-    # for row in professors_time:
-    #     if row[1] == professor_id and row[2] == hour and row[3] == day:
-    #         return True
-    # return False
-
-# def get_professor_conflicts_num(lectures, hour, day):
-#     conflicts_num = 0
-#     professors_ids = []
-
-#     for lec in lectures:
-#         lec_id = get_lecture_id_by_code(lec[0])
-                
-#         for row2 in lectures_professores:
-#             if row2[2] == lec_id:
-#                 if row2[1] in professors_ids:
-#                     conflicts_num += 1
-#                 else:
-#                     if not is_professor_available(row2[1], hour, day):
-#                         conflicts_num += 1
-#                     professors_ids.append(row2[1])
-    
-#     return conflicts_num
-
-# def get_student_conflicts_num(lectures):
-#     conflicts_num = 0
-#     students_ids = []
-
-#     for lec in lectures:
-#         lec_id = get_lecture_id_by_code(lec[0])
-                
-#         for row2 in lectures_students:
-#             if row2[2] == lec_id:
-#                 if row2[1] in students_ids:
-#                     conflicts_num += 1
-#                 else:
-#                     students_ids.append(row2[1])
-    
-#     return conflicts_num
+import concurrent.futures
 
 def get_sequence_subset(list_, subset_size):
     return [
@@ -85,10 +23,15 @@ def get_items_difference_sum(list_):
     # return result
 
 def get_items_distance_from_point(list_, point):
-    return min([
+    distances = [
         abs(item - point)
         for item in list_
-    ])
+    ]
+    for d in distances:
+        if d == 0 or distances.count(d) > 1:
+            return d
+    
+    return min(distances)-1
 
 def get_shared_items_between_lists(list1, list2):
     shared_items = []
@@ -134,84 +77,71 @@ def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
     
     return empty_hours
 
-def get_hours_space_between_prof(week, day, lecture, test_hours=[]):
-    distance_from_same_prof_counter = 0
-    distance_from_same_prof_counter_temp = None
+# def get_hours_space_between_prof(week, day, lecture, test_hours=[]):
+#     distance_from_same_prof_counter = 0
+#     distance_from_same_prof_counter_temp = None
 
-    for hour in week[day]:
-        for lec in week[day][hour]:
-            if lec["professor"]["id"] == lecture["professor"]["id"] or hour in test_hours:
-                if distance_from_same_prof_counter_temp is not None:
-                    distance_from_same_prof_counter += distance_from_same_prof_counter_temp
-
-                distance_from_same_prof_counter_temp = 0
-
-                break
-            
-        else:
-            if distance_from_same_prof_counter_temp is not None:
-                distance_from_same_prof_counter_temp += 1
-    
-    return distance_from_same_prof_counter
-
-def get_hours_space_between_year(week, day, year, test_hours=[]):
-    distance_from_same_year_counter = 0
-    distance_from_same_year_counter_temp = None
-
-    for hour in week[day]:
-        for lec in week[day][hour]:
-            if lec["year"] == year or hour in test_hours:
-                if distance_from_same_year_counter_temp is not None:
-                    distance_from_same_year_counter += distance_from_same_year_counter_temp
-
-                distance_from_same_year_counter_temp = 0
-
-                break
-            
-        else:
-            if distance_from_same_year_counter_temp is not None:
-                distance_from_same_year_counter_temp += 1
-    
-    return distance_from_same_year_counter
-
-def score_hours(week, day, lecture, hours):
-    if get_items_difference_sum(hours) != len(hours) - 1:
-        return None
-    
-    distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
-    distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
-
-    distance_from_point = get_items_distance_from_point(hours, 12) - 1
-    # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
-
-    return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter# + distance_from_point_8
-    # return - diff
-
-def get_best_hours(week, day, lecture, hours_list):
-    max_score = None
-    max_score_hours = None
-
-    for hours in hours_list:
-        score = score_hours(week, day, lecture, hours)
-        
-        if score is not None and (max_score is None or score > max_score):
-            max_score = score
-            max_score_hours = hours
-    
-    return max_score_hours, max_score
-
-# def get_day_score(week, day, lecture): # best for profs
-#     score = 0
 #     for hour in week[day]:
-#         if len(week[day][hour]) == 0:
-#             score -= 2
-#         for lec_ in week[day][hour]:
-#             if lec_["code"] == lecture["code"]:
-#                 score += 1
-#             if lec_["professor"]["id"] != lecture["professor"]["id"]:
-#                 score -= 1
+#         for lec in week[day][hour]:
+#             if lec["professor"]["id"] == lecture["professor"]["id"] or hour in test_hours:
+#                 if distance_from_same_prof_counter_temp is not None:
+#                     distance_from_same_prof_counter += distance_from_same_prof_counter_temp
+
+#                 distance_from_same_prof_counter_temp = 0
+
+#                 break
+            
+#         else:
+#             if distance_from_same_prof_counter_temp is not None:
+#                 distance_from_same_prof_counter_temp += 1
     
-#     return score
+#     return distance_from_same_prof_counter
+
+# def get_hours_space_between_year(week, day, year, test_hours=[]):
+#     distance_from_same_year_counter = 0
+#     distance_from_same_year_counter_temp = None
+
+#     for hour in week[day]:
+#         for lec in week[day][hour]:
+#             if lec["year"] == year or hour in test_hours:
+#                 if distance_from_same_year_counter_temp is not None:
+#                     distance_from_same_year_counter += distance_from_same_year_counter_temp
+
+#                 distance_from_same_year_counter_temp = 0
+
+#                 break
+            
+#         else:
+#             if distance_from_same_year_counter_temp is not None:
+#                 distance_from_same_year_counter_temp += 1
+    
+#     return distance_from_same_year_counter
+
+# def score_hours(week, day, lecture, hours):
+#     if get_items_difference_sum(hours) != len(hours) - 1:
+#         return None
+    
+#     distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
+#     distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
+
+#     distance_from_point = get_items_distance_from_point(hours, 12) - 1
+#     # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
+
+#     return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter# + distance_from_point_8
+#     # return - diff
+
+# def get_best_hours(week, day, lecture, hours_list):
+#     max_score = None
+#     max_score_hours = None
+
+#     for hours in hours_list:
+#         score = score_hours(week, day, lecture, hours)
+        
+#         if score is not None and (max_score is None or score > max_score):
+#             max_score = score
+#             max_score_hours = hours
+    
+#     return max_score_hours, max_score
 
 def get_day_score(week, day, lecture):
     score = 0
@@ -236,15 +166,25 @@ def get_lecture_hall_score(lecture_hall, lecture):
 def place_lecture_in_week(lecture, week, lecture_halls):
     best_hours, best_score, best_day, best_lecture_hall = None, None, None, None
     for day in week:
+        if best_score is not None:
+            break
+        
         day_score = get_day_score(week, day, lecture)
         for lec_hall in lecture_halls:
+            if best_score is not None:
+                break
+
             lec_hall_score = get_lecture_hall_score(lec_hall, lecture)
             
             empty_hours = get_lecture_day_available_hours(lecture, week, day, lec_hall)
 
             hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
-            hours, score = get_best_hours(week, day, lecture, hours_list)
+            # hours, score = get_best_hours(week, day, lecture, hours_list)
+            if len(hours_list):
+                hours, score = hours_list[0], 0
+            else:
+                continue
 
             if score is None:
                 continue
@@ -335,6 +275,77 @@ def get_detailed_lectures():
         for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
 
+def flatten_week(week):
+    return [
+        {
+            "day": day,
+            "hour": hour,
+            "lecCode": lec["code"],
+            "profId": lec["professor"]["id"],
+            "year": lec["year"],
+            "lec": lec,
+        }
+        for day in week
+        for hour in week[day]
+        for lec in week[day][hour]
+    ]
+
+def unflatten_json(json_data, keys: list[str] = []):
+    if not len(keys):
+        return json_data
+    
+    unflattened_data = {}
+
+    for item in json_data:
+        d = unflattened_data
+        for k, key in enumerate(keys):
+            if item[key] not in d:
+                if k < len(keys) - 1:
+                    d[item[key]] = {}
+                else:
+                    d[item[key]] = []
+            d = d[item[key]]
+
+        d.append(item)
+
+    return unflattened_data
+
+def get_week_score(week):
+    DAY_DISTANCE_PANELTY = 3
+    HOUR_DISTANCE_PANELTY = 1
+    HALL_CHAIR_PANELTY = 1
+
+    score = 0
+
+    flatten_week_list = flatten_week(week)
+
+    prof_day_hour_group = unflatten_json(flatten_week_list, ["profId", "day", "hour"])
+    for profId in prof_day_hour_group:
+        score -= DAY_DISTANCE_PANELTY * (len(prof_day_hour_group[profId]) - 1)
+        for day in prof_day_hour_group[profId]:
+            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(list(prof_day_hour_group[profId][day].keys())) - len(prof_day_hour_group[profId][day]) + 1) 
+
+    lec_day_hour_group = unflatten_json(flatten_week_list, ["lecCode", "day", "hour"])
+    for lecCode in lec_day_hour_group:
+        score -= DAY_DISTANCE_PANELTY * (len(lec_day_hour_group[lecCode]) - 1)
+        for day in lec_day_hour_group[lecCode]:
+            hours = list(lec_day_hour_group[lecCode][day].keys())
+            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(hours) - len(hours) + 1)
+            score -= HOUR_DISTANCE_PANELTY * (get_items_distance_from_point(hours, 12))
+    
+    year_day_hour_group = unflatten_json(flatten_week_list, ["year", "day", "hour"])
+    for year in year_day_hour_group:
+        score -= DAY_DISTANCE_PANELTY * (len(year_day_hour_group[year]) - 1)
+        for day in year_day_hour_group[year]:
+            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(list(year_day_hour_group[year][day].keys())) - len(year_day_hour_group[year][day]) + 1) 
+    
+    lec_group = unflatten_json(flatten_week_list, ["lecCode"])
+    for lecCode in lec_group:
+        score -= HALL_CHAIR_PANELTY * abs(lec_group[lecCode][0]["lec"]["lectureHall"]["capacity"] - len(lec_group[lecCode][0]["lec"]["studentIds"]))
+
+        
+    return score
+
 def build_week(week_program = None, detailed_lectures = None, lecture_halls = None, is_random = True):
     if week_program is None:
         week_program = {
@@ -377,7 +388,10 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
     lec_groups = dict(sorted(lecs.items(), key=lambda item: sum(v["hours"] for v in item[1]), reverse=True))
     lec_groups = dict(sorted(lec_groups.items(), key=lambda item: sum(v["year"] for v in item[1]), reverse=True))
 
-    count = 100
+    for k, v in lec_groups.items():
+        lec_groups[k].sort(key=lambda x: x["year"], reverse=True)
+
+    count = 1
 
     results = [
         build_week_(copy.deepcopy(week_program), copy.deepcopy(lec_groups), copy.deepcopy(lecture_halls), is_random)
@@ -413,7 +427,7 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
 
 def build_week_(week_program, lec_groups, lecture_halls, is_random):
     detailed_lectures = []
-    for group in list(lec_groups.values()):
+    for group in list(lec_groups.values())[:2]:
         if is_random:
             random.shuffle(group)
         detailed_lectures.extend(group)

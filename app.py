@@ -254,6 +254,7 @@ def generate_week_program():
     #             del week_program[day][hour]
     #     print(week_program)
     
+    print(get_week_score(week_program), score)
 
     return app.response_class( # to remove key sorting
         response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
