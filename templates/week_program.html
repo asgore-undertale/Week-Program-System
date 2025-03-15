@@ -187,7 +187,6 @@
             let day = event.target.getAttribute("day");
             let hour = event.target.getAttribute("hour");
             let year = event.target.getAttribute("year");
-
             
             if (year != lectures[current_lecture_index]["year"]) {
                 return;
@@ -219,12 +218,12 @@
                 lectures[current_lecture_index]["hours"] -= 1
             }
 
-            displayWeekProgram()
+            // displayWeekProgram()
         }
         {% endif %}
 
         async function buildWeekProgram() {
-            let response2 = await fetch("/generate_week_program", {
+            let response = await fetch("/generate_week_program", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -236,7 +235,12 @@
                 }),
             });
 
-            week_program = await response2.json();
+            if (!response.ok) {
+                alert((await response.json())["message"]);
+                return;
+            }
+
+            week_program = await response.json();
 
             // lectures = structuredClone(lectures_clone);
             for (let lecture of lectures) {

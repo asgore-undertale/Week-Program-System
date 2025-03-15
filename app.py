@@ -1,11 +1,12 @@
 from flask import Flask, flash, render_template, Response, request, redirect
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
+from config import Config
 # from flask_wtf.csrf import CSRFProtect
 
 from pyscripts.week_generator import *
 from pyscripts.table_builder import *
-from config import Config
+# from pyscripts.genetic_algorithm import *
 from models import *
 
 import json
@@ -221,7 +222,7 @@ def generate_week_program():
     data = request.get_json()
 
     if data is None:
-        week_program, score = build_week()
+        week_program = build_week()
 
     else:
         if "week_program" not in data:
@@ -242,19 +243,16 @@ def generate_week_program():
                 for day, hour_values in data["week_program"].items()
             }
 
-        week_program, score = build_week(
+        week_program = build_week(
             week,
             copy.deepcopy(data["detailed_lectures"]),
         )
 
-    # if week_program is not None:
-    #     for day in list(week_program.keys()):
-    #         for hour, value in list(week_program[day].items()):
-    #             week_program[day][int(hour)] = value
-    #             del week_program[day][hour]
-    #     print(week_program)
-    
-    print(get_week_score(week_program), score)
+    if week_program is None:
+        return {
+            "message": "Failed to generate week program."
+        }, 400
+    # week_program = run_genetic()
 
     return app.response_class( # to remove key sorting
         response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
@@ -456,4 +454,4 @@ def build_week_program_(week_program, data_type, do_download):
 
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.run()
+    app.run(host="0.0.0.0", port=5000)

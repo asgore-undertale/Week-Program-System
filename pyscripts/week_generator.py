@@ -1,8 +1,7 @@
 import random
 from models import *
-from rich import print
+# from rich import print
 import copy
-import concurrent.futures
 
 def get_sequence_subset(list_, subset_size):
     return [
@@ -77,71 +76,58 @@ def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
     
     return empty_hours
 
-# def get_hours_space_between_prof(week, day, lecture, test_hours=[]):
-#     distance_from_same_prof_counter = 0
-#     distance_from_same_prof_counter_temp = None
+def get_hours_space_between_prof(week, day, lecture, test_hours=[]):
+    distance_from_same_prof_counter = 0
+    distance_from_same_prof_counter_temp = None
 
-#     for hour in week[day]:
-#         for lec in week[day][hour]:
-#             if lec["professor"]["id"] == lecture["professor"]["id"] or hour in test_hours:
-#                 if distance_from_same_prof_counter_temp is not None:
-#                     distance_from_same_prof_counter += distance_from_same_prof_counter_temp
+    for hour in week[day]:
+        for lec in week[day][hour]:
+            if lec["professor"]["id"] == lecture["professor"]["id"] or hour in test_hours:
+                if distance_from_same_prof_counter_temp is not None:
+                    distance_from_same_prof_counter += distance_from_same_prof_counter_temp
 
-#                 distance_from_same_prof_counter_temp = 0
+                distance_from_same_prof_counter_temp = 0
 
-#                 break
+                break
             
-#         else:
-#             if distance_from_same_prof_counter_temp is not None:
-#                 distance_from_same_prof_counter_temp += 1
+        else:
+            if distance_from_same_prof_counter_temp is not None:
+                distance_from_same_prof_counter_temp += 1
     
-#     return distance_from_same_prof_counter
+    return distance_from_same_prof_counter
 
-# def get_hours_space_between_year(week, day, year, test_hours=[]):
-#     distance_from_same_year_counter = 0
-#     distance_from_same_year_counter_temp = None
+def get_hours_space_between_year(week, day, year, test_hours=[]):
+    distance_from_same_year_counter = 0
+    distance_from_same_year_counter_temp = None
 
-#     for hour in week[day]:
-#         for lec in week[day][hour]:
-#             if lec["year"] == year or hour in test_hours:
-#                 if distance_from_same_year_counter_temp is not None:
-#                     distance_from_same_year_counter += distance_from_same_year_counter_temp
+    for hour in week[day]:
+        for lec in week[day][hour]:
+            if lec["year"] == year or hour in test_hours:
+                if distance_from_same_year_counter_temp is not None:
+                    distance_from_same_year_counter += distance_from_same_year_counter_temp
 
-#                 distance_from_same_year_counter_temp = 0
+                distance_from_same_year_counter_temp = 0
 
-#                 break
+                break
             
-#         else:
-#             if distance_from_same_year_counter_temp is not None:
-#                 distance_from_same_year_counter_temp += 1
+        else:
+            if distance_from_same_year_counter_temp is not None:
+                distance_from_same_year_counter_temp += 1
     
-#     return distance_from_same_year_counter
+    return distance_from_same_year_counter
 
-# def score_hours(week, day, lecture, hours):
-#     if get_items_difference_sum(hours) != len(hours) - 1:
-#         return None
+def get_hours_score(week, day, lecture, hours):
+    if get_items_difference_sum(hours) != len(hours) - 1:
+        return None
     
-#     distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
-#     distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
+    distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
+    distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
 
-#     distance_from_point = get_items_distance_from_point(hours, 12) - 1
-#     # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
+    distance_from_point = get_items_distance_from_point(hours, 12) - 1
+    # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
 
-#     return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter# + distance_from_point_8
-#     # return - diff
-
-# def get_best_hours(week, day, lecture, hours_list):
-#     max_score = None
-#     max_score_hours = None
-
-#     for hours in hours_list:
-#         score = score_hours(week, day, lecture, hours)
-        
-#         if score is not None and (max_score is None or score > max_score):
-#             max_score = score
-#             max_score_hours = hours
-    
-#     return max_score_hours, max_score
+    return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter# + distance_from_point_8
+    # return - diff
 
 def get_day_score(week, day, lecture):
     score = 0
@@ -163,41 +149,58 @@ def get_day_score(week, day, lecture):
 def get_lecture_hall_score(lecture_hall, lecture):
     return - abs(lecture_hall["capacity"] - len(lecture["studentIds"]))
 
-def place_lecture_in_week(lecture, week, lecture_halls):
+def choose_random_max(list_, func_):
+    list_max = max(list_, key=func_)
+    return list_max
+    # list_maxes = [item for item in list_ if func_(item) == func_(list_max)]
+    # return random.choice(list_maxes)
+
+def get_week_score(week, lecture, lecture_halls):
+    results = []
     best_hours, best_score, best_day, best_lecture_hall = None, None, None, None
+    
     for day in week:
-        if best_score is not None:
-            break
-        
         day_score = get_day_score(week, day, lecture)
         for lec_hall in lecture_halls:
-            if best_score is not None:
-                break
-
             lec_hall_score = get_lecture_hall_score(lec_hall, lecture)
             
             empty_hours = get_lecture_day_available_hours(lecture, week, day, lec_hall)
 
             hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
-            # hours, score = get_best_hours(week, day, lecture, hours_list)
-            if len(hours_list):
-                hours, score = hours_list[0], 0
-            else:
+            hours_results = [
+                {
+                    "hours": hours,
+                    "score": score
+                }
+                for hours in hours_list
+                if (score := get_hours_score(week, day, lecture, hours)) is not None
+            ]
+
+            if not hours_results:
                 continue
 
-            if score is None:
-                continue
+            best_hours_ = choose_random_max(hours_results, lambda x: x["score"])
+            best_hours_["score"] += day_score + lec_hall_score
 
-            score += day_score + lec_hall_score
+            results.append({
+                "day": day,
+                "hours": best_hours_["hours"],
+                "score": best_hours_["score"] + day_score + lec_hall_score,
+                "lectureHall": lec_hall
+            })
+    
+    return results
 
-            if best_score is None or score > best_score: # or (hours[0] < best_hours[0] and score >= best_score):
-                best_score = score
-                best_hours = hours
-                best_day = day
-                best_lecture_hall = lec_hall
+def place_lecture_in_week(lecture, week, lecture_halls):
+    times = get_week_score(week, lecture, lecture_halls)
 
-    if best_hours is None:
+    if len(times):
+        best_time = choose_random_max(times, lambda x: x["score"])
+    else:
+        best_time = {"hours": None, "score": None}
+
+    if best_time["hours"] is None:
         if lecture["hours"] == 1:
             # raise Exception("Could not place lecture " + lecture["code"])
             # print("Could not place lecture " + lecture["code"])
@@ -206,26 +209,26 @@ def place_lecture_in_week(lecture, week, lecture_halls):
             
         splitted_lectures = split_lecture_time(lecture)
 
-        best_score = 0
+        best_time["score"] = 0
 
         for splitted_lecture in splitted_lectures:
             week_, score = place_lecture_in_week(splitted_lecture, week, lecture_halls)
 
             if score is None:
-                continue
+                return None, None
 
             week = week_
 
-            best_score += score
+            best_time["score"] += score
         
-        return week, best_score
+        return week, best_time["score"]
 
-    lecture["lectureHall"] = best_lecture_hall
+    lecture["lectureHall"] = best_time["lectureHall"]
 
-    for hour in best_hours:
-        week[best_day][hour].append(lecture.copy())
+    for hour in best_time["hours"]:
+        week[best_time["day"]][hour].append(lecture.copy())
 
-    return week, best_score
+    return week, best_time["score"]
 
 def split_lecture_time(lecture):
     hours = lecture["hours"]
@@ -275,77 +278,6 @@ def get_detailed_lectures():
         for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
 
-def flatten_week(week):
-    return [
-        {
-            "day": day,
-            "hour": hour,
-            "lecCode": lec["code"],
-            "profId": lec["professor"]["id"],
-            "year": lec["year"],
-            "lec": lec,
-        }
-        for day in week
-        for hour in week[day]
-        for lec in week[day][hour]
-    ]
-
-def unflatten_json(json_data, keys: list[str] = []):
-    if not len(keys):
-        return json_data
-    
-    unflattened_data = {}
-
-    for item in json_data:
-        d = unflattened_data
-        for k, key in enumerate(keys):
-            if item[key] not in d:
-                if k < len(keys) - 1:
-                    d[item[key]] = {}
-                else:
-                    d[item[key]] = []
-            d = d[item[key]]
-
-        d.append(item)
-
-    return unflattened_data
-
-def get_week_score(week):
-    DAY_DISTANCE_PANELTY = 3
-    HOUR_DISTANCE_PANELTY = 1
-    HALL_CHAIR_PANELTY = 1
-
-    score = 0
-
-    flatten_week_list = flatten_week(week)
-
-    prof_day_hour_group = unflatten_json(flatten_week_list, ["profId", "day", "hour"])
-    for profId in prof_day_hour_group:
-        score -= DAY_DISTANCE_PANELTY * (len(prof_day_hour_group[profId]) - 1)
-        for day in prof_day_hour_group[profId]:
-            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(list(prof_day_hour_group[profId][day].keys())) - len(prof_day_hour_group[profId][day]) + 1) 
-
-    lec_day_hour_group = unflatten_json(flatten_week_list, ["lecCode", "day", "hour"])
-    for lecCode in lec_day_hour_group:
-        score -= DAY_DISTANCE_PANELTY * (len(lec_day_hour_group[lecCode]) - 1)
-        for day in lec_day_hour_group[lecCode]:
-            hours = list(lec_day_hour_group[lecCode][day].keys())
-            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(hours) - len(hours) + 1)
-            score -= HOUR_DISTANCE_PANELTY * (get_items_distance_from_point(hours, 12))
-    
-    year_day_hour_group = unflatten_json(flatten_week_list, ["year", "day", "hour"])
-    for year in year_day_hour_group:
-        score -= DAY_DISTANCE_PANELTY * (len(year_day_hour_group[year]) - 1)
-        for day in year_day_hour_group[year]:
-            score -= HOUR_DISTANCE_PANELTY * (get_items_difference_sum(list(year_day_hour_group[year][day].keys())) - len(year_day_hour_group[year][day]) + 1) 
-    
-    lec_group = unflatten_json(flatten_week_list, ["lecCode"])
-    for lecCode in lec_group:
-        score -= HALL_CHAIR_PANELTY * abs(lec_group[lecCode][0]["lec"]["lectureHall"]["capacity"] - len(lec_group[lecCode][0]["lec"]["studentIds"]))
-
-        
-    return score
-
 def build_week(week_program = None, detailed_lectures = None, lecture_halls = None, is_random = True):
     if week_program is None:
         week_program = {
@@ -376,68 +308,64 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
             }
             for lec_hall in db.session.query(LectureHall).all()
         ]
-
-
-    lecs = {}
-    for lec in detailed_lectures:
-        if lec["professor"]["id"] in lecs:
-            lecs[lec["professor"]["id"]].append(lec)
-        else:
-            lecs[lec["professor"]["id"]] = [lec]
     
-    lec_groups = dict(sorted(lecs.items(), key=lambda item: sum(v["hours"] for v in item[1]), reverse=True))
-    lec_groups = dict(sorted(lec_groups.items(), key=lambda item: sum(v["year"] for v in item[1]), reverse=True))
+    detailed_lectures.sort(key=lambda x: x["hours"])
+    detailed_lectures.sort(key=lambda x: x["year"])
+    detailed_lectures.sort(key=lambda x: x["professor"]["id"])
 
-    for k, v in lec_groups.items():
-        lec_groups[k].sort(key=lambda x: x["year"], reverse=True)
+    results = generate_population(week_program, detailed_lectures, lecture_halls, True)
 
-    count = 1
+    for _ in range(GENERATIONS_NUM):
+        results = selection(results)
+        new_detailed_lectures_list = [
+            apply_mutations(results[i % len(results)]["detailed_lectures"])
+            for i in range(POPULATION_SIZE - len(results))
+        ]
+        results += [
+            result
+            for new_detailed_lectures in new_detailed_lectures_list
+            if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(new_detailed_lectures), copy.deepcopy(lecture_halls), False)) is not None
+        ]
 
-    results = [
-        build_week_(copy.deepcopy(week_program), copy.deepcopy(lec_groups), copy.deepcopy(lecture_halls), is_random)
-        for _ in range(count)
-    ]
+        print("Generation:", _, "Score:", results[0]["total_score"])
 
+    # results = [
+    #     result
+    #     for _ in range(population_size)
+    #     if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), is_random)) is not None
+    # ]
+    # best_week_program, best_score = build_week_(copy.deepcopy(week_program), copy.deepcopy(lec_groups), copy.deepcopy(lecture_halls), is_random)
 
-    # with concurrent.futures.ProcessPoolExecutor() as executor:
-    #     results = list(executor.map(build_week_, (copy.deepcopy(week_program) for _ in range(count)), (copy.deepcopy(lec_groups) for _ in range(count)), (copy.deepcopy(lecture_halls) for _ in range(count)), (is_random for _ in range(count))))
-        # results = list(executor.map(build_week_, (copy.deepcopy(week_program) for _ in range(count)), lec_groups_permutations, (copy.deepcopy(lecture_halls) for _ in range(count)), (is_random for _ in range(count))))
+    # best_week_program, best_score = max(results, key=lambda x: x[1])
 
-    # print(len(lec_groups))
-    # lec_groups_permutations = list(itertools.permutations(lec_groups))
-    # print(1)
-    # i = len(lec_groups_permutations)
-    # print(i)
-    # input()
-        
-    best_week_program = None
-    best_score = None
+    if not len(results):
+        return None
 
-    for test_week_program, score in results:
-        if best_score is None or best_score < score:
-            best_score = score
-            best_week_program = test_week_program
+    # best_result = selection(results, 1)[0]
+    best_result = choose_random_max(results, lambda x: x["total_score"])
+
+    print(best_result["total_score"])
+
+    best_week_program = best_result["week_program"]
 
     for day in best_week_program:
         for hour in best_week_program[day]:
             for l, lec in enumerate(best_week_program[day][hour]):
                 best_week_program[day][hour][l] = get_fully_detailed_lecture(lec)
 
-    return best_week_program, best_score
+    return best_week_program#, best_score
 
-def build_week_(week_program, lec_groups, lecture_halls, is_random):
-    detailed_lectures = []
-    for group in list(lec_groups.values())[:2]:
-        if is_random:
-            random.shuffle(group)
-        detailed_lectures.extend(group)
+def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True):
+    if is_random:
+    #     random.shuffle(detailed_lectures)
+        detailed_lectures = apply_mutations(detailed_lectures)
     
     total_score = 0
 
     for lec in detailed_lectures:
         if not lec["studentIds"]:
-            print(f"Lecture: {lec["code"]}, for Professor: {lec["professor"]["id"]} has been dropped!")
-            print("Cause: No students take this lecture.")
+            # print(f"Lecture: {lec["code"]}, for Professor: {lec["professor"]["id"]} has been dropped!")
+            # print("Cause: No students take this lecture.")
             continue
 
         if not lec["hours"]:
@@ -445,18 +373,20 @@ def build_week_(week_program, lec_groups, lecture_halls, is_random):
             # print("Cause: No hours.")
             continue
 
-        week_program_, score = place_lecture_in_week(lec, week_program, lecture_halls)
+        week_program, score = place_lecture_in_week(lec, week_program, lecture_halls)
 
         if score is None:
-            continue
-
-        week_program = week_program_
+            return None
 
         total_score += score
 
     # print(total_score)
 
-    return week_program, total_score
+    return {
+        "week_program": week_program,
+        "detailed_lectures": detailed_lectures,
+        "total_score": total_score
+    }
 
 def get_fully_detailed_lecture(detailed_lecture):
     # lecture = Lecture.query.filter(Lecture.code == detailed_lecture["code"]).first()
@@ -483,3 +413,69 @@ def get_fully_detailed_lecture(detailed_lecture):
     # del detailed_lecture["studentIds"]
 
     return detailed_lecture
+
+def generate_population(week_program, detailed_lectures, lecture_halls, is_random = True):
+    return [
+        result
+        for _ in range(POPULATION_SIZE)
+        if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), is_random)) is not None
+    ]
+
+def selection(population, k = None):
+    if k == None:
+        # k = POPULATION_SIZE - (POPULATION_SIZE // 2)
+        k = max(1, int(POPULATION_SIZE * SELECTION_RATE))
+    return sorted(population, key=lambda x: x["total_score"], reverse=True)[:k]
+
+def swap_mutation(indivisual):
+    i = random.randint(0, len(indivisual)-1)
+    j = random.randint(0, len(indivisual)-1)
+
+    indivisual[i], indivisual[j] = indivisual[j], indivisual[i]
+
+    return indivisual
+
+def replace_mutation(indivisual):
+    i = random.randint(0, len(indivisual)-1)
+    j = random.randint(0, len(indivisual)-1)
+
+    v = indivisual.pop(i)
+    indivisual.insert(j, v)
+
+    return indivisual
+
+def shuffle_mutation(indivisual):
+    i = random.randint(0, len(indivisual)-1)
+    j = random.randint(0, len(indivisual)-1)
+
+    if i == j:
+        return indivisual
+    elif j < i:
+        i, j = j, i
+
+    subset = indivisual[i:j]
+    random.shuffle(subset)
+    indivisual[i:j] = subset
+
+    return indivisual
+
+def apply_mutations(indivisual):
+    r = random.random()
+    if r < SWAP_MUTATION_RATE:
+        indivisual = swap_mutation(indivisual)
+    
+    if r < REPLACE_MUTATION_RATE:
+        indivisual = replace_mutation(indivisual)
+
+    if r < SHUFFLE_RATE:
+        indivisual = shuffle_mutation(indivisual)
+
+    return indivisual
+
+
+POPULATION_SIZE       = 100
+GENERATIONS_NUM       = 100
+SELECTION_RATE        = .5
+REPLACE_MUTATION_RATE = 1
+SWAP_MUTATION_RATE    = 0
+SHUFFLE_RATE          = 0
