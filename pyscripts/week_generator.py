@@ -473,7 +473,7 @@ def apply_mutations(indivisual):
     return indivisual
 
 
-POPULATION_SIZE       = 100
+POPULATION_SIZE       = 10
 GENERATIONS_NUM       = 100
 SELECTION_RATE        = .5
 REPLACE_MUTATION_RATE = 1
