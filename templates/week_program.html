@@ -89,7 +89,8 @@
                 day,
                 Object.fromEntries([8, 9, 10, 11, 13, 14, 15, 16, 17].map(hour => [hour, []]))
             ])
-        );;
+        );
+        var score = null;
         
         {% if current_user.role_id == 1 %}
         let lectures = {{lectures | tojson}};
@@ -240,7 +241,10 @@
                 return;
             }
 
-            week_program = await response.json();
+            json_data = await response.json();
+
+            week_program = json_data["week_program"];
+            score = json_data["score"];
 
             // lectures = structuredClone(lectures_clone);
             for (let lecture of lectures) {
@@ -267,7 +271,7 @@
             });
 
             if (response.ok) {
-                container.innerHTML = await response.text();
+                container.innerHTML = (score === null ? '' : `<h3>Score: ${score}</h3>`) + await response.text();
             }
             else {
                 container.innerHTML = (await response.json())["message"];

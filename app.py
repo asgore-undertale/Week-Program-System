@@ -6,7 +6,6 @@ from config import Config
 
 from pyscripts.week_generator import *
 from pyscripts.table_builder import *
-# from pyscripts.genetic_algorithm import *
 from models import *
 
 import json
@@ -222,7 +221,7 @@ def generate_week_program():
     data = request.get_json()
 
     if data is None:
-        week_program = build_week()
+        result = build_week()
 
     else:
         if "week_program" not in data:
@@ -243,19 +242,20 @@ def generate_week_program():
                 for day, hour_values in data["week_program"].items()
             }
 
-        week_program = build_week(
+        result = build_week(
             week,
             copy.deepcopy(data["detailed_lectures"]),
         )
 
-    if week_program is None:
+    if result["week_program"] is None:
         return {
             "message": "Failed to generate week program."
         }, 400
+    
     # week_program = run_genetic()
 
     return app.response_class( # to remove key sorting
-        response=json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False),
+        response=json.dumps(result, ensure_ascii=False, indent=4, sort_keys=False),
         status=200,
         mimetype="application/json"
     )

@@ -1,6 +1,6 @@
 import random
 from models import *
-# from rich import print
+from rich import print
 import copy
 
 def get_sequence_subset(list_, subset_size):
@@ -150,14 +150,13 @@ def get_lecture_hall_score(lecture_hall, lecture):
     return - abs(lecture_hall["capacity"] - len(lecture["studentIds"]))
 
 def choose_random_max(list_, func_):
-    list_max = max(list_, key=func_)
-    return list_max
+    max_index, list_max = max(enumerate(list_), key=lambda x: func_(x[1]))
+    return list_max, max_index
     # list_maxes = [item for item in list_ if func_(item) == func_(list_max)]
     # return random.choice(list_maxes)
 
 def get_week_score(week, lecture, lecture_halls):
     results = []
-    best_hours, best_score, best_day, best_lecture_hall = None, None, None, None
     
     for day in week:
         day_score = get_day_score(week, day, lecture)
@@ -180,7 +179,7 @@ def get_week_score(week, lecture, lecture_halls):
             if not hours_results:
                 continue
 
-            best_hours_ = choose_random_max(hours_results, lambda x: x["score"])
+            best_hours_ = choose_random_max(hours_results, lambda x: x["score"] or -99999)[0]
             best_hours_["score"] += day_score + lec_hall_score
 
             results.append({
@@ -196,7 +195,7 @@ def place_lecture_in_week(lecture, week, lecture_halls):
     times = get_week_score(week, lecture, lecture_halls)
 
     if len(times):
-        best_time = choose_random_max(times, lambda x: x["score"])
+        best_time = choose_random_max(times, lambda x: x["score"] or -99999)[0]
     else:
         best_time = {"hours": None, "score": None}
 
@@ -242,6 +241,7 @@ def split_lecture_time(lecture):
 def get_detailed_lectures():
     return [
         {
+            'id': i+1,
             'code': lec.code,
             'name': lec.name,
             'professor': {
@@ -275,7 +275,7 @@ def get_detailed_lectures():
             ],
             'hours': lec.hours,
             'year': lec.year}
-        for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
+        for i, (lec, lec_prof) in enumerate(db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all())
     ]
 
 def build_week(week_program = None, detailed_lectures = None, lecture_halls = None, is_random = True):
@@ -309,56 +309,54 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
             for lec_hall in db.session.query(LectureHall).all()
         ]
     
-    detailed_lectures.sort(key=lambda x: x["hours"])
-    detailed_lectures.sort(key=lambda x: x["year"])
-    detailed_lectures.sort(key=lambda x: x["professor"]["id"])
+    # detailed_lectures.sort(key=lambda x: x["hours"])
+    # detailed_lectures.sort(key=lambda x: x["year"])
+    # detailed_lectures.sort(key=lambda x: x["professor"]["id"])
 
-    results = generate_population(week_program, detailed_lectures, lecture_halls, True)
-
-    for _ in range(GENERATIONS_NUM):
-        results = selection(results)
-        new_detailed_lectures_list = [
-            apply_mutations(results[i % len(results)]["detailed_lectures"])
-            for i in range(POPULATION_SIZE - len(results))
-        ]
-        results += [
-            result
-            for new_detailed_lectures in new_detailed_lectures_list
-            if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(new_detailed_lectures), copy.deepcopy(lecture_halls), False)) is not None
-        ]
-
-        print("Generation:", _, "Score:", results[0]["total_score"])
-
-    # results = [
-    #     result
-    #     for _ in range(population_size)
-    #     if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), is_random)) is not None
-    # ]
-    # best_week_program, best_score = build_week_(copy.deepcopy(week_program), copy.deepcopy(lec_groups), copy.deepcopy(lecture_halls), is_random)
-
-    # best_week_program, best_score = max(results, key=lambda x: x[1])
+    results = [
+        result
+        for _ in range(POPULATION_SIZE)
+        if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), True))["score"] is not None
+    ]
 
     if not len(results):
-        return None
+        return {
+            "week_program": None,
+            "score": None
+        }
 
-    # best_result = selection(results, 1)[0]
-    best_result = choose_random_max(results, lambda x: x["total_score"])
+    for _ in range(GENERATIONS_NUM):
+        best_result, best_index = choose_random_max(results, lambda x: x["score"] or -99999)
+        print("Generation:", _, "Score:", best_result["score"])
 
-    print(best_result["total_score"])
+        for r, result in enumerate(results):
+            if r == best_index:
+                continue
 
-    best_week_program = best_result["week_program"]
+            results[r] = build_week_(
+                copy.deepcopy(week_program),
+                follow_leader(result["detailed_lectures"], best_result["detailed_lectures"]),
+                copy.deepcopy(lecture_halls),
+                True
+            )
 
-    for day in best_week_program:
-        for hour in best_week_program[day]:
-            for l, lec in enumerate(best_week_program[day][hour]):
-                best_week_program[day][hour][l] = get_fully_detailed_lecture(lec)
+    best_result = choose_random_max(results, lambda x: x["score"] or -99999)[0]
 
-    return best_week_program#, best_score
+    print(best_result["score"])
+
+    for day in best_result["week_program"]:
+        for hour in best_result["week_program"][day]:
+            for l, lec in enumerate(best_result["week_program"][day][hour]):
+                best_result["week_program"][day][hour][l] = get_fully_detailed_lecture(lec)
+
+    return {
+        "week_program": best_result["week_program"],
+        "score": best_result["score"]
+    }
 
 def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True):
     if is_random:
-    #     random.shuffle(detailed_lectures)
-        detailed_lectures = apply_mutations(detailed_lectures)
+        random.shuffle(detailed_lectures)
     
     total_score = 0
 
@@ -376,7 +374,11 @@ def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True
         week_program, score = place_lecture_in_week(lec, week_program, lecture_halls)
 
         if score is None:
-            return None
+            return {
+                "week_program": None,
+                "detailed_lectures": detailed_lectures,
+                "score": None
+            }
 
         total_score += score
 
@@ -385,7 +387,7 @@ def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True
     return {
         "week_program": week_program,
         "detailed_lectures": detailed_lectures,
-        "total_score": total_score
+        "score": total_score
     }
 
 def get_fully_detailed_lecture(detailed_lecture):
@@ -414,66 +416,21 @@ def get_fully_detailed_lecture(detailed_lecture):
 
     return detailed_lecture
 
-def generate_population(week_program, detailed_lectures, lecture_halls, is_random = True):
-    return [
-        result
-        for _ in range(POPULATION_SIZE)
-        if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), is_random)) is not None
-    ]
+def follow_leader(indivisual, leader):
+    i = random.randint(0, len(leader)-1)
 
-def selection(population, k = None):
-    if k == None:
-        # k = POPULATION_SIZE - (POPULATION_SIZE // 2)
-        k = max(1, int(POPULATION_SIZE * SELECTION_RATE))
-    return sorted(population, key=lambda x: x["total_score"], reverse=True)[:k]
+    leader_gen = leader[i]
 
-def swap_mutation(indivisual):
-    i = random.randint(0, len(indivisual)-1)
-    j = random.randint(0, len(indivisual)-1)
-
-    indivisual[i], indivisual[j] = indivisual[j], indivisual[i]
-
-    return indivisual
-
-def replace_mutation(indivisual):
-    i = random.randint(0, len(indivisual)-1)
-    j = random.randint(0, len(indivisual)-1)
-
-    v = indivisual.pop(i)
-    indivisual.insert(j, v)
-
-    return indivisual
-
-def shuffle_mutation(indivisual):
-    i = random.randint(0, len(indivisual)-1)
-    j = random.randint(0, len(indivisual)-1)
-
-    if i == j:
-        return indivisual
-    elif j < i:
-        i, j = j, i
-
-    subset = indivisual[i:j]
-    random.shuffle(subset)
-    indivisual[i:j] = subset
-
-    return indivisual
-
-def apply_mutations(indivisual):
-    r = random.random()
-    if r < SWAP_MUTATION_RATE:
-        indivisual = swap_mutation(indivisual)
+    for j, item in enumerate(indivisual):
+        if item["id"] == leader_gen["id"]:
+            indivisual_gen = indivisual.pop(j)
+            break
     
-    if r < REPLACE_MUTATION_RATE:
-        indivisual = replace_mutation(indivisual)
-
-    if r < SHUFFLE_RATE:
-        indivisual = shuffle_mutation(indivisual)
+    indivisual.insert(i, indivisual_gen)
 
     return indivisual
 
-
-POPULATION_SIZE       = 10
+POPULATION_SIZE       = 100
 GENERATIONS_NUM       = 100
 SELECTION_RATE        = .5
 REPLACE_MUTATION_RATE = 1
