@@ -250,6 +250,11 @@ def split_lecture_time(lecture):
     return [lec1, lec2]
 
 def get_detailed_lectures():
+    days = [
+        day.name
+        for day in db.session.query(Day).all()
+    ]
+
     return [
         {
             'id': i+1,
@@ -261,18 +266,21 @@ def get_detailed_lectures():
                 # 'number': lec_prof.professor.number,
                 'freeTime': {
                     day: [
-                        time_slot.hour
-                        for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id, day=day).all()
+                        time_slot.hour_name
+                        # for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id, day=day).all()
+                        for time_slot in (
+                            db.session.query(
+                                TimeProfessor.id, 
+                                Day.name.label("day_name"),  # Alias for Day's name column
+                                Hour.name.label("hour_name"), # Alias for Hour's name column
+                            )
+                            .join(Day, Day.id == TimeProfessor.day_id)
+                            .join(Hour, Hour.id == TimeProfessor.hour_id)
+                            .filter(TimeProfessor.professor_id == lec_prof.professor_id, Day.name == day)
+                            .all()
+                        )
                     ]
-                    # for day in WEEK
-                    for day in [
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "Thursday",
-                        "Friday",
-                    ]
-                    # for time_slot in TimeProfessor.query.filter_by(professor_id=lec_prof.professor_id).group_by(TimeProfessor.day).all()
+                    for day in days
                 }
             },
             'lectureHall': {
@@ -292,23 +300,28 @@ def get_detailed_lectures():
 def get_lecture_by_id(id_, detailed_lectures): # TODO convert to dict
     return next((lec for lec in detailed_lectures if lec["id"] == id_), None)
 
+def generate_empty_week():
+    hours = [
+        hour.name
+        for hour in db.session.query(Hour).all()
+    ]
+    days = [
+        day.name
+        for day in db.session.query(Day).all()
+    ]
+    week_program = {
+        day: {
+            hour: []
+            for hour in hours
+        }
+        for day in days
+    }
+
+    return week_program
+
 def build_week(week_program = None, detailed_lectures = None, lecture_halls = None):
     if week_program is None:
-        week_program = {
-            day: {
-                hour: []
-                for hour in [
-                    8, 9, 10, 11, 13, 14, 15, 16, 17
-                ]
-            }
-            for day in [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-            ]
-        }
+        week_program = generate_empty_week()
 
     if detailed_lectures is None:
         detailed_lectures = get_detailed_lectures()
@@ -345,9 +358,15 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
 
         print("Generation:", epoch, "Score:", sorted_results[0]["score"])
 
-        for r in range(int(SELECTION_RATE * len(sorted_results)), int((1 - DUMP_RATE) * len(sorted_results))):
-            result = sorted_results[r]
-            w = result["week_program"]
+        sorted_results = sorted_results[:int(SELECTION_RATE * len(sorted_results))]
+
+        old_sorted_results_len = len(sorted_results)
+        for r in range(POPULATION_SIZE - old_sorted_results_len):
+            result = sorted_results[r % old_sorted_results_len]
+        # for r in range(1, int((1 - DUMP_RATE) * len(sorted_results))):
+            # result = sorted_results[r]
+
+            w = copy.deepcopy(result["week_program"])
             random_ids = random.sample(range(1, len(detailed_lectures)), int(len(detailed_lectures) * ERASION_RATE))
             remove_lecture_from_week_by_ids(w, random_ids)
             d = [
@@ -362,8 +381,10 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
                 lecture_halls,
                 True
             )
+
             if result_["score"] is not None:
-                sorted_results[r] = result_
+                # sorted_results[r] = result_
+                sorted_results.append(result_)
             
         for r in range(int((1 - DUMP_RATE) * len(sorted_results)), len(sorted_results)):
             sorted_results[r] = build_week_(
@@ -499,8 +520,8 @@ def remove_lecture_from_week_by_ids(week, id_s):
     for id_ in id_s:
         remove_lecture_from_week_by_id(week, id_)
 
-POPULATION_SIZE = 100
-GENERATIONS_NUM = 200
+POPULATION_SIZE = 50
+GENERATIONS_NUM = 100
 SELECTION_RATE = 0.2
 DUMP_RATE = 0.1
 ERASION_RATE = 0.2

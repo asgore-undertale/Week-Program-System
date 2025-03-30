@@ -68,7 +68,7 @@
 
                 for (let j = 1; j < cells.length; j++) {
                     if (cells[j].classList.contains('selected')) {
-                        prof_time_data.push(["{{professors_number}}", cells[0].getAttribute("value"), days_row[j].getAttribute("value")]);
+                        prof_time_data.push(["{{professors_number}}", days_row[j].getAttribute("value"), cells[0].getAttribute("value")]);
                     }
                 }
             }

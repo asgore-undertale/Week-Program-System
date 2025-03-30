@@ -28,8 +28,8 @@ class Lecture(db.Model):
 class TimeProfessor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
-    hour = db.Column(db.Integer, nullable=False)
-    day = db.Column(db.Integer, nullable=False)
+    day_id = db.Column(db.Integer, db.ForeignKey('day.id'), nullable=False)
+    hour_id = db.Column(db.Integer, db.ForeignKey('hour.id'), nullable=False)
 
 class LectureProfessor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,6 +55,18 @@ class LectureHall(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
+
+class Year(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Integer, unique=True, nullable=False)
+
+class Day(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True, nullable=False)
+
+class Hour(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Integer, unique=True, nullable=False)
 
 
 def seed_data(app, bcrypt):
@@ -224,39 +236,76 @@ def seed_data(app, bcrypt):
                 ),
                 lecture_students
             ))
+        
+        if not Year.query.first():
+            years = [
+                (1),
+                (2),
+                (3),
+                (4),
+            ]
+            db.session.add_all(map(
+                lambda x: Year(
+                    name=x
+                ),
+                years
+            ))
+        
+        if not Day.query.first():
+            days = [
+                ("Monday"),
+                ("Tuesday"),
+                ("Wednesday"),
+                ("Thursday"),
+                ("Friday"),
+            ]
+            db.session.add_all(map(
+                lambda x: Day(
+                    name=x
+                ),
+                days
+            ))
+        
+        if not Hour.query.first():
+            hours = [
+                (8),
+                (9),
+                (10),
+                (11),
+                (13),
+                (14),
+                (15),
+                (16),
+                (17),
+            ]
+            db.session.add_all(map(
+                lambda x: Hour(
+                    name=x
+                ),
+                hours
+            ))
 
         if not TimeProfessor.query.first():
-            sample = [
-                (1, 8, ""),
-                (1, 9, ""),
-                (1, 10, ""),
-                (1, 11, ""),
-                (1, 13, ""),
-                (1, 14, ""),
-                (1, 15, ""),
-                (1, 16, ""),
-                (1, 17, ""),
+            hour_ids = [
+                1, 2, 3, 4, 5, 6, 7, 8, 9,
             ]
 
-            WEEKDAYS = [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
+            day_ids = [
+                1, 2, 3, 4, 5,
             ]
 
             # Insert dummy professor schedule
             time_professors = [
-                (i+1, s[1], d)
+                (i+1, d, h)
                 for i in range(len(professors)) 
-                for d in WEEKDAYS for s in sample
+                for h in hour_ids
+                for d in day_ids
             ]
             db.session.add_all(map(
                 lambda x: TimeProfessor(
                     professor_id=x[0],
-                    hour=x[1],
-                    day=x[2]
+                    day_id=x[1],
+                    hour_id=x[2],
                 ),
                 time_professors
             ))

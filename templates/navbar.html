@@ -1,11 +1,11 @@
 <nav class="bordered">
+    {% if current_user.role_id == 1 %}
+    <!-- <a href='/week_editor'>Week Editor</a> -->
+    {% endif %}
+    <a href='/week_program'>Week Program</a>
     {% if current_user.role_id == 1 or current_user.role_id == 2 %}
     <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'>Professor Time</a>
     {% endif %}
-    {% if current_user.role_id == 1 %}
-        <!-- <a href='/week_editor'>Week Editor</a> -->
-    {% endif %}
-    <a href='/week_program'>Week Program</a>
     <a href='/logout'>Logout</a>
     <span class="copy-right">Developed by [Ahmad DRAIE] and [Muhammed Salih BEDIR] in the 6th term</span>
 </nav>

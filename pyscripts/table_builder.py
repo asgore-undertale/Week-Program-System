@@ -7,6 +7,7 @@ def combine_sequenced_lectures(week):
             for l, lec in enumerate(week[day][hour]):
                 week[day][hour][l]["count"] = 1
 
+
     for day in week:
         reversed_hours = list(week[day].keys())[::-1]
         for h, hour in enumerate(reversed_hours[:-1]):
@@ -79,7 +80,7 @@ def tableize_combined_week_by_year(combined_week, remove_unnecessary_nones = Fal
 
     return table
 
-def build_week_html_content(tableized_week):
+def build_week_html_content(tableized_week, years):
     style = """<style>
     th, tr {
         border: 1px solid black;
@@ -127,7 +128,7 @@ def build_week_html_content(tableized_week):
         f"""
         <th class="bordered_cell header_cell year_header" colspan="{len(tableized_week["cols"][year]) if year in tableized_week["cols"] else 1}">Year {year}</th>
         """
-        for year in [1, 2, 3, 4] # tableized_week["cols"]
+        for year in years # tableized_week["cols"]
     ) + """
 </tr>"""
 
@@ -146,7 +147,7 @@ def build_week_html_content(tableized_week):
             rows_content.append(f"""<tr><td class="bordered_cell">{hour}:00 ~ {hour}:50</td>""")
         
         # for year in tableized_week["cols"]:
-        for year in [1, 2, 3, 4]:
+        for year in years:
             if year not in tableized_week["cols"]:
                 for l in range(len(rows_content)):
                     rows_content[l] += f"<td day='{day}' hour='{hours[l]}' year='{year}' onclick='placeLecture(event)'></td>"
@@ -200,19 +201,19 @@ def auto_adjust_row_height(ws):
         
         ws.row_dimensions[row[0].row].height = max_height
 
-def get_max_dimentions(tableized_week):
+def get_max_dimentions(tableized_week, years):
     rows_num = 0
     for day in tableized_week["rows"]:
         rows_num += len(tableized_week["rows"][day]) + 1 # fore headers
 
     cols_num = 2
-    for year in [1, 2, 3, 4]: # tableized_week["cols"]:
+    for year in years: # tableized_week["cols"]:
         years_columns_num = len(tableized_week["cols"][year] )if year in tableized_week["cols"] else 1
         cols_num += years_columns_num
     
     return rows_num, cols_num
 
-def build_week_excel_file(tableized_week):
+def build_week_excel_file(tableized_week, years):
     header_fill = PatternFill(start_color="00FFFF", end_color="00FFFF", fill_type="solid")
     cell_fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
     alignment = Alignment(wrap_text=True, horizontal="center", vertical="center")  # Center alignment
@@ -240,7 +241,7 @@ def build_week_excel_file(tableized_week):
 
         col += 2
 
-        for year in [1, 2, 3, 4]: # tableized_week["cols"]:
+        for year in years: # tableized_week["cols"]:
             years_columns_num = len(tableized_week["cols"][year] )if year in tableized_week["cols"] else 1
             
             cell = ws.cell(row=1+row, column=1+col, value=f"Year {year}")
@@ -289,7 +290,7 @@ def build_week_excel_file(tableized_week):
         hours_num = len(tableized_week["rows"][day])
 
         local_col_pointer = global_col_pointer
-        for year in [1, 2, 3, 4]: # tableized_week["cols"]:
+        for year in years: # tableized_week["cols"]:
             if year not in tableized_week["cols"]:
                 local_col_pointer += 1
                 continue
@@ -331,7 +332,7 @@ def build_week_excel_file(tableized_week):
         global_row_pointer += hours_num
         global_table_row_pointer += hours_num
 
-    rows_num, cols_num = get_max_dimentions(tableized_week)
+    rows_num, cols_num = get_max_dimentions(tableized_week, years)
 
     for i in range(rows_num):
         cell = ws.cell(row=1+i, column=cols_num)
@@ -349,19 +350,7 @@ def build_week_excel_file(tableized_week):
     # wb.save("merged_cells.xlsx")
     return wb
 
-def build_time_table_html_content(times_list):
-    days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-    ]
-
-    hours = [
-        8, 9, 10, 11, 13, 14, 15, 16, 17
-    ]
-
+def build_time_table_html_content(times_list, days, hours):
     html_string = "<table id='schedule-table'>"
 
     html_string += "<thead><tr>"

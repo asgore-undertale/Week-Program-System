@@ -1,88 +1,17 @@
 {
     "Monday": {
-        "8": [
-            {
-                "code": "L011",
-                "hours": 4,
-                "id": 11,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Nesne Tabanl\u0131 Programlama",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 7,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
-                    "number": "P007"
-                },
-                "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
-            }
-        ],
+        "8": [],
         "9": [
             {
-                "code": "L011",
-                "hours": 4,
-                "id": 11,
+                "code": "L015",
+                "hours": 3,
+                "id": 15,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Nesne Tabanl\u0131 Programlama",
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -136,23 +65,23 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    2
+                    4
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S004"
                 ],
-                "year": 2
+                "year": 4
             },
             {
-                "code": "L016",
+                "code": "L003",
                 "hours": 3,
-                "id": 16,
+                "id": 3,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Algoritmalar",
+                "name": "Makine \u00d6\u011frenmesi",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -167,77 +96,7 @@
                             16,
                             17
                         ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": []
-                    },
-                    "id": 8,
-                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
-                    "number": "P008"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L025",
-                "hours": 3,
-                "id": 25,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Algoritma Analizi",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
+                        "Thursday": [],
                         "Tuesday": [
                             8,
                             9,
@@ -251,30 +110,30 @@
                         ],
                         "Wednesday": []
                     },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
+                    "id": 1,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                    "number": "P001"
                 },
                 "studentIds": [
-                    4
+                    2
                 ],
                 "studentNumbers": [
-                    "S003"
+                    "S002"
                 ],
-                "year": 4
+                "year": 2
             }
         ],
         "10": [
             {
-                "code": "L011",
-                "hours": 4,
-                "id": 11,
+                "code": "L015",
+                "hours": 3,
+                "id": 15,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Nesne Tabanl\u0131 Programlama",
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -328,143 +187,23 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L016",
-                "hours": 3,
-                "id": 16,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Algoritmalar",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": []
-                    },
-                    "id": 8,
-                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
-                    "number": "P008"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L025",
-                "hours": 3,
-                "id": 25,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Algoritma Analizi",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
                     4
                 ],
                 "studentNumbers": [
-                    "S003"
+                    "S004"
                 ],
                 "year": 4
             },
             {
-                "code": "L001",
-                "hours": 2,
-                "id": 1,
+                "code": "L003",
+                "hours": 3,
+                "id": 3,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "M\u00fchendislk Et\u011f",
+                "name": "Makine \u00d6\u011frenmesi",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -498,25 +237,25 @@
                     "number": "P001"
                 },
                 "studentIds": [
-                    1
+                    2
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S002"
                 ],
-                "year": 1
+                "year": 2
             }
         ],
         "11": [
             {
-                "code": "L011",
-                "hours": 4,
-                "id": 11,
+                "code": "L015",
+                "hours": 3,
+                "id": 15,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Nesne Tabanl\u0131 Programlama",
+                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -570,143 +309,23 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L016",
-                "hours": 3,
-                "id": 16,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Algoritmalar",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": []
-                    },
-                    "id": 8,
-                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
-                    "number": "P008"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L025",
-                "hours": 3,
-                "id": 25,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Algoritma Analizi",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
                     4
                 ],
                 "studentNumbers": [
-                    "S003"
+                    "S004"
                 ],
                 "year": 4
             },
             {
-                "code": "L001",
-                "hours": 2,
-                "id": 1,
+                "code": "L003",
+                "hours": 3,
+                "id": 3,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "M\u00fchendislk Et\u011f",
+                "name": "Makine \u00d6\u011frenmesi",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -740,12 +359,12 @@
                     "number": "P001"
                 },
                 "studentIds": [
-                    1
+                    2
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S002"
                 ],
-                "year": 1
+                "year": 2
             }
         ],
         "13": [
@@ -754,8 +373,8 @@
                 "hours": 2,
                 "id": 10,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
@@ -785,140 +404,20 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L002",
-                "hours": 5,
-                "id": 2,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Algoritma ve Programlama II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 1,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                    "number": "P001"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L015",
+                "code": "L025",
                 "hours": 3,
-                "id": 15,
+                "id": 25,
                 "lectureHall": {
                     "id": 3,
                     "name": "LH003",
                     "capacity": 10
                 },
-                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 7,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
-                    "number": "P007"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
-                "code": "L024",
-                "hours": 3,
-                "id": 24,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
+                "name": "Algoritma Analizi",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -972,12 +471,132 @@
                     "number": "P010"
                 },
                 "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L002",
+                "hours": 5,
+                "id": 2,
+                "lectureHall": {
+                    "id": 4,
+                    "name": "LH004",
+                    "capacity": 10
+                },
+                "name": "Algoritma ve Programlama II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 1,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                    "number": "P001"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L013",
+                "hours": 4,
+                "id": 13,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 7,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                    "number": "P007"
+                },
+                "studentIds": [
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
-                "year": 3
+                "year": 2
             }
         ],
         "14": [
@@ -986,8 +605,8 @@
                 "hours": 2,
                 "id": 10,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Atat\u00fcrk \u0130lke ve \u0130nk\u0131laplar\u0131",
@@ -1017,140 +636,20 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L002",
-                "hours": 5,
-                "id": 2,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Algoritma ve Programlama II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 1,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                    "number": "P001"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L015",
+                "code": "L025",
                 "hours": 3,
-                "id": 15,
+                "id": 25,
                 "lectureHall": {
                     "id": 3,
                     "name": "LH003",
                     "capacity": 10
                 },
-                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 7,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
-                    "number": "P007"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
-                "code": "L024",
-                "hours": 3,
-                "id": 24,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
+                "name": "Algoritma Analizi",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -1204,22 +703,20 @@
                     "number": "P010"
                 },
                 "studentIds": [
-                    3
+                    4
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S004"
                 ],
-                "year": 3
-            }
-        ],
-        "15": [
+                "year": 4
+            },
             {
                 "code": "L002",
                 "hours": 5,
                 "id": 2,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
                 "name": "Algoritma ve Programlama II",
@@ -1259,7 +756,199 @@
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L013",
+                "hours": 4,
+                "id": 13,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 7,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                    "number": "P007"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            }
+        ],
+        "15": [
+            {
+                "code": "L025",
+                "hours": 3,
+                "id": 25,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Algoritma Analizi",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L002",
+                "hours": 5,
+                "id": 2,
+                "lectureHall": {
+                    "id": 4,
+                    "name": "LH004",
+                    "capacity": 10
+                },
+                "name": "Algoritma ve Programlama II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 1,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                    "number": "P001"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
                 ],
                 "year": 1
             },
@@ -1268,8 +957,8 @@
                 "hours": 3,
                 "id": 17,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Yapay Zeka",
@@ -1309,20 +998,20 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L015",
-                "hours": 3,
-                "id": 15,
+                "code": "L013",
+                "hours": 4,
+                "id": 13,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "G\u00f6m\u00fcl\u00fc Sistemi Programlama",
+                "name": "G\u00f6rsel Programlama Dilleri",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -1376,82 +1065,12 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    4
+                    3
                 ],
                 "studentNumbers": [
                     "S003"
                 ],
-                "year": 4
-            },
-            {
-                "code": "L024",
-                "hours": 3,
-                "id": 24,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
+                "year": 2
             }
         ],
         "16": [
@@ -1460,8 +1079,8 @@
                 "hours": 5,
                 "id": 2,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
                 "name": "Algoritma ve Programlama II",
@@ -1501,7 +1120,7 @@
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             },
@@ -1510,8 +1129,8 @@
                 "hours": 3,
                 "id": 17,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Yapay Zeka",
@@ -1551,7 +1170,77 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L013",
+                "hours": 4,
+                "id": 13,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "G\u00f6rsel Programlama Dilleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 7,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                    "number": "P007"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
                 ],
                 "year": 2
             }
@@ -1562,8 +1251,8 @@
                 "hours": 5,
                 "id": 2,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
                 "name": "Algoritma ve Programlama II",
@@ -1603,7 +1292,7 @@
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             },
@@ -1612,8 +1301,8 @@
                 "hours": 3,
                 "id": 17,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Yapay Zeka",
@@ -1653,7 +1342,7 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             }
@@ -1666,8 +1355,8 @@
                 "hours": 4,
                 "id": 22,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -1727,25 +1416,24 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L007",
-                "hours": 4,
-                "id": 7,
+                "code": "L001",
+                "hours": 2,
+                "id": 1,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Matematik II",
+                "name": "M\u00fchendislk Et\u011f",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
+                        "Monday": [
                             8,
                             9,
                             10,
@@ -1756,6 +1444,7 @@
                             16,
                             17
                         ],
+                        "Thursday": [],
                         "Tuesday": [
                             8,
                             9,
@@ -1767,27 +1456,17 @@
                             16,
                             17
                         ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
+                        "Wednesday": []
                     },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
+                    "id": 1,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                    "number": "P001"
                 },
                 "studentIds": [
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             }
@@ -1798,8 +1477,8 @@
                 "hours": 4,
                 "id": 22,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -1859,25 +1538,23 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L007",
-                "hours": 4,
-                "id": 7,
+                "code": "L027",
+                "hours": 3,
+                "id": 27,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Matematik II",
+                "name": "Bilgisayar A\u011flar\u0131",
                 "professor": {
                     "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
+                        "Friday": [
                             8,
                             9,
                             10,
@@ -1888,6 +1565,8 @@
                             16,
                             17
                         ],
+                        "Monday": [],
+                        "Thursday": [],
                         "Tuesday": [
                             8,
                             9,
@@ -1911,27 +1590,117 @@
                             17
                         ]
                     },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 3
+            },
+            {
+                "code": "L001",
+                "hours": 2,
+                "id": 1,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "M\u00fchendislk Et\u011f",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 1,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
+                    "number": "P001"
                 },
                 "studentIds": [
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             }
         ],
         "10": [
             {
+                "code": "L004",
+                "hours": 2,
+                "id": 4,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "T\u00fcrk Dili II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 2,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                    "number": "P002"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L022",
                 "hours": 4,
                 "id": 22,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -1991,80 +1760,20 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L007",
-                "hours": 4,
-                "id": 7,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Matematik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L030",
-                "hours": 2,
-                "id": 30,
+                "code": "L027",
+                "hours": 3,
+                "id": 27,
                 "lectureHall": {
                     "id": 3,
                     "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Temel Bilgi Teknolojiler",
+                "name": "Bilgisayar A\u011flar\u0131",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -2108,22 +1817,62 @@
                     "number": "P011"
                 },
                 "studentIds": [
-                    2
+                    3
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S003"
                 ],
-                "year": 1
+                "year": 3
             }
         ],
         "11": [
             {
+                "code": "L004",
+                "hours": 2,
+                "id": 4,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "T\u00fcrk Dili II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 2,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
+                    "number": "P002"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L022",
                 "hours": 4,
                 "id": 22,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
                 "name": "Bilgisayar Organizasyonu ve Mimarisi",
@@ -2183,80 +1932,20 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L007",
-                "hours": 4,
-                "id": 7,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Matematik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L030",
-                "hours": 2,
-                "id": 30,
+                "code": "L027",
+                "hours": 3,
+                "id": 27,
                 "lectureHall": {
                     "id": 3,
                     "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Temel Bilgi Teknolojiler",
+                "name": "Bilgisayar A\u011flar\u0131",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -2300,125 +1989,25 @@
                     "number": "P011"
                 },
                 "studentIds": [
-                    2
+                    3
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S003"
                 ],
-                "year": 1
+                "year": 3
             }
         ],
         "13": [
             {
-                "code": "L004",
-                "hours": 2,
-                "id": 4,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "T\u00fcrk Dili II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 2,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
-                    "number": "P002"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L026",
+                "code": "L024",
                 "hours": 3,
-                "id": 26,
+                "id": 24,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
-                "name": "Veritaban\u0131 II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
-            },
-            {
-                "code": "L031",
-                "hours": 5,
-                "id": 31,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Mikroi\u015flemciler",
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -2475,24 +2064,23 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
-                "year": 2
+                "year": 3
             },
             {
-                "code": "L003",
+                "code": "L028",
                 "hours": 3,
-                "id": 3,
+                "id": 28,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Makine \u00d6\u011frenmesi",
+                "name": "Optimizasyona Giri\u015f",
                 "professor": {
                     "freeTime": {
-                        "Friday": [],
-                        "Monday": [
+                        "Friday": [
                             8,
                             9,
                             10,
@@ -2503,6 +2091,57 @@
                             16,
                             17
                         ],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L005",
+                "hours": 2,
+                "id": 5,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "\u0130ngilizce II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
                         "Thursday": [],
                         "Tuesday": [
                             8,
@@ -2517,130 +2156,30 @@
                         ],
                         "Wednesday": []
                     },
-                    "id": 1,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                    "number": "P001"
+                    "id": 3,
+                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                    "number": "P003"
                 },
                 "studentIds": [
-                    2
+                    1
                 ],
                 "studentNumbers": [
                     "S001"
                 ],
-                "year": 2
+                "year": 1
             }
         ],
         "14": [
             {
-                "code": "L004",
-                "hours": 2,
-                "id": 4,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "T\u00fcrk Dili II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 2,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Adnan KOK",
-                    "number": "P002"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L026",
+                "code": "L024",
                 "hours": 3,
-                "id": 26,
+                "id": 24,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
-                "name": "Veritaban\u0131 II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
-            },
-            {
-                "code": "L031",
-                "hours": 5,
-                "id": 31,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Mikroi\u015flemciler",
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -2697,24 +2236,23 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
-                "year": 2
+                "year": 3
             },
             {
-                "code": "L003",
+                "code": "L028",
                 "hours": 3,
-                "id": 3,
+                "id": 28,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Makine \u00d6\u011frenmesi",
+                "name": "Optimizasyona Giri\u015f",
                 "professor": {
                     "freeTime": {
-                        "Friday": [],
-                        "Monday": [
+                        "Friday": [
                             8,
                             9,
                             10,
@@ -2725,6 +2263,57 @@
                             16,
                             17
                         ],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L005",
+                "hours": 2,
+                "id": 5,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "\u0130ngilizce II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
                         "Thursday": [],
                         "Tuesday": [
                             8,
@@ -2739,35 +2328,65 @@
                         ],
                         "Wednesday": []
                     },
-                    "id": 1,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                    "number": "P001"
+                    "id": 3,
+                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
+                    "number": "P003"
                 },
                 "studentIds": [
-                    2
+                    1
                 ],
                 "studentNumbers": [
                     "S001"
                 ],
-                "year": 2
+                "year": 1
             }
         ],
         "15": [
             {
-                "code": "L005",
-                "hours": 2,
-                "id": 5,
+                "code": "L024",
+                "hours": 3,
+                "id": 24,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
-                "name": "\u0130ngilizce II",
+                "name": "Bi\u00e7imsel Diller ve Otomata Teorisi",
                 "professor": {
                     "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
                         "Tuesday": [
                             8,
                             9,
@@ -2781,28 +2400,28 @@
                         ],
                         "Wednesday": []
                     },
-                    "id": 3,
-                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
-                    "number": "P003"
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
                 },
                 "studentIds": [
-                    1
+                    3
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S003"
                 ],
-                "year": 1
+                "year": 3
             },
             {
-                "code": "L026",
+                "code": "L028",
                 "hours": 3,
-                "id": 26,
+                "id": 28,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Veritaban\u0131 II",
+                "name": "Optimizasyona Giri\u015f",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -2846,553 +2465,29 @@
                     "number": "P011"
                 },
                 "studentIds": [
-                    3
+                    4
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S004"
                 ],
-                "year": 3
-            },
-            {
-                "code": "L031",
-                "hours": 5,
-                "id": 31,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Mikroi\u015flemciler",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L003",
-                "hours": 3,
-                "id": 3,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Makine \u00d6\u011frenmesi",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 1,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Rasim \u00c7EK\u0130K",
-                    "number": "P001"
-                },
-                "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
+                "year": 4
             }
         ],
-        "16": [
-            {
-                "code": "L005",
-                "hours": 2,
-                "id": 5,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "\u0130ngilizce II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 3,
-                    "name": "\u00d6\u011fretm G\u00f6revls Metn \u00c7ALMAN",
-                    "number": "P003"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L031",
-                "hours": 5,
-                "id": 31,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Mikroi\u015flemciler",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            }
-        ],
-        "17": [
-            {
-                "code": "L031",
-                "hours": 5,
-                "id": 31,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Mikroi\u015flemciler",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": []
-                    },
-                    "id": 10,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
-                    "number": "P010"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            }
-        ]
+        "16": [],
+        "17": []
     },
     "Wednesday": {
         "8": [
             {
-                "code": "L021",
+                "code": "L006",
                 "hours": 4,
-                "id": 21,
+                "id": 6,
                 "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
-                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 9,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
-                "code": "L008",
-                "hours": 4,
-                "id": 8,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Dfferansyel Denklemler",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
-                },
-                "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
-            }
-        ],
-        "9": [
-            {
-                "code": "L021",
-                "hours": 4,
-                "id": 21,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 9,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
-                "code": "L008",
-                "hours": 4,
-                "id": 8,
-                "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
-                    "capacity": 10
-                },
-                "name": "Dfferansyel Denklemler",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
-                },
-                "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L029",
-                "hours": 3,
-                "id": 29,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Elektrik Devreleri",
+                "name": "Fizik II",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -3411,28 +2506,230 @@
                             17
                         ]
                     },
-                    "id": 12,
-                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                    "number": "P012"
+                    "id": 4,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                    "number": "P004"
                 },
                 "studentIds": [
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             },
             {
-                "code": "L027",
+                "code": "L021",
+                "hours": 4,
+                "id": 21,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 9,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            }
+        ],
+        "9": [
+            {
+                "code": "L006",
+                "hours": 4,
+                "id": 6,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Fizik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 4,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                    "number": "P004"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L009",
                 "hours": 3,
-                "id": 27,
+                "id": 9,
                 "lectureHall": {
                     "id": 5,
                     "name": "LH005",
                     "capacity": 10
                 },
-                "name": "Bilgisayar A\u011flar\u0131",
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    2
+                ],
+                "studentNumbers": [
+                    "S002"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L021",
+                "hours": 4,
+                "id": 21,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 9,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L026",
+                "hours": 3,
+                "id": 26,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Veritaban\u0131 II",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -3479,69 +2776,19 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "10": [
             {
-                "code": "L021",
-                "hours": 4,
-                "id": 21,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 9,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
                 "code": "L012",
                 "hours": 2,
                 "id": 12,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
                 "name": "\u0130nsan Blgsayar Etkle\u015fm",
@@ -3601,20 +2848,60 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 2
             },
             {
-                "code": "L008",
+                "code": "L006",
                 "hours": 4,
-                "id": 8,
+                "id": 6,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 2,
+                    "name": "LH002",
                     "capacity": 10
                 },
-                "name": "Dfferansyel Denklemler",
+                "name": "Fizik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 4,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                    "number": "P004"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L009",
+                "hours": 3,
+                "id": 9,
+                "lectureHall": {
+                    "id": 5,
+                    "name": "LH005",
+                    "capacity": 10
+                },
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -3661,25 +2948,35 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             },
             {
-                "code": "L029",
-                "hours": 3,
-                "id": 29,
+                "code": "L021",
+                "hours": 4,
+                "id": 21,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
-                "name": "Elektrik Devreleri",
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
                         "Monday": [],
-                        "Thursday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
                         "Tuesday": [],
                         "Wednesday": [
                             8,
@@ -3693,28 +2990,28 @@
                             17
                         ]
                     },
-                    "id": 12,
-                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
-                    "number": "P012"
+                    "id": 9,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
                 },
                 "studentIds": [
-                    1
+                    4
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S004"
                 ],
-                "year": 1
+                "year": 4
             },
             {
-                "code": "L027",
+                "code": "L026",
                 "hours": 3,
-                "id": 27,
+                "id": 26,
                 "lectureHall": {
-                    "id": 5,
-                    "name": "LH005",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Bilgisayar A\u011flar\u0131",
+                "name": "Veritaban\u0131 II",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -3761,69 +3058,19 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "11": [
             {
-                "code": "L021",
-                "hours": 4,
-                "id": 21,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 9,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
                 "code": "L012",
                 "hours": 2,
                 "id": 12,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 4,
+                    "name": "LH004",
                     "capacity": 10
                 },
                 "name": "\u0130nsan Blgsayar Etkle\u015fm",
@@ -3883,9 +3130,391 @@
                     3
                 ],
                 "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L006",
+                "hours": 4,
+                "id": 6,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Fizik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 4,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
+                    "number": "P004"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L009",
+                "hours": 3,
+                "id": 9,
+                "lectureHall": {
+                    "id": 5,
+                    "name": "LH005",
+                    "capacity": 10
+                },
+                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    2
+                ],
+                "studentNumbers": [
                     "S002"
                 ],
                 "year": 2
+            },
+            {
+                "code": "L021",
+                "hours": 4,
+                "id": 21,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "Bulan\u0131k Mant\u0131\u011f\u0131n Temelleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 9,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
+                },
+                "studentIds": [
+                    4
+                ],
+                "studentNumbers": [
+                    "S004"
+                ],
+                "year": 4
+            },
+            {
+                "code": "L026",
+                "hours": 3,
+                "id": 26,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Veritaban\u0131 II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 3
+            }
+        ],
+        "13": [
+            {
+                "code": "L014",
+                "hours": 2,
+                "id": 14,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Mobil Tabanl\u0131 Uygulamalar",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 7,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                    "number": "P007"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 3
+            },
+            {
+                "code": "L030",
+                "hours": 2,
+                "id": 30,
+                "lectureHall": {
+                    "id": 4,
+                    "name": "LH004",
+                    "capacity": 10
+                },
+                "name": "Temel Bilgi Teknolojiler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    2
+                ],
+                "studentNumbers": [
+                    "S002"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L029",
+                "hours": 3,
+                "id": 29,
+                "lectureHall": {
+                    "id": 5,
+                    "name": "LH005",
+                    "capacity": 10
+                },
+                "name": "Elektrik Devreleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 12,
+                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                    "number": "P012"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
             },
             {
                 "code": "L008",
@@ -3943,17 +3572,199 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
+            },
+            {
+                "code": "L018",
+                "hours": 2,
+                "id": 18,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "Bili\u015fim Hukuku",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 9,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
+                    "number": "P009"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            }
+        ],
+        "14": [
+            {
+                "code": "L014",
+                "hours": 2,
+                "id": 14,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Mobil Tabanl\u0131 Uygulamalar",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 7,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
+                    "number": "P007"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 3
+            },
+            {
+                "code": "L030",
+                "hours": 2,
+                "id": 30,
+                "lectureHall": {
+                    "id": 4,
+                    "name": "LH004",
+                    "capacity": 10
+                },
+                "name": "Temel Bilgi Teknolojiler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 11,
+                    "name": "Do\u00e7. Dr. Murat ASLAN",
+                    "number": "P011"
+                },
+                "studentIds": [
+                    2
+                ],
+                "studentNumbers": [
+                    "S002"
+                ],
+                "year": 1
             },
             {
                 "code": "L029",
                 "hours": 3,
                 "id": 29,
                 "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
+                    "id": 5,
+                    "name": "LH005",
                     "capacity": 10
                 },
                 "name": "Elektrik Devreleri",
@@ -3983,302 +3794,20 @@
                     1
                 ],
                 "studentNumbers": [
-                    "S000"
+                    "S001"
                 ],
                 "year": 1
             },
             {
-                "code": "L027",
-                "hours": 3,
-                "id": 27,
-                "lectureHall": {
-                    "id": 5,
-                    "name": "LH005",
-                    "capacity": 10
-                },
-                "name": "Bilgisayar A\u011flar\u0131",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
-            }
-        ],
-        "13": [
-            {
-                "code": "L006",
+                "code": "L008",
                 "hours": 4,
-                "id": 6,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Fizik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 4,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
-                    "number": "P004"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L028",
-                "hours": 3,
-                "id": 28,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Optimizasyona Giri\u015f",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
-                "code": "L018",
-                "hours": 2,
-                "id": 18,
+                "id": 8,
                 "lectureHall": {
                     "id": 3,
                     "name": "LH003",
                     "capacity": 10
                 },
-                "name": "Bili\u015fim Hukuku",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 9,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Kenan DONUK",
-                    "number": "P009"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L014",
-                "hours": 2,
-                "id": 14,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Mobil Tabanl\u0131 Uygulamalar",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 7,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
-                    "number": "P007"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
-            },
-            {
-                "code": "L009",
-                "hours": 3,
-                "id": 9,
-                "lectureHall": {
-                    "id": 5,
-                    "name": "LH005",
-                    "capacity": 10
-                },
-                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "name": "Dfferansyel Denklemler",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -4325,119 +3854,17 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
-            }
-        ],
-        "14": [
-            {
-                "code": "L006",
-                "hours": 4,
-                "id": 6,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Fizik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 4,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
-                    "number": "P004"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L028",
-                "hours": 3,
-                "id": 28,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Optimizasyona Giri\u015f",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
             },
             {
                 "code": "L018",
                 "hours": 2,
                 "id": 18,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
                 "name": "Bili\u015fim Hukuku",
@@ -4477,249 +3904,19 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
-                ],
-                "year": 2
-            },
-            {
-                "code": "L014",
-                "hours": 2,
-                "id": 14,
-                "lectureHall": {
-                    "id": 4,
-                    "name": "LH004",
-                    "capacity": 10
-                },
-                "name": "Mobil Tabanl\u0131 Uygulamalar",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 7,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mehmet G\u00dcL",
-                    "number": "P007"
-                },
-                "studentIds": [
-                    3
-                ],
-                "studentNumbers": [
-                    "S002"
-                ],
-                "year": 3
-            },
-            {
-                "code": "L009",
-                "hours": 3,
-                "id": 9,
-                "lectureHall": {
-                    "id": 5,
-                    "name": "LH005",
-                    "capacity": 10
-                },
-                "name": "Olas\u0131l\u0131k ve \u0130statstk",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 5,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
-                    "number": "P005"
-                },
-                "studentIds": [
-                    2
-                ],
-                "studentNumbers": [
-                    "S001"
+                    "S003"
                 ],
                 "year": 2
             }
         ],
         "15": [
             {
-                "code": "L006",
-                "hours": 4,
-                "id": 6,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Fizik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 4,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
-                    "number": "P004"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
-                "code": "L028",
-                "hours": 3,
-                "id": 28,
-                "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
-                    "capacity": 10
-                },
-                "name": "Optimizasyona Giri\u015f",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 11,
-                    "name": "Do\u00e7. Dr. Murat ASLAN",
-                    "number": "P011"
-                },
-                "studentIds": [
-                    4
-                ],
-                "studentNumbers": [
-                    "S003"
-                ],
-                "year": 4
-            },
-            {
                 "code": "L019",
                 "hours": 3,
                 "id": 19,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -4759,20 +3956,60 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             },
             {
-                "code": "L009",
+                "code": "L029",
                 "hours": 3,
-                "id": 9,
+                "id": 29,
                 "lectureHall": {
                     "id": 5,
                     "name": "LH005",
                     "capacity": 10
                 },
-                "name": "Olas\u0131l\u0131k ve \u0130statstk",
+                "name": "Elektrik Devreleri",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [],
+                        "Tuesday": [],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 12,
+                    "name": "Do\u00e7. Dr. Asaf T. \u00dcLGEN",
+                    "number": "P012"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
+                "code": "L008",
+                "hours": 4,
+                "id": 8,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Dfferansyel Denklemler",
                 "professor": {
                     "freeTime": {
                         "Friday": [],
@@ -4819,59 +4056,19 @@
                     2
                 ],
                 "studentNumbers": [
-                    "S001"
+                    "S002"
                 ],
                 "year": 2
             }
         ],
         "16": [
             {
-                "code": "L006",
-                "hours": 4,
-                "id": 6,
-                "lectureHall": {
-                    "id": 1,
-                    "name": "LH001",
-                    "capacity": 10
-                },
-                "name": "Fizik II",
-                "professor": {
-                    "freeTime": {
-                        "Friday": [],
-                        "Monday": [],
-                        "Thursday": [],
-                        "Tuesday": [],
-                        "Wednesday": [
-                            8,
-                            9,
-                            10,
-                            11,
-                            13,
-                            14,
-                            15,
-                            16,
-                            17
-                        ]
-                    },
-                    "id": 4,
-                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Dilan ALP",
-                    "number": "P004"
-                },
-                "studentIds": [
-                    1
-                ],
-                "studentNumbers": [
-                    "S000"
-                ],
-                "year": 1
-            },
-            {
                 "code": "L019",
                 "hours": 3,
                 "id": 19,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -4911,9 +4108,69 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
+            },
+            {
+                "code": "L008",
+                "hours": 4,
+                "id": 8,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Dfferansyel Denklemler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    2
+                ],
+                "studentNumbers": [
+                    "S002"
+                ],
+                "year": 2
             }
         ],
         "17": [
@@ -4922,8 +4179,8 @@
                 "hours": 3,
                 "id": 19,
                 "lectureHall": {
-                    "id": 3,
-                    "name": "LH003",
+                    "id": 1,
+                    "name": "LH001",
                     "capacity": 10
                 },
                 "name": "Veri Madencili\u011fine Giri\u015f",
@@ -4963,7 +4220,7 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
@@ -4972,6 +4229,66 @@
     "Thursday": {
         "8": [
             {
+                "code": "L007",
+                "hours": 4,
+                "id": 7,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Matematik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L023",
                 "hours": 4,
                 "id": 23,
@@ -5037,13 +4354,73 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "9": [
             {
+                "code": "L007",
+                "hours": 4,
+                "id": 7,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Matematik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L023",
                 "hours": 4,
                 "id": 23,
@@ -5109,13 +4486,123 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
+            },
+            {
+                "code": "L016",
+                "hours": 3,
+                "id": 16,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Algoritmalar",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": []
+                    },
+                    "id": 8,
+                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                    "number": "P008"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
             }
         ],
         "10": [
             {
+                "code": "L007",
+                "hours": 4,
+                "id": 7,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Matematik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L023",
                 "hours": 4,
                 "id": 23,
@@ -5181,13 +4668,123 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
+            },
+            {
+                "code": "L016",
+                "hours": 3,
+                "id": 16,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Algoritmalar",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": []
+                    },
+                    "id": 8,
+                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                    "number": "P008"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
             }
         ],
         "11": [
             {
+                "code": "L007",
+                "hours": 4,
+                "id": 7,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Matematik II",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ]
+                    },
+                    "id": 5,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Mustafa MIZRAK",
+                    "number": "P005"
+                },
+                "studentIds": [
+                    1
+                ],
+                "studentNumbers": [
+                    "S001"
+                ],
+                "year": 1
+            },
+            {
                 "code": "L023",
                 "hours": 4,
                 "id": 23,
@@ -5253,22 +4850,142 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
+            },
+            {
+                "code": "L016",
+                "hours": 3,
+                "id": 16,
+                "lectureHall": {
+                    "id": 3,
+                    "name": "LH003",
+                    "capacity": 10
+                },
+                "name": "Algoritmalar",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [],
+                        "Wednesday": []
+                    },
+                    "id": 8,
+                    "name": "Do\u00e7. Dr. Mahmut D\u0130R\u0130K",
+                    "number": "P008"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
             }
         ],
         "13": [
             {
-                "code": "L013",
-                "hours": 4,
-                "id": 13,
+                "code": "L031",
+                "hours": 5,
+                "id": 31,
                 "lectureHall": {
                     "id": 1,
                     "name": "LH001",
                     "capacity": 10
                 },
-                "name": "G\u00f6rsel Programlama Dilleri",
+                "name": "Mikroi\u015flemciler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L011",
+                "hours": 4,
+                "id": 11,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Nesne Tabanl\u0131 Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -5322,7 +5039,7 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    3
+                    2
                 ],
                 "studentNumbers": [
                     "S002"
@@ -5334,8 +5051,8 @@
                 "hours": 4,
                 "id": 20,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -5375,22 +5092,92 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "14": [
             {
-                "code": "L013",
-                "hours": 4,
-                "id": 13,
+                "code": "L031",
+                "hours": 5,
+                "id": 31,
                 "lectureHall": {
                     "id": 1,
                     "name": "LH001",
                     "capacity": 10
                 },
-                "name": "G\u00f6rsel Programlama Dilleri",
+                "name": "Mikroi\u015flemciler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L011",
+                "hours": 4,
+                "id": 11,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Nesne Tabanl\u0131 Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -5444,7 +5231,7 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    3
+                    2
                 ],
                 "studentNumbers": [
                     "S002"
@@ -5456,8 +5243,8 @@
                 "hours": 4,
                 "id": 20,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -5497,22 +5284,92 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "15": [
             {
-                "code": "L013",
-                "hours": 4,
-                "id": 13,
+                "code": "L031",
+                "hours": 5,
+                "id": 31,
                 "lectureHall": {
                     "id": 1,
                     "name": "LH001",
                     "capacity": 10
                 },
-                "name": "G\u00f6rsel Programlama Dilleri",
+                "name": "Mikroi\u015flemciler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L011",
+                "hours": 4,
+                "id": 11,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Nesne Tabanl\u0131 Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -5566,7 +5423,7 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    3
+                    2
                 ],
                 "studentNumbers": [
                     "S002"
@@ -5578,8 +5435,8 @@
                 "hours": 4,
                 "id": 20,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -5619,22 +5476,92 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
         "16": [
             {
-                "code": "L013",
-                "hours": 4,
-                "id": 13,
+                "code": "L031",
+                "hours": 5,
+                "id": 31,
                 "lectureHall": {
                     "id": 1,
                     "name": "LH001",
                     "capacity": 10
                 },
-                "name": "G\u00f6rsel Programlama Dilleri",
+                "name": "Mikroi\u015flemciler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            },
+            {
+                "code": "L011",
+                "hours": 4,
+                "id": 11,
+                "lectureHall": {
+                    "id": 2,
+                    "name": "LH002",
+                    "capacity": 10
+                },
+                "name": "Nesne Tabanl\u0131 Programlama",
                 "professor": {
                     "freeTime": {
                         "Friday": [
@@ -5688,7 +5615,7 @@
                     "number": "P007"
                 },
                 "studentIds": [
-                    3
+                    2
                 ],
                 "studentNumbers": [
                     "S002"
@@ -5700,8 +5627,8 @@
                 "hours": 4,
                 "id": 20,
                 "lectureHall": {
-                    "id": 2,
-                    "name": "LH002",
+                    "id": 3,
+                    "name": "LH003",
                     "capacity": 10
                 },
                 "name": "Yaz\u0131l\u0131m M\u00fchendisl\u011fi",
@@ -5741,12 +5668,83 @@
                     3
                 ],
                 "studentNumbers": [
-                    "S002"
+                    "S003"
                 ],
                 "year": 3
             }
         ],
-        "17": []
+        "17": [
+            {
+                "code": "L031",
+                "hours": 5,
+                "id": 31,
+                "lectureHall": {
+                    "id": 1,
+                    "name": "LH001",
+                    "capacity": 10
+                },
+                "name": "Mikroi\u015flemciler",
+                "professor": {
+                    "freeTime": {
+                        "Friday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Monday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Thursday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Tuesday": [
+                            8,
+                            9,
+                            10,
+                            11,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17
+                        ],
+                        "Wednesday": []
+                    },
+                    "id": 10,
+                    "name": "Dr. \u00d6\u011fr. \u00dcyesi Emrullah GAZ\u0130O\u011eLU",
+                    "number": "P010"
+                },
+                "studentIds": [
+                    3
+                ],
+                "studentNumbers": [
+                    "S003"
+                ],
+                "year": 2
+            }
+        ]
     },
     "Friday": {
         "8": [],

@@ -93,9 +93,9 @@
 
     <script>
         var week_program = Object.fromEntries(
-            ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => [
+            {{ days | tojson }}.map(day => [
                 day,
-                Object.fromEntries([8, 9, 10, 11, 13, 14, 15, 16, 17].map(hour => [hour, []]))
+                Object.fromEntries({{ hours | tojson }}.map(hour => [hour, []]))
             ])
         );
         var score = null;

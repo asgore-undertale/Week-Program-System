@@ -102,17 +102,36 @@ def get_professor_time_table():
     
     professor_id = professor.id
 
-    professors_time = TimeProfessor.query.filter_by(professor_id=professor_id).all()
+    # professors_time = TimeProfessor.query.filter_by(professor_id=professor_id).all()
+    professors_time = (
+        db.session.query(
+            TimeProfessor.id, 
+            Day.name.label("day_name"),  # Alias for Day's name column
+            Hour.name.label("hour_name") # Alias for Hour's name column
+        )
+        .join(Day, Day.id == TimeProfessor.day_id)
+        .join(Hour, Hour.id == TimeProfessor.hour_id)
+        .filter(TimeProfessor.professor_id == professor_id)
+        .all()
+    )
 
     professors_time_dict = [
         {
-            "hour": item.hour,
-            "day": item.day
+            "hour": item.hour_name,
+            "day": item.day_name
         }
         for item in professors_time
     ]
+    hours = [
+        hour.name
+        for hour in db.session.query(Hour).all()
+    ]
+    days = [
+        day.name
+        for day in db.session.query(Day).all()
+    ]
 
-    html_string = build_time_table_html_content(professors_time_dict)
+    html_string = build_time_table_html_content(professors_time_dict, days, hours)
 
     return html_string
 
@@ -162,8 +181,17 @@ def save_professor_time():
 
     professor_id = professor.id
 
+    hours_dict = {
+        str(hour.name): hour.id # str because of sending stringified json
+        for hour in db.session.query(Hour).all()
+    }
+    days_dict = {
+        str(day.name): day.id
+        for day in db.session.query(Day).all()
+    }
+
     TimeProfessor.query.filter_by(professor_id=professor_id).delete()
-    db.session.add_all(map(lambda x: TimeProfessor(professor_id=professor_id, hour=x[1], day=x[2]), json_data))
+    db.session.add_all(map(lambda x: TimeProfessor(professor_id=professor_id, day_id=days_dict[x[1]], hour_id=hours_dict[x[2]]), json_data))
     db.session.commit()
 
     return {"message": "Data saved successfully"}, 200
@@ -209,6 +237,15 @@ def week_program():
     else:
         lecture_halls = None
 
+    hours = [
+        hour.name
+        for hour in db.session.query(Hour).all()
+    ]
+    days = [
+        day.name
+        for day in db.session.query(Day).all()
+    ]
+
     # role = Role.query.filter_by(id=current_user.role_id).first().name
 
     return render_template(
@@ -218,6 +255,8 @@ def week_program():
         professors=professors,
         lectures=detailed_lectures,
         lecture_halls=lecture_halls,
+        days=days,
+        hours=hours,
         # role=role
         # role_id=current_user.role_id
         current_user=current_user
@@ -409,7 +448,12 @@ def build_week_program_(week_program, data_type, do_download):
             )
         )
 
-        html_string = build_week_html_content(tableized_week_program)
+        years = [
+            year.name
+            for year in db.session.query(Year).all()
+        ]
+
+        html_string = build_week_html_content(tableized_week_program, years)
 
         if do_download == True:
             response = Response(html_string)
@@ -420,7 +464,7 @@ def build_week_program_(week_program, data_type, do_download):
         else:
             return html_string
 
-    elif data_type == "excel":
+    elif data_type == "xlsx":
         # if do_download == True:
         tableized_week_program = tableize_combined_week_by_year(
             combine_sequenced_lectures(
@@ -428,7 +472,12 @@ def build_week_program_(week_program, data_type, do_download):
             )
         )
 
-        wb = build_week_excel_file(tableized_week_program)
+        years = [
+            year.name
+            for year in db.session.query(Year).all()
+        ]
+
+        wb = build_week_excel_file(tableized_week_program, years)
 
         excel_buffer = BytesIO()
         wb.save(excel_buffer)
