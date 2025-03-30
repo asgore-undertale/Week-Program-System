@@ -196,6 +196,19 @@ def week_program():
     else:
         detailed_lectures = None
 
+    if current_user.role_id == 1:
+        lecture_halls = [
+            {
+                "id": lecture_hall.id,
+                "name": lecture_hall.name,
+                "capacity": lecture_hall.capacity
+            }
+            for lecture_hall in LectureHall.query.order_by(LectureHall.name).all()
+        ]
+        
+    else:
+        lecture_halls = None
+
     # role = Role.query.filter_by(id=current_user.role_id).first().name
 
     return render_template(
@@ -204,6 +217,7 @@ def week_program():
         professors_numbers=professors_numbers, 
         professors=professors,
         lectures=detailed_lectures,
+        lecture_halls=lecture_halls,
         # role=role
         # role_id=current_user.role_id
         current_user=current_user

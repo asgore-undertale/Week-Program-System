@@ -63,7 +63,7 @@
                     <a href="#" onclick="">Remove</a> -->
                 </div>
 
-                <form class="bordered">
+                <div class="bordered">
                     <label>Lectures:</label>
                     <br>
                     <a href="#" onclick="updateCurrentLecture(null)">None</a>
@@ -71,7 +71,17 @@
                         <br>
                         <a href="#" onclick="updateCurrentLecture({{ loop.index-1 }})">{{lecture.name}}</a>
                     {% endfor %}
-                </form>
+                </div>
+
+                <div class="bordered">
+                    <label>Lecture Halls:</label>
+                    <br>
+                    <a href="#" onclick="updateCurrentLectureHall(null)">None</a>
+                    {% for hall in lecture_halls %}
+                        <br>
+                        <a href="#" onclick="updateCurrentLectureHall({{ loop.index-1 }})">{{hall.name}}</a>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
 
@@ -82,8 +92,6 @@
     </div>
 
     <script>
-        let current_lecture_index = null;
-
         var week_program = Object.fromEntries(
             ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => [
                 day,
@@ -93,7 +101,12 @@
         var score = null;
         
         {% if current_user.role_id == 1 %}
+        let current_lecture_index = null;
+        let current_lecture_hall_index = null;
+
         let lectures = {{lectures | tojson}};
+        let lecture_halls = {{lecture_halls | tojson}};
+        
         let lectures_clone = structuredClone(lectures);
         var week_program_clone = structuredClone(week_program);
         {% endif %}
@@ -180,8 +193,15 @@
             current_lecture_index = index;
         }
 
+        function updateCurrentLectureHall(index) {
+            current_lecture_hall_index = index;
+        }
+
         function placeLecture(event) {
             if (current_lecture_index === null) {
+                return;
+            }
+            if (current_lecture_hall_index === null) {
                 return;
             }
 
@@ -205,8 +225,10 @@
                 week_program_clone[day][hour].splice(index, 1);
                 lectures_clone[current_lecture_index]["hours"] += 1
             } else if (lectures_clone[current_lecture_index]["hours"] > 0) {
-                week_program_clone[day][hour].push(lectures_clone[current_lecture_index]);
-                week_program_clone[day][hour][week_program_clone[day][hour].length-1]["locked"] = true;
+                let e = lectures_clone[current_lecture_index];
+                e["lectureHall"] = lecture_halls[current_lecture_hall_index];
+                e["locked"] = true;
+                week_program_clone[day][hour].push(structuredClone(e));
                 lectures_clone[current_lecture_index]["hours"] -= 1
             }
             
@@ -214,12 +236,14 @@
                 week_program[day][hour].splice(index, 1);
                 lectures[current_lecture_index]["hours"] += 1
             } else if (lectures[current_lecture_index]["hours"] > 0) {
-                week_program[day][hour].push(lectures[current_lecture_index]);
-                week_program[day][hour][week_program[day][hour].length-1]["locked"] = true;
+                let e = lectures[current_lecture_index];
+                e["lectureHall"] = lecture_halls[current_lecture_hall_index];
+                e["locked"] = true;
+                week_program[day][hour].push(structuredClone(e));
                 lectures[current_lecture_index]["hours"] -= 1
             }
 
-            // displayWeekProgram()
+            displayWeekProgram()
         }
         {% endif %}
 

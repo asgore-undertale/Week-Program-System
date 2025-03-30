@@ -1,6 +1,6 @@
 import random
 from models import *
-from rich import print
+# from rich import print
 import copy
 
 def get_sequence_subset(list_, subset_size):
@@ -116,17 +116,28 @@ def get_hours_space_between_year(week, day, year, test_hours=[]):
     
     return distance_from_same_year_counter
 
-def get_hours_score(week, day, lecture, hours):
+def get_lecture_different_halls(week, day, lecture, lecture_hall, test_hours=[]):
+    different_halls_num = 0
+
+    for hour in week[day]:
+        for lec in week[day][hour]:
+            if lec["id"] == lecture["id"] and lec["lectureHall"]["id"] != lecture_hall["id"] or hour in test_hours:
+                different_halls_num += 1
+    
+    return different_halls_num
+
+def get_hours_score(week, day, lecture, hours, lecture_hall):
     if get_items_difference_sum(hours) != len(hours) - 1:
         return None
     
     distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
     distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
+    # distance_from_same_hall_counter = get_lecture_different_halls(week, day, lecture, lecture_hall, hours)
 
     distance_from_point = get_items_distance_from_point(hours, 12) - 1
     # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
 
-    return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter# + distance_from_point_8
+    return - distance_from_point - distance_from_same_prof_counter - distance_from_same_year_counter
     # return - diff
 
 def get_day_score(week, day, lecture):
@@ -173,7 +184,7 @@ def get_week_score(week, lecture, lecture_halls):
                     "score": score
                 }
                 for hours in hours_list
-                if (score := get_hours_score(week, day, lecture, hours)) is not None
+                if (score := get_hours_score(week, day, lecture, hours, lec_hall)) is not None
             ]
 
             if not hours_results:
@@ -278,7 +289,10 @@ def get_detailed_lectures():
         for i, (lec, lec_prof) in enumerate(db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all())
     ]
 
-def build_week(week_program = None, detailed_lectures = None, lecture_halls = None, is_random = True):
+def get_lecture_by_id(id_, detailed_lectures): # TODO convert to dict
+    return next((lec for lec in detailed_lectures if lec["id"] == id_), None)
+
+def build_week(week_program = None, detailed_lectures = None, lecture_halls = None):
     if week_program is None:
         week_program = {
             day: {
@@ -313,34 +327,53 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
     # detailed_lectures.sort(key=lambda x: x["year"])
     # detailed_lectures.sort(key=lambda x: x["professor"]["id"])
 
-    results = [
+    sorted_results = [
         result
         for _ in range(POPULATION_SIZE)
         if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), True))["score"] is not None
     ]
 
-    if not len(results):
+    if not len(sorted_results):
         return {
             "week_program": None,
             "score": None
         }
 
-    for _ in range(GENERATIONS_NUM):
-        best_result, best_index = choose_random_max(results, lambda x: x["score"] or -99999)
-        print("Generation:", _, "Score:", best_result["score"])
+    for epoch in range(GENERATIONS_NUM):
+        # best_result, best_index = choose_random_max(results, lambda x: x["score"] or -99999)
+        sorted_results = sorted(sorted_results, key=lambda x: x["score"] or -99999, reverse=True)
 
-        for r, result in enumerate(results):
-            if r == best_index:
-                continue
+        print("Generation:", epoch, "Score:", sorted_results[0]["score"])
 
-            results[r] = build_week_(
+        for r in range(int(SELECTION_RATE * len(sorted_results)), int((1 - DUMP_RATE) * len(sorted_results))):
+            result = sorted_results[r]
+            w = result["week_program"]
+            random_ids = random.sample(range(1, len(detailed_lectures)), int(len(detailed_lectures) * ERASION_RATE))
+            remove_lecture_from_week_by_ids(w, random_ids)
+            d = [
+                get_lecture_by_id(id_, detailed_lectures)
+                for id_ in random_ids
+            ]
+
+            result_ = build_week_(
+                w,
+                d,
+                # mutate_indivisual(result["detailed_lectures"], best_result["detailed_lectures"], epoch),
+                lecture_halls,
+                True
+            )
+            if result_["score"] is not None:
+                sorted_results[r] = result_
+            
+        for r in range(int((1 - DUMP_RATE) * len(sorted_results)), len(sorted_results)):
+            sorted_results[r] = build_week_(
                 copy.deepcopy(week_program),
-                follow_leader(result["detailed_lectures"], best_result["detailed_lectures"]),
+                copy.deepcopy(detailed_lectures),
                 copy.deepcopy(lecture_halls),
                 True
             )
 
-    best_result = choose_random_max(results, lambda x: x["score"] or -99999)[0]
+    best_result = choose_random_max(sorted_results, lambda x: x["score"] or -99999)[0]
 
     print(best_result["score"])
 
@@ -416,23 +449,58 @@ def get_fully_detailed_lecture(detailed_lecture):
 
     return detailed_lecture
 
-def follow_leader(indivisual, leader):
-    i = random.randint(0, len(leader)-1)
+# def replace_lecture_randomly(indivisual):
+#     i = random.randint(0, len(indivisual)-1)
+#     j = random.randint(0, len(indivisual)-1)
 
-    leader_gen = leader[i]
+#     indivisual_gen = indivisual.pop(j)
+#     indivisual.insert(i, indivisual_gen)
 
-    for j, item in enumerate(indivisual):
-        if item["id"] == leader_gen["id"]:
-            indivisual_gen = indivisual.pop(j)
-            break
+#     return indivisual
+
+# def follow_leader(indivisual, leader):
+#     i = random.randint(0, len(leader)-1)
+
+#     leader_gen = leader[i]
+
+#     for j, item in enumerate(indivisual):
+#         if item["id"] == leader_gen["id"]:
+#             indivisual_gen = indivisual.pop(j)
+#             break
     
-    indivisual.insert(i, indivisual_gen)
+#     indivisual.insert(i, indivisual_gen)
 
-    return indivisual
+#     return indivisual
 
-POPULATION_SIZE       = 100
-GENERATIONS_NUM       = 100
-SELECTION_RATE        = .5
-REPLACE_MUTATION_RATE = 1
-SWAP_MUTATION_RATE    = 0
-SHUFFLE_RATE          = 0
+# def mutate_indivisual(indivisual, leader, epoch):
+#     # if random.random() < ((epoch / GENERATIONS_NUM) - 1) ** 2:
+#     # if random.random() < epoch / GENERATIONS_NUM:
+#     # n = random.random()
+#     # if random.random() < ((epoch / GENERATIONS_NUM) -1) ** 2:
+#     #     # pass
+#     #     # for _ in range(int(n*10)):
+#     for _ in range(int(((epoch / GENERATIONS_NUM) -1) ** 2 * 10)):
+#         indivisual = replace_lecture_randomly(indivisual)
+#     # else:
+#     #     for _ in range(int(n*10)):
+#     indivisual = follow_leader(indivisual, leader)
+
+#     return indivisual
+
+def remove_lecture_from_week_by_id(week, id_):
+    for day in week:
+        for lectures in week[day].values():
+            for i, lecture in enumerate(lectures):
+                if lecture["id"] == id_:
+                    lectures.pop(i)
+                    # return
+
+def remove_lecture_from_week_by_ids(week, id_s):
+    for id_ in id_s:
+        remove_lecture_from_week_by_id(week, id_)
+
+POPULATION_SIZE = 100
+GENERATIONS_NUM = 200
+SELECTION_RATE = 0.2
+DUMP_RATE = 0.1
+ERASION_RATE = 0.2

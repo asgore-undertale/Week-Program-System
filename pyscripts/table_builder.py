@@ -14,7 +14,7 @@ def combine_sequenced_lectures(week):
                 lec = week[day][hour][l]
                 for l2, lec2 in enumerate(week[day][reversed_hours[h+1]]):
                     # if lec["code"] == lec2["code"] and lec["professorNumber"] == lec2["professorNumber"]:
-                    if lec["code"] == lec2["code"] and lec["professor"]["number"] == lec2["professor"]["number"]:
+                    if lec["id"] == lec2["id"] and lec["professor"]["id"] == lec2["professor"]["id"] and lec["lectureHall"]["id"] == lec2["lectureHall"]["id"]:
                         week[day][reversed_hours[h+1]][l2]["count"] += week[day][hour][l]["count"]
                         week[day][hour].pop(l)
                         break
