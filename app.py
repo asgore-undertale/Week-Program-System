@@ -26,7 +26,7 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-    seed_data(app, bcrypt)
+    # seed_data(app, bcrypt)
 
 @login_manager.user_loader
 def load_user(user_id):

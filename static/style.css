@@ -4,8 +4,6 @@
     margin: 5px;
 }
 
-/* form {
-} */
 .break {
     background-color: #e0e0e0;
     pointer-events: none;
@@ -38,7 +36,7 @@ button {
     flex: 1;
 }
 
-.copy-right {
+.align-right {
     float: right;
 }
 

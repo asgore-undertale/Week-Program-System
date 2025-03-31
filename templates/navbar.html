@@ -1,11 +1,20 @@
-<nav class="bordered">
-    {% if current_user.role_id == 1 %}
+<span>Developed by [Ahmad DRAIE] and [Muhammed Salih BEDIR] in the 6th term</span>
+
+<nav class="bordered" dir="ltr">
+    <!-- {% if current_user.role_id == 1 %} -->
     <!-- <a href='/week_editor'>Week Editor</a> -->
-    {% endif %}
+    <!-- {% endif %} -->
     <a href='/week_program'>Week Program</a>
     {% if current_user.role_id == 1 or current_user.role_id == 2 %}
     <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'>Professor Time</a>
     {% endif %}
     <a href='/logout'>Logout</a>
-    <span class="copy-right">Developed by [Ahmad DRAIE] and [Muhammed Salih BEDIR] in the 6th term</span>
+    <button class="align-right" onclick="toggleDirection(event)">RTL</button>
 </nav>
+
+<script>
+    function toggleDirection(e) {
+        document.body.style.direction = document.body.style.direction === 'rtl' ? 'ltr' : 'rtl';
+        e.target.textContent = document.body.style.direction === 'rtl' ? 'LTR' : 'RTL';
+    }
+</script>
