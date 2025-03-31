@@ -1,7 +1,7 @@
 from flask import Flask, flash, render_template, Response, request, redirect
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from flask_bcrypt import Bcrypt
 from config import Config
+from flask_bcrypt import Bcrypt
 # from flask_wtf.csrf import CSRFProtect
 
 from pyscripts.week_generator import *
@@ -23,10 +23,6 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 db.init_app(app)
-
-with app.app_context():
-    db.create_all()
-    # seed_data(app, bcrypt)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -225,17 +221,17 @@ def week_program():
         detailed_lectures = None
 
     if current_user.role_id == 1:
-        lecture_halls = [
+        classrooms = [
             {
-                "id": lecture_hall.id,
-                "name": lecture_hall.name,
-                "capacity": lecture_hall.capacity
+                "id": classroom.id,
+                "name": classroom.name,
+                "capacity": classroom.capacity
             }
-            for lecture_hall in LectureHall.query.order_by(LectureHall.name).all()
+            for classroom in Classroom.query.order_by(Classroom.name).all()
         ]
         
     else:
-        lecture_halls = None
+        classrooms = None
 
     hours = [
         hour.name
@@ -254,7 +250,7 @@ def week_program():
         professors_numbers=professors_numbers, 
         professors=professors,
         lectures=detailed_lectures,
-        lecture_halls=lecture_halls,
+        classrooms=classrooms,
         days=days,
         hours=hours,
         # role=role

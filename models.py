@@ -51,10 +51,15 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
-class LectureHall(db.Model):
+class Classroom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
+
+class LectureClassroom(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    classroom_id = db.Column(db.Integer, db.ForeignKey('classroom.id'), nullable=False)
+    lecture_id = db.Column(db.Integer, db.ForeignKey('lecture.id'), nullable=False)
 
 class Year(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -367,22 +372,241 @@ def seed_data(app, bcrypt):
                 students
             ))
         
-        if not LectureHall.query.first():
-            lecture_halls = [
-                ("LH001", 10),
-                ("LH002", 10),
-                ("LH003", 10),
-                ("LH004", 10),
-                ("LH005", 10),
-                ("LH006", 10),
-                ("LH007", 10),
+        if not Classroom.query.first():
+            classrooms = [
+                ("Lab 1", 10),
+                ("Classroom 1", 10),
+                ("Classroom 2", 10),
+                ("Classroom 3", 10),
+                ("Classroom 4", 10),
+                ("Classroom 5", 10),
+                ("Classroom 6", 10),
+                ("Classroom 7", 10),
             ]
             db.session.add_all(map(
-                lambda x: LectureHall(
+                lambda x: Classroom(
                     name=x[0],
                     capacity=x[1]
                 ),
-                lecture_halls
+                classrooms
+            ))
+        
+        if not LectureClassroom.query.first():
+            lecture_classrooms = [
+                (2, 1),
+                (3, 1),
+                (4, 1),
+                (5, 1),
+                (6, 1),
+                (7, 1),
+                (8, 1),
+
+                (2, 2),
+                (3, 2),
+                (4, 2),
+                (5, 2),
+                (6, 2),
+                (7, 2),
+                (8, 2),
+                
+                (2, 3),
+                (3, 3),
+                (4, 3),
+                (5, 3),
+                (6, 3),
+                (7, 3),
+                (8, 3),
+                
+                (2, 4),
+                (3, 4),
+                (4, 4),
+                (5, 4),
+                (6, 4),
+                (7, 4),
+                (8, 4),
+                
+                (2, 5),
+                (3, 5),
+                (4, 5),
+                (5, 5),
+                (6, 5),
+                (7, 5),
+                (8, 5),
+                
+                (2, 6),
+                (3, 6),
+                (4, 6),
+                (5, 6),
+                (6, 6),
+                (7, 6),
+                (8, 6),
+                
+                (2, 7),
+                (3, 7),
+                (4, 7),
+                (5, 7),
+                (6, 7),
+                (7, 7),
+                (8, 7),
+                
+                (2, 8),
+                (3, 8),
+                (4, 8),
+                (5, 8),
+                (6, 8),
+                (7, 8),
+                (8, 8),
+                
+                (2, 9),
+                (3, 9),
+                (4, 9),
+                (5, 9),
+                (6, 9),
+                (7, 9),
+                (8, 9),
+                
+                (2, 10),
+                (3, 10),
+                (4, 10),
+                (5, 10),
+                (6, 10),
+                (7, 10),
+                (8, 10),
+                
+                (1, 11),
+                
+                (2, 12),
+                (3, 12),
+                (4, 12),
+                (5, 12),
+                (6, 12),
+                (7, 12),
+                (8, 12),
+                
+                (1, 13),
+                
+                (1, 14),
+                
+                (2, 15),
+                (3, 15),
+                (4, 15),
+                (5, 15),
+                (6, 15),
+                (7, 15),
+                (8, 15),
+                
+                (2, 16),
+                (3, 16),
+                (4, 16),
+                (5, 16),
+                (6, 16),
+                (7, 16),
+                (8, 16),
+                
+                (1, 17),
+                
+                (2, 18),
+                (3, 18),
+                (4, 18),
+                (5, 18),
+                (6, 18),
+                (7, 18),
+                (8, 18),
+                
+                (1, 19),
+                
+                (2, 20),
+                (3, 20),
+                (4, 20),
+                (5, 20),
+                (6, 20),
+                (7, 20),
+                (8, 20),
+                
+                (2, 21),
+                (3, 21),
+                (4, 21),
+                (5, 21),
+                (6, 21),
+                (7, 21),
+                (8, 21),
+                
+                (2, 22),
+                (3, 22),
+                (4, 22),
+                (5, 22),
+                (6, 22),
+                (7, 22),
+                (8, 22),
+                
+                (1, 23),
+                
+                (2, 24),
+                (3, 24),
+                (4, 24),
+                (5, 24),
+                (6, 24),
+                (7, 24),
+                (8, 24),
+                
+                (2, 25),
+                (3, 25),
+                (4, 25),
+                (5, 25),
+                (6, 25),
+                (7, 25),
+                (8, 25),
+                
+                (1, 26),
+                
+                (1, 27),
+                
+                (2, 28),
+                (3, 28),
+                (4, 28),
+                (5, 28),
+                (6, 28),
+                (7, 28),
+                (8, 28),
+                
+                (2, 29),
+                (3, 29),
+                (4, 29),
+                (5, 29),
+                (6, 29),
+                (7, 29),
+                (8, 29),
+                
+                (2, 30),
+                (3, 30),
+                (4, 30),
+                (5, 30),
+                (6, 30),
+                (7, 30),
+                (8, 30),
+                
+                (1, 31),
+            ]
+            db.session.add_all(map(
+                lambda x: LectureClassroom(
+                    classroom_id=x[0],
+                    lecture_id=x[1]
+                ),
+                lecture_classrooms
             ))
 
         db.session.commit()
+
+if __name__ == "__main__":
+    from flask import Flask
+    from config import Config
+    from flask_bcrypt import Bcrypt
+
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    bcrypt = Bcrypt(app)
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+        seed_data(app, bcrypt)

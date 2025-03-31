@@ -43,7 +43,7 @@ def get_shared_items_between_lists(list1, list2):
     
     return shared_items
 
-def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
+def get_lecture_day_available_hours(lecture, week, day, classroom):
     empty_hours = []
     for hour in week[day]:
         # if not is_professor_available(lecture, hour, day):
@@ -66,10 +66,10 @@ def get_lecture_day_available_hours(lecture, week, day, lecture_hall):
             #     ):
             #         break
 
-            if lec_["lectureHall"]['id'] == lecture_hall['id']:
+            if lec_["classroom"]["id"] == classroom["id"]:
                 break
 
-            if lecture_hall['capacity'] < len(lecture["studentIds"]):
+            if classroom['capacity'] < len(lecture["studentIds"]):
                 break
         else:
             empty_hours.append(hour)
@@ -116,23 +116,23 @@ def get_hours_space_between_year(week, day, year, test_hours=[]):
     
     return distance_from_same_year_counter
 
-def get_lecture_different_halls(week, day, lecture, lecture_hall, test_hours=[]):
+def get_lecture_different_halls(week, day, lecture, classroom, test_hours=[]):
     different_halls_num = 0
 
     for hour in week[day]:
         for lec in week[day][hour]:
-            if lec["id"] == lecture["id"] and lec["lectureHall"]["id"] != lecture_hall["id"] or hour in test_hours:
+            if lec["id"] == lecture["id"] and lec["classroom"]["id"] != classroom["id"] or hour in test_hours:
                 different_halls_num += 1
     
     return different_halls_num
 
-def get_hours_score(week, day, lecture, hours, lecture_hall):
+def get_hours_score(week, day, lecture, hours, classroom):
     if get_items_difference_sum(hours) != len(hours) - 1:
         return None
     
     distance_from_same_prof_counter = get_hours_space_between_prof(week, day, lecture, hours)
     distance_from_same_year_counter = get_hours_space_between_year(week, day, lecture["year"], hours)
-    # distance_from_same_hall_counter = get_lecture_different_halls(week, day, lecture, lecture_hall, hours)
+    # distance_from_same_hall_counter = get_lecture_different_halls(week, day, lecture, classroom, hours)
 
     distance_from_point = get_items_distance_from_point(hours, 12) - 1
     # distance_from_point_8 = get_items_distance_from_point_sum(hours[:1], 8) / (len(hours) * 2)
@@ -157,8 +157,8 @@ def get_day_score(week, day, lecture):
     
     return score
 
-def get_lecture_hall_score(lecture_hall, lecture):
-    return - abs(lecture_hall["capacity"] - len(lecture["studentIds"]))
+def get_classroom_score(classroom, lecture):
+    return - abs(classroom["capacity"] - len(lecture["studentIds"]))
 
 def choose_random_max(list_, func_):
     max_index, list_max = max(enumerate(list_), key=lambda x: func_(x[1]))
@@ -166,15 +166,21 @@ def choose_random_max(list_, func_):
     # list_maxes = [item for item in list_ if func_(item) == func_(list_max)]
     # return random.choice(list_maxes)
 
-def get_week_score(week, lecture, lecture_halls):
+def get_week_score(week, lecture, classrooms, classrooms_lectures):
     results = []
+    allowed_classrooms = [
+        classroom
+        for id_, classroom in classrooms.items()
+        if id_ in classrooms_lectures.get(lecture["id"], [])
+    ]
     
     for day in week:
         day_score = get_day_score(week, day, lecture)
-        for lec_hall in lecture_halls:
-            lec_hall_score = get_lecture_hall_score(lec_hall, lecture)
+        # for classroom in classrooms.values():
+        for classroom in allowed_classrooms:
+            classroom_score = get_classroom_score(classroom, lecture)
             
-            empty_hours = get_lecture_day_available_hours(lecture, week, day, lec_hall)
+            empty_hours = get_lecture_day_available_hours(lecture, week, day, classroom)
 
             hours_list = get_sequence_subset(empty_hours, lecture["hours"])
 
@@ -184,26 +190,26 @@ def get_week_score(week, lecture, lecture_halls):
                     "score": score
                 }
                 for hours in hours_list
-                if (score := get_hours_score(week, day, lecture, hours, lec_hall)) is not None
+                if (score := get_hours_score(week, day, lecture, hours, classroom)) is not None
             ]
 
             if not hours_results:
                 continue
 
             best_hours_ = choose_random_max(hours_results, lambda x: x["score"] or -99999)[0]
-            best_hours_["score"] += day_score + lec_hall_score
+            best_hours_["score"] += day_score + classroom_score
 
             results.append({
                 "day": day,
                 "hours": best_hours_["hours"],
-                "score": best_hours_["score"] + day_score + lec_hall_score,
-                "lectureHall": lec_hall
+                "score": best_hours_["score"] + day_score + classroom_score,
+                "classroom": classroom
             })
     
     return results
 
-def place_lecture_in_week(lecture, week, lecture_halls):
-    times = get_week_score(week, lecture, lecture_halls)
+def place_lecture_in_week(lecture, week, classrooms, classrooms_lectures):
+    times = get_week_score(week, lecture, classrooms, classrooms_lectures)
 
     if len(times):
         best_time = choose_random_max(times, lambda x: x["score"] or -99999)[0]
@@ -222,7 +228,7 @@ def place_lecture_in_week(lecture, week, lecture_halls):
         best_time["score"] = 0
 
         for splitted_lecture in splitted_lectures:
-            week_, score = place_lecture_in_week(splitted_lecture, week, lecture_halls)
+            week_, score = place_lecture_in_week(splitted_lecture, week, classrooms, classrooms_lectures)
 
             if score is None:
                 return None, None
@@ -233,7 +239,7 @@ def place_lecture_in_week(lecture, week, lecture_halls):
         
         return week, best_time["score"]
 
-    lecture["lectureHall"] = best_time["lectureHall"]
+    lecture["classroom"] = best_time["classroom"]
 
     for hour in best_time["hours"]:
         week[best_time["day"]][hour].append(lecture.copy())
@@ -257,7 +263,7 @@ def get_detailed_lectures():
 
     return [
         {
-            'id': i+1,
+            'id': lec.id,
             'code': lec.code,
             'name': lec.name,
             'professor': {
@@ -283,7 +289,7 @@ def get_detailed_lectures():
                     for day in days
                 }
             },
-            'lectureHall': {
+            "classroom": {
                 'id': None,
                 'name': None,
                 'capacity': None
@@ -293,7 +299,8 @@ def get_detailed_lectures():
                 for lec_student in LectureStudent.query.filter(LectureStudent.lecture_professor_id == lec_prof.id).all()
             ],
             'hours': lec.hours,
-            'year': lec.year}
+            'year': lec.year
+        }
         for i, (lec, lec_prof) in enumerate(db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all())
     ]
 
@@ -319,22 +326,29 @@ def generate_empty_week():
 
     return week_program
 
-def build_week(week_program = None, detailed_lectures = None, lecture_halls = None):
+def build_week(week_program = None, detailed_lectures = None, classrooms = None):
     if week_program is None:
         week_program = generate_empty_week()
 
     if detailed_lectures is None:
         detailed_lectures = get_detailed_lectures()
 
-    if lecture_halls is None:
-        lecture_halls = [
-            {
-                'id': lec_hall.id,
-                'name': lec_hall.name,
-                'capacity': lec_hall.capacity
-            }
-            for lec_hall in db.session.query(LectureHall).all()
-        ]
+    classrooms = {
+        classroom.id: {
+            'id': classroom.id,
+            'name': classroom.name,
+            'capacity': classroom.capacity
+        }
+        for classroom in db.session.query(Classroom).all()
+    }
+
+    classrooms_lectures = {}
+
+    for item in db.session.query(LectureClassroom).all():
+        if item.lecture_id not in classrooms_lectures:
+            classrooms_lectures[item.lecture_id] = []
+        
+        classrooms_lectures[item.lecture_id].append(item.classroom_id)
     
     # detailed_lectures.sort(key=lambda x: x["hours"])
     # detailed_lectures.sort(key=lambda x: x["year"])
@@ -343,7 +357,7 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
     sorted_results = [
         result
         for _ in range(POPULATION_SIZE)
-        if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), copy.deepcopy(lecture_halls), True))["score"] is not None
+        if (result := build_week_(copy.deepcopy(week_program), copy.deepcopy(detailed_lectures), classrooms, classrooms_lectures, True))["score"] is not None
     ]
 
     if not len(sorted_results):
@@ -378,7 +392,8 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
                 w,
                 d,
                 # mutate_indivisual(result["detailed_lectures"], best_result["detailed_lectures"], epoch),
-                lecture_halls,
+                classrooms,
+                classrooms_lectures,
                 True
             )
 
@@ -390,7 +405,8 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
             sorted_results[r] = build_week_(
                 copy.deepcopy(week_program),
                 copy.deepcopy(detailed_lectures),
-                copy.deepcopy(lecture_halls),
+                classrooms,
+                classrooms_lectures,
                 True
             )
 
@@ -408,7 +424,7 @@ def build_week(week_program = None, detailed_lectures = None, lecture_halls = No
         "score": best_result["score"]
     }
 
-def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True):
+def build_week_(week_program, detailed_lectures, classrooms, classrooms_lectures, is_random = True):
     if is_random:
         random.shuffle(detailed_lectures)
     
@@ -425,7 +441,7 @@ def build_week_(week_program, detailed_lectures, lecture_halls, is_random = True
             # print("Cause: No hours.")
             continue
 
-        week_program, score = place_lecture_in_week(lec, week_program, lecture_halls)
+        week_program, score = place_lecture_in_week(lec, week_program, classrooms, classrooms_lectures)
 
         if score is None:
             return {
@@ -523,5 +539,5 @@ def remove_lecture_from_week_by_ids(week, id_s):
 POPULATION_SIZE = 50
 GENERATIONS_NUM = 100
 SELECTION_RATE = 0.2
-DUMP_RATE = 0.1
+DUMP_RATE = 0.2
 ERASION_RATE = 0.2

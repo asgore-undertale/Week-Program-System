@@ -15,7 +15,7 @@ def combine_sequenced_lectures(week):
                 lec = week[day][hour][l]
                 for l2, lec2 in enumerate(week[day][reversed_hours[h+1]]):
                     # if lec["code"] == lec2["code"] and lec["professorNumber"] == lec2["professorNumber"]:
-                    if lec["id"] == lec2["id"] and lec["professor"]["id"] == lec2["professor"]["id"] and lec["lectureHall"]["id"] == lec2["lectureHall"]["id"]:
+                    if lec["id"] == lec2["id"] and lec["professor"]["id"] == lec2["professor"]["id"] and lec["classroom"]["id"] == lec2["classroom"]["id"]:
                         week[day][reversed_hours[h+1]][l2]["count"] += week[day][hour][l]["count"]
                         week[day][hour].pop(l)
                         break
@@ -164,7 +164,7 @@ def build_week_html_content(tableized_week, years):
 
                     span = lec["count"]
 
-                    rows_content[l] += f"""<td rowspan="{span}" day='{day}' hour='{hours[l]}' year='{year}' onclick='placeLecture(event)' class="bordered_cell lec_cell {("locked" in lec and lec["locked"]) * "lec_cell_locked"}">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["lectureHall"]["name"]}</td>"""
+                    rows_content[l] += f"""<td rowspan="{span}" day='{day}' hour='{hours[l]}' year='{year}' onclick='placeLecture(event)' class="bordered_cell lec_cell {("locked" in lec and lec["locked"]) * "lec_cell_locked"}">{lec["name"]}<br>{lec["professor"]["name"]}<br>{lec["classroom"]["name"]}</td>"""
                     # rows_content[l] += f"""<td rowspan="{span}" class="bordered_cell lec_cell">{lec["name"]}<br>{lec["professorName"]}</td>"""
         
         global_table_row_pointer += len(rows_content)
@@ -311,8 +311,8 @@ def build_week_excel_file(tableized_week, years):
                     cell = ws.cell(
                         row=local_row_pointer,
                         column=1+local_col_pointer+2,
-                        # value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + lec["lectureHall"]["name"]
-                        value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + str(lec["lectureHall"]["name"])
+                        # value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + lec["classroom"]["name"]
+                        value=lec["name"] + "\n" + lec["professor"]["name"] + "\n" + str(lec["classroom"]["name"])
                         # value=lec["name"] + "\n" + lec["professorName"]
                     )
                     cell.fill = cell_fill
