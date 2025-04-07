@@ -8,10 +8,11 @@ from pyscripts.week_generator import *
 from pyscripts.table_builder import *
 from models import *
 
+from io import BytesIO
 import json
 import os
-from io import BytesIO
 import copy
+from weasyprint import HTML, CSS
 
 
 app = Flask(__name__)
@@ -486,11 +487,76 @@ def build_week_program_(week_program, data_type, do_download):
         return response
 
     elif data_type == "pdf":
-        pass
+        tableized_week_program = tableize_combined_week_by_year(
+            combine_sequenced_lectures(
+                week_program
+            )
+        )
+
+        years = [
+            year.name
+            for year in db.session.query(Year).all()
+        ]
+
+        html_string = build_week_html_content(tableized_week_program, years)
+
+        # pdf_bytes = HTML(string=html_string).write_pdf()
+        pdf_bytes = auto_fit_pdf(html_string)
+
+        response = Response(pdf_bytes)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=report.pdf'
+        return response
 
     elif data_type == "png":
         pass
 
+def auto_fit_pdf(html_string,
+                 target_page_width_mm=297,   # A4 landscape width
+                 target_page_height_mm=210,  # A4 landscape height
+                 margin_mm=10,
+                 render_page_size_mm=1000):  # BIG rendering canvas
+    """
+    Renders a PDF from HTML, scaling the page to fit everything into a single standard page.
+    """
+    # Create a huge page to render the entire content without wrapping/pagination
+    css_large = CSS(string=f'''
+        @page large {{
+            size: {render_page_size_mm}mm {render_page_size_mm}mm;
+            margin: {margin_mm}mm;
+        }}
+        body {{ page: large; }}
+    ''')
+    doc = HTML(string=html_string)
+    layout = doc.render(stylesheets=[css_large])
+
+    # Get content dimensions (from the first page box)
+    page = layout.pages[0]
+    # fallback in case no anchors: use page._page_box content size
+    box = page._page_box
+    content_width_px = box.width
+    content_height_px = box.height
+
+    # Convert page size and margin to pixels (WeasyPrint uses 96 dpi)
+    mm_to_px = 96 / 25.4
+    available_width_px = (target_page_width_mm - 2 * margin_mm) * mm_to_px
+    available_height_px = (target_page_height_mm - 2 * margin_mm) * mm_to_px
+
+    # Calculate the zoom factor
+    zoom_x = available_width_px / content_width_px
+    zoom_y = available_height_px / content_height_px
+    zoom = min(zoom_x, zoom_y, 1.0)
+
+    # Apply zoom and output final PDF with real page size
+    css_target = CSS(string=f'''
+        @page real {{
+            size: {target_page_width_mm / zoom}mm {target_page_height_mm / zoom}mm;
+            margin: {margin_mm}mm;
+        }}
+        body {{ page: real; }}
+    ''')
+    pdf = doc.write_pdf(stylesheets=[css_target], zoom=zoom)
+    return pdf
 
 # @app.route("/week_editor")
 # @login_required

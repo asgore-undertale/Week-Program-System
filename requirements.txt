@@ -1,4 +1,5 @@
 openpyxl
+weasyprint
 flask
 flask-login
 flask-sqlalchemy
