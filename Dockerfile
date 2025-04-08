@@ -1,30 +1,18 @@
-### build stage
-FROM python:3.13-alpine AS builder
+FROM python:3.13-alpine
 
 WORKDIR /app
 
-COPY ./requirements.txt .
+# 1 layer: install runtime deps (no venv)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies into a virtual environment
-RUN python -m venv venv && \
-    . venv/bin/activate && \
-    python -m pip install -r requirements.txt
-
-### runtime stage
-FROM python:3.13-alpine AS production
-
-COPY --from=builder /app/venv /app/venv
-
-WORKDIR /app
-
+# 1 layer: copy your app
 COPY . .
 
-# RUN useradd --create-home appuser
-# USER appuser
-
-# Set environment variables to use the virtual environment
-ENV PATH="/app/venv/bin:$PATH"
+# metadata/env is just one layer
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 5000
 
+# final layer: default command
 CMD ["python", "app.py"]
