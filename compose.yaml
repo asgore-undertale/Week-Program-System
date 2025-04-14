@@ -1,6 +1,7 @@
 services:
   website: # container name
     build: .
+    image: ahmaddraie/week-program-system # to solve the image naming issue
 
     ports:
       - 80:5000

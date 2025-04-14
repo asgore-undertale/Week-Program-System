@@ -536,7 +536,7 @@ def remove_lecture_from_week_by_ids(week, id_s):
         remove_lecture_from_week_by_id(week, id_)
 
 POPULATION_SIZE = 50
-GENERATIONS_NUM = 100
+GENERATIONS_NUM = 50
 SELECTION_RATE = 0.2
 DUMP_RATE = 0.2
 ERASION_RATE = 0.3
