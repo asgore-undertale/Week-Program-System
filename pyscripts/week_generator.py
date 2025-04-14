@@ -535,8 +535,8 @@ def remove_lecture_from_week_by_ids(week, id_s):
     for id_ in id_s:
         remove_lecture_from_week_by_id(week, id_)
 
-POPULATION_SIZE = 10
+POPULATION_SIZE = 50
 GENERATIONS_NUM = 100
 SELECTION_RATE = 0.2
 DUMP_RATE = 0.2
-ERASION_RATE = 0.2
+ERASION_RATE = 0.3
