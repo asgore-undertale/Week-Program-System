@@ -301,7 +301,7 @@ def get_detailed_lectures():
             'hours': lec.hours,
             'year': lec.year
         }
-        for i, (lec, lec_prof) in enumerate(db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all())
+        for lec, lec_prof in db.session.query(Lecture, LectureProfessor).join(LectureProfessor).filter(Lecture.id == LectureProfessor.lecture_id).all()
     ]
 
 def get_lecture_by_id(id_, detailed_lectures): # TODO convert to dict
@@ -528,15 +528,14 @@ def remove_lecture_from_week_by_id(week, id_):
     for day in week:
         for lectures in week[day].values():
             for i, lecture in enumerate(lectures):
-                if lecture["id"] == id_:
+                if lecture["id"] == id_ and ("locked" not in lecture or not lecture["locked"]):
                     lectures.pop(i)
-                    # return
 
 def remove_lecture_from_week_by_ids(week, id_s):
     for id_ in id_s:
         remove_lecture_from_week_by_id(week, id_)
 
-POPULATION_SIZE = 20
+POPULATION_SIZE = 10
 GENERATIONS_NUM = 100
 SELECTION_RATE = 0.2
 DUMP_RATE = 0.2
