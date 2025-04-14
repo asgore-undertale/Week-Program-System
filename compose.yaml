@@ -1,10 +1,11 @@
 services:
-  website:
+  website: # container name
     build: .
-    image: ahmaddraie/week-program-system
-    container_name: flask_website
-    command: python app.py
+
     ports:
       - 80:5000
     volumes:
-      - ./databases:/app/databases
+      - dbdata:/app/databases
+
+volumes:
+  dbdata:
