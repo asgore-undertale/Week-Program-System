@@ -1,15 +1,21 @@
-<span>Developed by [Ahmad DRAIE] and [Muhammed Salih BEDIR] in the 6th term</span>
+<nav class="container bordered navbar" dir="ltr">
+    <span>Developed by <a>[Ahmad DRAIE]</a> and <a>[Muhammed Salih BEDIR]</a> in the 6th term</span>
+</nav>
 
-<nav class="bordered" dir="ltr">
-    <!-- {% if current_user.role_id == 1 %} -->
-    <!-- <a href='/week_editor'>Week Editor</a> -->
-    <!-- {% endif %} -->
-    <a href='/week_program'>Week Program</a>
-    {% if current_user.role_id == 1 or current_user.role_id == 2 %}
-    <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'>Professor Time</a>
-    {% endif %}
-    <a href='/logout'>Logout</a>
-    <button class="align-right" onclick="toggleDirection(event)">RTL</button>
+<nav class="container bordered navbar" dir="ltr">
+    <div>
+        <a href='/week_program'>
+            <button>Week Program</button>
+        </a>
+        {% if current_user.role_id == 1 or current_user.role_id == 2 %}
+        <a href='/professor_time{% if current_user.role_id == 2 %}?professors_number={{current_user.number}}{% endif %}'>
+            <button>Professor Time</button>
+        </a>
+        {% endif %}
+        <a href='/logout'>
+            <button>Logout</button>
+        </a>
+    </div>
 </nav>
 
 <script>

@@ -1,0 +1,36 @@
+th, tr {
+    border: 1px solid black;
+}
+td, th {
+    padding: 5px;
+}
+.bordered_cell {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+.vertical_writing {
+    transform: rotate(-90deg);
+}
+table {
+    border-collapse: collapse;
+}
+.header_cell {
+    /* background-color: rgb(255, 89, 89); */
+    background-color: aqua;
+}
+.lec_cell {
+    background-color: rgb(224, 224, 224);
+}
+.lec_cell_locked {
+    background-color: rgb(255, 200, 200);
+}
+.year_header {
+    width: 250px
+}
+td, tr, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}

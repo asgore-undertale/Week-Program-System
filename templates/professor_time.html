@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Professor Time</title>
     <link rel="stylesheet" href="static/style.css">
+    <!-- <link rel="stylesheet" href="static/timeprof-table.css"> -->
 </head>
 <body>
     {% include 'navbar.html' %}
@@ -12,7 +13,7 @@
         {% if current_user.role_id == 1 %}
             <div class="filters bordered">
                 {% for professor in professors %}
-                    <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a><br>
+                    <a href="professor_time?professors_number={{professor.number}}">{{ professor.name }}</a>
                 {% endfor %}
             </div>
         {% endif %}

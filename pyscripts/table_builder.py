@@ -81,44 +81,8 @@ def tableize_combined_week_by_year(combined_week, remove_unnecessary_nones = Fal
     return table
 
 def build_week_html_content(tableized_week, years):
-    style = """<style>
-    th, tr {
-        border: 1px solid black;
-    }
-    td, th {
-        padding: 5px;
-    }
-    .bordered_cell {
-        border: 1px solid black;
-        text-align: center;
-        vertical-align: middle;
-    }
-    .vertical_writing {
-        transform: rotate(-90deg);
-    }
-    table {
-        border-collapse: collapse;
-    }
-    .header_cell {
-        /* background-color: rgb(255, 89, 89); */
-        background-color: aqua;
-    }
-    .lec_cell {
-        background-color: rgb(224, 224, 224);
-    }
-    .lec_cell_locked {
-        background-color: rgb(255, 200, 200);
-    }
-    .year_header {
-        width: 250px
-    }
-    td, tr, th {
-        border: 1px solid black;
-        padding: 5px;
-        text-align: center;
-        vertical-align: middle;
-    }
-    </style>"""
+    with open("static/week-schedual-table.css", "r") as f:
+        style = "<style>" + f.read() + "</style>"
 
     table_content = style + "<table>"
 
@@ -385,24 +349,7 @@ def build_time_table_html_content(times_list, days, hours):
     html_string += foot_content
     html_string += "</table>"
 
-    style = """<style>
-table {
-    border-collapse: collapse;
-}
-td, th {
-    border: 1px solid black;
-    padding: 5px;
-    text-align: center;
-    vertical-align: middle;
-}
-tr th {
-    background-color: aqua;
-}
-button {
-    margin: 2px;
-}
-.selected {
-    background-color: green;
-}</style>"""
+    with open("static/timeprof-table.css", "r") as f:
+        style = "<style>" + f.read() + "</style>"
 
     return style + html_string

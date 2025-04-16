@@ -47,9 +47,11 @@
                 <a href="#" onclick="downloadWeekProgram('xlsx')">excel</a>
                 <!-- <a href="#" onclick="downloadWeekProgram('pdf')">pdf</a> -->
             </div>
-
-            {% if current_user.role_id == 1 %}                   
+            
+                {% if current_user.role_id == 1 %}                   
                 <div class="bordered">
+                    <label>Actions:</label>
+                    <br>
                     <button onclick="EraseWeekProgram()">New</button>
                     <!-- <br> -->
                     <button onclick="buildWeekProgram()">Auto fill</button>
@@ -69,7 +71,6 @@
                     <br>
                     <a href="#" onclick="updateCurrentLecture(null)">None</a>
                     {% for lecture in lectures %}
-                        <br>
                         <a href="#" onclick="updateCurrentLecture({{ loop.index-1 }})">{{lecture.name}}</a>
                     {% endfor %}
                 </div>
@@ -79,7 +80,6 @@
                     <br>
                     <a href="#" onclick="updateCurrentClassroom(null)">None</a>
                     {% for classroom in classrooms %}
-                        <br>
                         <a href="#" onclick="updateCurrentClassroom({{ loop.index-1 }})">{{classroom.name}}</a>
                     {% endfor %}
                 </div>

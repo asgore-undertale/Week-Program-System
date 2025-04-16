@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+tr th {
+    background-color: aqua;
+}
+button {
+    margin: 2px;
+}
+.selected {
+    background-color: green;
+}

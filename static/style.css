@@ -1,13 +1,32 @@
+:root {
+    --bg-color: #eee;
+    --border-color: #ccc;
+    --primary-color: #0077cc;
+    --primary-light: #e6f4ff;
+    --text-color: #333;
+    --link-color: #0077cc;
+    --link-color: #0036cc;
+    --link-hover-bg: #e6f4ff;
+    --selected-bg: #cce5ff;
+    --break-bg: #f0f0f0;
+    --area-bg: #fff;
+    /* --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    --row-even-bg: #f9f9f9;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
 .bordered {
     border: 1px solid black;
+    background-color: var(--area-bg);
+    border-radius: 5px;
     padding: 5px;
     margin: 5px;
 }
 
-.break {
-    background-color: #e0e0e0;
-    pointer-events: none;
-}
 table {
     border-collapse: collapse;
 }
@@ -24,22 +43,54 @@ button {
     margin: 2px;
 }
 
-.container {
-    display: flex;
+.navbar a {
+    text-decoration: none;
+    color: var(--link-color);
+    border-radius: 4px;
 }
 
-.filters {
-    width: 20%;
+.navbar a:hover {
+    background-color: var(--link-hover-bg);
 }
 
 .week-table {
     flex: 1;
 }
 
-.align-right {
-    float: right;
+@media (min-aspect-ratio: 1) {
+    .container {
+        display: flex;
+    }
+    .filters {
+        max-width: 20%;
+    }
 }
 
-a {
-    margin-left: 10px;
+.filters a {
+    display: block;
+    margin: 6px;
+    text-decoration: none;
+    color: var(--link-color);
+}
+    
+.filters a:hover {
+    color: var(--link-hover);
+}
+
+button, input[type='submit'] {
+    padding: 0.4rem 0.8rem;
+    margin: 0.1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    background: var(--area-bg);
+    color: var(--link-color);
+    /* color: var(--primary-color); */
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-size: 0.9rem;
+}
+
+button:hover, input[type='submit']:hover {
+    background-color: var(--primary-color);
+    color: var(--area-bg);
 }
