@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Professor Time</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <!-- <link rel="stylesheet" href="static/timeprof-table.css"> -->
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% include 'components/navbar.html' %}
 
     <div class="container">
         {% if current_user.role_id == 1 %}

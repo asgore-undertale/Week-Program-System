@@ -77,7 +77,8 @@ button {
     color: var(--link-hover);
 }
 
-button, input[type='submit'] {
+/* button, input[type='submit'] { */
+.button-blue-white {
     padding: 0.4rem 0.8rem;
     margin: 0.1rem;
     border: 1px solid var(--primary-color);

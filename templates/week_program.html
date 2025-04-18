@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Week Program</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-    {% include 'navbar.html' %}
+    {% include 'components/navbar.html' %}
 
     <div class="container">
         <div class="filters">
@@ -28,7 +28,7 @@
                     <br>
                 {% endfor %}
                 <!-- <br>
-                <input type="submit" value="Submit"> -->
+                <input class="button-blue-white" type="submit" value="Submit"> -->
             </form>
 
             {% if current_user.role_id == 3 %}
@@ -52,13 +52,13 @@
                 <div class="bordered">
                     <label>Actions:</label>
                     <br>
-                    <button onclick="EraseWeekProgram()">New</button>
+                    <button class="button-blue-white" onclick="EraseWeekProgram()">New</button>
                     <!-- <br> -->
-                    <button onclick="buildWeekProgram()">Auto fill</button>
+                    <button class="button-blue-white" onclick="buildWeekProgram()">Auto fill</button>
                     <!-- <br> -->
-                    <button onclick="confirmWeekProgram()">Confirm</button>
+                    <button class="button-blue-white" onclick="confirmWeekProgram()">Confirm</button>
                     <!-- <br> -->
-                    <button onclick="removeWeekProgram()">Remove</button>
+                    <button class="button-blue-white" onclick="removeWeekProgram()">Remove</button>
                     <!-- <a href="#" onclick="">New</a>
                     <a href="#" onclick="">Auto fill</a>
                     <a href="#" onclick="">Erase</a>

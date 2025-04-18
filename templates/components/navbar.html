@@ -1,0 +1,30 @@
+<nav class="container bordered navbar" dir="ltr">
+    <span>Developed by <a>[Ahmad DRAIE]</a> and <a>[Muhammed Salih BEDIR]</a> in the 6th term</span>
+</nav>
+
+<nav class="container bordered navbar" dir="ltr">
+    <div>
+        <a href='/week_program'>
+            <button class="button-blue-white">Week Program</button>
+        </a>
+        
+        {% if current_user.role_id == 2 %}
+        <a href='/professor_time?professors_number={{current_user.number}}'>
+            <button class="button-blue-white">Professor Time</button>
+        </a>
+        {% endif %}
+
+        {% if current_user.role_id == 1 %}
+        <a href='/professor_time'>
+            <button class="button-blue-white">Professor Time</button>
+        </a>
+        <a href='/tables'>
+            <button class="button-blue-white">Tables</button>
+        </a>
+        {% endif %}
+
+        <a href='/logout'>
+            <button class="button-blue-white">Logout</button>
+        </a>
+    </div>
+</nav>

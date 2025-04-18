@@ -1,0 +1,9 @@
+<nav class="container bordered navbar" dir="ltr">
+    <div>
+        {% for item in used_models %}
+            <a href="/table/{{ item.__name__.lower() }}">
+                <button class="button-blue-white">{{ item.__name__ }}</button>
+            </a>
+        {% endfor %}
+    </div>
+</nav>

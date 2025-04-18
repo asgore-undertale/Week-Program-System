@@ -7,16 +7,17 @@ from flask_bcrypt import Bcrypt
 from pyscripts.week_generator import *
 from pyscripts.table_builder import *
 from models import *
+from routes.models import *
 
 from io import BytesIO
 import json
 import os
 import copy
-# from weasyprint import HTML, CSS
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.jinja_env.globals['getattr'] = getattr
 
 # csrf = CSRFProtect(app)
 bcrypt = Bcrypt(app)
@@ -30,6 +31,8 @@ def load_user(user_id):
     # return User.query.get(int(user_id))
     return db.session.get(User, int(user_id))
 
+for routes in models_routes:
+    app.register_blueprint(routes)
 
 @app.route("/")
 def home():
@@ -37,6 +40,18 @@ def home():
         return redirect("/week_program")
     
     return redirect("/login")
+
+### =================================================================
+
+@app.route("/tables")
+def tables():
+    if current_user.role_id != 1:
+        return "Unauthorized.", 401
+    
+    return render_template(
+        "table_editor_base.html",
+        used_models=used_models
+    )
 
 ### =================================================================
 

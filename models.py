@@ -30,16 +30,26 @@ class TimeProfessor(db.Model):
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     day_id = db.Column(db.Integer, db.ForeignKey('day.id'), nullable=False)
     hour_id = db.Column(db.Integer, db.ForeignKey('hour.id'), nullable=False)
+    
+    professor = db.relationship('Professor')
+    day = db.relationship('Day')
+    hour = db.relationship('Hour')
 
 class LectureProfessor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     lecture_id = db.Column(db.Integer, db.ForeignKey('lecture.id'), nullable=False)
 
+    professor = db.relationship('Professor')
+    lecture = db.relationship('Lecture')
+
 class LectureStudent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     lecture_professor_id = db.Column(db.Integer, db.ForeignKey('lecture_professor.id'), nullable=False)
+
+    student = db.relationship('Student')
+    lecture_professor = db.relationship('LectureProfessor')
 
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,6 +60,8 @@ class User(db.Model, UserMixin):
     number = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+    
+    role = db.relationship('Role')
 
 class Classroom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,6 +72,9 @@ class LectureClassroom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     classroom_id = db.Column(db.Integer, db.ForeignKey('classroom.id'), nullable=False)
     lecture_id = db.Column(db.Integer, db.ForeignKey('lecture.id'), nullable=False)
+
+    classroom = db.relationship('Classroom')
+    lecture = db.relationship('Lecture')
 
 class Year(db.Model):
     id = db.Column(db.Integer, primary_key=True)

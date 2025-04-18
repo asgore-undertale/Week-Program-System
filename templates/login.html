@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h2>Login</h2>
@@ -16,7 +16,7 @@
         <br>
         <input type="password" id="password" name="password"><br>
         <br>
-        <input type="submit" value="Login">
+        <input type="submit" class="button-blue-white" value="Login">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
