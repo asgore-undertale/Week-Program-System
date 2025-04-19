@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, Blueprint
+from flask import render_template, request, redirect, Blueprint, flash
 from flask_login import LoginManager, login_required, current_user, login_user, logout_user
 from flask_bcrypt import Bcrypt
 
