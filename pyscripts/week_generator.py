@@ -414,10 +414,7 @@ def build_week(week_program = None, detailed_lectures = None, classrooms = None)
 
     print(best_result["score"])
 
-    for day in best_result["week_program"]:
-        for hour in best_result["week_program"][day]:
-            for l, lec in enumerate(best_result["week_program"][day][hour]):
-                best_result["week_program"][day][hour][l] = get_fully_detailed_lecture(lec)
+    best_result["week_program"] = get_fully_detailed_week_program(best_result["week_program"])
 
     return {
         "week_program": best_result["week_program"],
@@ -461,30 +458,42 @@ def build_week_(week_program, detailed_lectures, classrooms, classrooms_lectures
     }
 
 def get_fully_detailed_lecture(detailed_lecture):
-    # lecture = Lecture.query.filter(Lecture.code == detailed_lecture["code"]).first()
-    # detailed_lecture["name"] = lecture.name
-
     professor = Professor.query.filter(Professor.id == detailed_lecture["professor"]["id"]).first()
     detailed_lecture["professor"]["name"] = professor.name
     detailed_lecture["professor"]["number"] = professor.number
-    
-    # detailed_lecture["professor"] = {
-    #     "name": professor.name,
-    #     "number": professor.number
-    # }
-
-    # del detailed_lecture["professor"]["id"] # it is safer to remove any database info
-    # del detailed_lecture["professor"]["freeTime"]
-    # del detailed_lecture["professor"]
 
     students = Student.query.filter(Student.id.in_(detailed_lecture["studentIds"])).all()
     detailed_lecture["studentNumbers"] = [
         student.number
         for student in students
     ]
-    # del detailed_lecture["studentIds"]
 
     return detailed_lecture
+
+def get_fully_detailed_week_program(week_program):
+    for day in week_program:
+        for hour in week_program[day]:
+            for lecture in week_program[day][hour]:
+                get_fully_detailed_lecture(lecture)
+
+    return week_program
+
+def remove_lecture_sensitive_info(detailed_lecture):
+    detailed_lecture["professor"] = {
+        "name": detailed_lecture["professor"]["name"],
+        "number": detailed_lecture["professor"]["number"]
+    }
+    del detailed_lecture["studentIds"]
+
+    return detailed_lecture
+
+def remove_week_program_sensitive_info(week_program):
+    for day in week_program:
+        for hour in week_program[day]:
+            for lecture in week_program[day][hour]:
+                remove_lecture_sensitive_info(lecture)
+
+    return week_program
 
 # def replace_lecture_randomly(indivisual):
 #     i = random.randint(0, len(indivisual)-1)
