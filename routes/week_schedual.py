@@ -245,9 +245,9 @@ def confirm_week_program():
 
 def build_week_program_(week_program, data_type, do_download):
     if data_type == "json":
-        week_program = remove_week_program_sensitive_info(week_program)
-
         if do_download == True:
+            week_program = remove_week_program_sensitive_info(week_program)
+
             response = Response(
                 json.dumps(week_program, ensure_ascii=False, indent=4, sort_keys=False) # to use filters
             )
