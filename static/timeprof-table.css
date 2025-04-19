@@ -11,7 +11,16 @@ tr th {
     background-color: aqua;
 }
 button {
-    margin: 2px;
+    padding: 0.4rem 0.8rem;
+    margin: 0.1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    background: var(--area-bg);
+    color: var(--link-color);
+    /* color: var(--primary-color); */
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-size: 0.9rem;
 }
 .selected {
     background-color: green;
