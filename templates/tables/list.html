@@ -1,11 +1,11 @@
-{% extends 'table_editor_base.html' %}
+{% extends 'tables/table_editor_base.html' %}
 
 {% block content %}
   <h2>{{ model_name }}s</h2>
 
   <div>
     <a href="{{ url_for(request.endpoint.replace('.index', '.create')) }}">
-      <button class="button-blue">New {{ model_name }}</button>
+      <button class="button-green">New {{ model_name }}</button>
     </a>
   </div>
   <br>
@@ -53,7 +53,10 @@
             </td>
             <td>
               <a href="{{ url_for(request.endpoint.replace('.index', '.delete'), id=item.id) }}">
-                <button class="button-blue">Delete</button>
+                <button
+                  class="button-red"
+                  onclick="return confirm('⚠️ Are you sure you want to do this?');"
+                >Delete</button>
               </a>
             </td>
           </tr>

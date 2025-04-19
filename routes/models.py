@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 from models import *
 from flask_login import login_required, current_user
 
 from wtforms_sqlalchemy.orm import model_form
 from flask_wtf import FlaskForm
 
+from routes.auth import bcrypt
 
 def get_columns(model):
     return [
@@ -34,6 +35,28 @@ def get_field_args_for_fks(model):
             }
 
     return field_args
+
+def populate_obj_by_form(obj, form):
+    form.populate_obj(obj)
+
+    if obj.__class__ == User:
+        raw_password = form.password.data
+        obj.password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
+
+def commit_changes():
+    try:
+        db.session.commit()
+        return True
+    except Exception as e:
+        error_message = str(e)
+        print(error_message)
+        error_message = error_message[
+            error_message.index(')') + 2
+            :
+            error_message.index('[') - 1
+        ]
+        flash(error_message, 'error')
+        return False
 
 def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
     bp = Blueprint(name, __name__, url_prefix=url_prefix)
@@ -85,9 +108,14 @@ def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
         form = form_class()
         if form.validate_on_submit():
             obj = model()
-            form.populate_obj(obj)
+            populate_obj_by_form(obj, form)
+
             db.session.add(obj)
-            db.session.commit()
+
+            success = commit_changes()
+            if not success:
+                return redirect(url_for(f'{name}.create'))
+
             return redirect(url_for(f'{name}.index'))
         
         return render_template(
@@ -95,7 +123,8 @@ def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
             form=form,
             action="Create",
             title=name.capitalize(),
-            cancel_url=url_for(f'{name}.index')
+            cancel_url=url_for(f'{name}.index'),
+            used_models=used_models
         )
 
     # Edit view
@@ -109,8 +138,12 @@ def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
         form = form_class(obj=obj)
 
         if form.validate_on_submit():
-            form.populate_obj(obj)
-            db.session.commit()
+            populate_obj_by_form(obj, form)
+            
+            success = commit_changes()
+            if not success:
+                return redirect(url_for(f'{name}.edit', id=id))
+            
             return redirect(url_for(f'{name}.index'))
         
         return render_template(
@@ -118,7 +151,8 @@ def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
             form=form,
             action="Edit",
             title=name.capitalize(),
-            cancel_url=url_for(f'{name}.index')
+            cancel_url=url_for(f'{name}.index'),
+            used_models=used_models
         )
 
     # Delete view
@@ -130,7 +164,8 @@ def create_crud_blueprint(name, model, db, url_prefix, template_prefix):
         
         obj = model.query.get_or_404(id)
         db.session.delete(obj)
-        db.session.commit()
+
+        commit_changes()
         return redirect(url_for(f'{name}.index'))
 
     return bp
@@ -174,6 +209,6 @@ def tables():
         return "Unauthorized.", 401
     
     return render_template(
-        "table_editor_base.html",
+        "tables/table_editor_base.html",
         used_models=used_models
     )
