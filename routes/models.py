@@ -4,7 +4,6 @@ from flask_login import login_required, current_user
 
 from wtforms_sqlalchemy.orm import model_form
 from flask_wtf import FlaskForm
-from sqlalchemy.orm import class_mapper
 
 
 def get_columns(model):
@@ -16,7 +15,7 @@ def get_columns(model):
 def get_field_args_for_fks(model):
     field_args = {}
 
-    for prop in class_mapper(model).iterate_properties:
+    for prop in model.__mapper__.iterate_properties:
         if hasattr(prop, 'direction'):
             rel_name = prop.key
             rel_model = prop.mapper.class_
