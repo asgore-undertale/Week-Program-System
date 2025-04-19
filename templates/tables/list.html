@@ -33,11 +33,17 @@
             {% for col in columns %}
               <td>
                 {% if col.endswith('_id') %}
-                  {{ getattr(item, col[:-3]).name }}
+                  {% set obj = getattr(item, col[:-3]) %}
+                  {% if obj.name is defined %}
+                    {{ obj.name }}
+                  {% else %}
+                    {{ obj.id }}
+                  {% endif %}
+                
                 {% else %}
                   {{ getattr(item, col) }}
                 {% endif %}
-              </td>
+            </td>
             {% endfor %}
             
             <td>
