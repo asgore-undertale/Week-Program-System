@@ -21,9 +21,17 @@ def get_field_args_for_fks(model):
             rel_name = prop.key
             rel_model = prop.mapper.class_
 
+            # check if rel model has name attribute
+            if hasattr(rel_model, 'name'):
+                option_string = rel_model.name
+                option_attr = 'name'
+            else:
+                option_string = rel_model.id
+                option_attr = 'id'
+
             field_args[rel_name] = {
-                'query_factory': lambda: rel_model.query.order_by(rel_model.name),
-                'get_label': 'name'
+                'query_factory': lambda: rel_model.query.order_by(option_string),
+                'get_label': option_attr
             }
 
     return field_args
@@ -158,4 +166,15 @@ models_routes = [
     # if issubclass(model, db.Model) or model is db.Model
     for model in used_models
 ]
+
+model_bp = Blueprint("model", __name__, url_prefix="/tables")
+
+@model_bp.route("/")
+def tables():
+    if current_user.role_id != 1:
+        return "Unauthorized.", 401
     
+    return render_template(
+        "table_editor_base.html",
+        used_models=used_models
+    )
